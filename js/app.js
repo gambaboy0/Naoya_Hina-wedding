@@ -8,7 +8,7 @@
   const sideLabel = (side) => SIDE_LABEL[side] || "";
 
   // ---------- splash ----------
-  const SPLASH_DURATION_MS = 3000;
+  const SPLASH_DURATION_MS = 5000;
   const SPLASH_FADE_MS = 400;
   let splashTimerId = null;
 
@@ -29,6 +29,31 @@
 
   function startSplashTimer() {
     splashTimerId = window.setTimeout(revealMain, SPLASH_DURATION_MS);
+  }
+
+  // ---------- page router ----------
+  function parseHash() {
+    return location.hash.replace(/^#/, "") || "top";
+  }
+
+  function showPage(page) {
+    $$(".page").forEach((sec) => {
+      sec.hidden = sec.dataset.page !== page;
+    });
+    $("#back-toggle").hidden = page === "top";
+    window.scrollTo(0, 0);
+  }
+
+  function navigate(page) {
+    if (location.hash === "#" + page) {
+      showPage(page);
+    } else {
+      location.hash = "#" + page;
+    }
+  }
+
+  function render() {
+    showPage(parseHash());
   }
 
   // ---------- couple info (title / splash / TOP / footer / venue) ----------
@@ -61,7 +86,6 @@
         "</a></li>"
       );
     }).join("");
-    $("#index-list-inline").innerHTML = items;
     $("#index-list-panel").innerHTML = items;
   }
 
@@ -288,6 +312,11 @@
       revealMain();
       return;
     }
+    const navEl = e.target.closest("[data-nav]");
+    if (navEl) {
+      navigate(navEl.dataset.nav);
+      return;
+    }
     const indexToggle = e.target.closest("#index-toggle");
     if (indexToggle) {
       openIndexPanel();
@@ -296,7 +325,7 @@
     const indexLink = e.target.closest("[data-index-link]");
     if (indexLink) {
       closeIndexPanel();
-      return; // let the native anchor navigation handle scrolling
+      return; // let the anchor's href trigger hashchange -> render()
     }
     const closeIndexEl = e.target.closest("[data-close-index]");
     if (closeIndexEl) {
@@ -321,6 +350,8 @@
     }
   });
 
+  window.addEventListener("hashchange", render);
+
   window.addEventListener("DOMContentLoaded", () => {
     renderCoupleInfo();
     renderTopMessage();
@@ -331,6 +362,7 @@
     renderFood();
     renderDrink();
     renderPhotoShare();
+    render();
     startSplashTimer();
   });
 })();

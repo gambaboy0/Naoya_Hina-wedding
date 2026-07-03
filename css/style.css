@@ -148,7 +148,6 @@ body {
   border-radius: 50%;
   background: rgba(255, 255, 255, 0.88);
   border: 1px solid var(--line);
-  display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
@@ -156,10 +155,37 @@ body {
   cursor: pointer;
 }
 
+.index-toggle:not([hidden]) {
+  display: flex;
+}
+
 .index-toggle span {
   width: 1.1rem;
   height: 1px;
   background: var(--dark);
+}
+
+/* ---------- fixed back button ---------- */
+.back-toggle {
+  position: fixed;
+  top: 1rem;
+  left: max(1rem, calc(50vw - 240px + 1rem));
+  z-index: 40;
+  width: 2.6rem;
+  height: 2.6rem;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.88);
+  border: 1px solid var(--line);
+  align-items: center;
+  justify-content: center;
+  color: var(--dark);
+  font-size: 1.2rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.back-toggle:not([hidden]) {
+  display: flex;
 }
 
 /* ---------- index slide-in panel ---------- */
@@ -356,7 +382,7 @@ body {
 
 .nav-square-en {
   font-family: "Great Vibes", "YuMincho", cursive;
-  color: var(--wine);
+  color: var(--sea);
   font-size: 1.15rem;
 }
 

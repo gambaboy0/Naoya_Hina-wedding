@@ -35,6 +35,9 @@
   <span></span><span></span><span></span>
 </button>
 
+<!-- ============ fixed back button ============ -->
+<button type="button" id="back-toggle" class="back-toggle" aria-label="トップへ戻る" data-nav="top" hidden>&larr;</button>
+
 <!-- ============ slide-in index panel ============ -->
 <div id="index-panel" class="index-panel" hidden>
   <div class="index-panel-backdrop" data-close-index></div>
@@ -49,7 +52,7 @@
 <main id="app" hidden>
 
   <!-- TOP -->
-  <section class="section-top-compact" id="top">
+  <section class="page section-top-compact" id="top" data-page="top">
     <img class="top-photo-full" src="assets/img/menu-bg.jpg" alt="">
     <div class="top-greeting-block">
       <p class="top-greeting-label">Greeting</p>
@@ -83,14 +86,8 @@
     </nav>
   </section>
 
-  <!-- INDEX (inline) -->
-  <section class="section" id="index" aria-label="INDEX">
-    <h2 class="section-title">INDEX</h2>
-    <ol class="index-list" id="index-list-inline"></ol>
-  </section>
-
   <!-- PROFILE -->
-  <section class="section section-flush" id="profile">
+  <section class="page section section-flush" id="profile" data-page="profile" hidden>
     <p class="section-eyebrow">02</p>
     <h2 class="section-title">PROFILE</h2>
     <div class="profile-photo" style="background-image:url('assets/img/kimono.jpg')"></div>
@@ -101,7 +98,7 @@
   </section>
 
   <!-- SEATING LIST -->
-  <section class="section" id="seating">
+  <section class="page section" id="seating" data-page="seating" hidden>
     <p class="section-eyebrow">03</p>
     <h2 class="section-title">SEATING LIST</h2>
     <p id="venue-info" class="venue-info"></p>
@@ -116,7 +113,7 @@
   </section>
 
   <!-- MENU -->
-  <section class="section" id="menu">
+  <section class="page section" id="menu" data-page="menu" hidden>
     <p class="section-eyebrow">04</p>
     <h2 class="section-title">MENU</h2>
     <div id="food-list" class="course-list-flat"></div>
@@ -124,14 +121,14 @@
   </section>
 
   <!-- DRINK -->
-  <section class="section" id="drink">
+  <section class="page section" id="drink" data-page="drink" hidden>
     <p class="section-eyebrow">05</p>
     <h2 class="section-title">DRINK</h2>
     <div id="drink-list" class="drink-list-flat"></div>
   </section>
 
   <!-- PHOTO SHARING -->
-  <section class="section" id="photo">
+  <section class="page section" id="photo" data-page="photo" hidden>
     <p class="section-eyebrow">06</p>
     <h2 class="section-title">PHOTO SHARING</h2>
     <p id="photo-message" class="photo-message"></p>
