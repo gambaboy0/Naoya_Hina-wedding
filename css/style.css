@@ -111,12 +111,17 @@ body {
   text-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
 }
 
-.splash-skip {
+.splash-actions {
   position: absolute;
   bottom: 0.9rem;
   left: 50%;
   transform: translateX(-50%);
   z-index: 2;
+  display: flex;
+  gap: 0.6rem;
+}
+
+.splash-skip {
   appearance: none;
   background: rgba(255, 255, 255, 0.22);
   border: 1px solid rgba(255, 255, 255, 0.55);
@@ -130,6 +135,11 @@ body {
   cursor: pointer;
   backdrop-filter: blur(3px);
   -webkit-backdrop-filter: blur(3px);
+}
+
+.splash-stop.is-active {
+  background: rgba(255, 255, 255, 0.6);
+  color: var(--dark);
 }
 
 .splash.is-leaving {
@@ -353,6 +363,7 @@ body {
 }
 
 .nav-square {
+  appearance: none;
   aspect-ratio: 1;
   display: flex;
   flex-direction: column;
@@ -364,12 +375,19 @@ body {
   border-radius: 10px;
   box-shadow: 0 2px 6px rgba(51, 48, 44, 0.06);
   text-decoration: none;
+  font: inherit;
+  padding: 0.3rem;
+  cursor: pointer;
+  width: 100%;
 }
 
 .nav-square-en {
   font-family: "Great Vibes", "YuMincho", cursive;
   color: var(--sea);
-  font-size: 1.15rem;
+  font-size: 1rem;
+  line-height: 1.15;
+  text-align: center;
+  padding: 0 0.2rem;
 }
 
 .nav-square-jp {
@@ -379,9 +397,44 @@ body {
   letter-spacing: 0.04em;
 }
 
-/* ---------- profile (life-stage timeline) ---------- */
-#profile {
+/* ---------- profile family (PROFILE / PERSONAL HISTORY / OUR HISTORY) ---------- */
+#profile,
+#history,
+#our-history {
   background: var(--cream);
+}
+
+.profile-person {
+  margin-bottom: 3rem;
+}
+
+.profile-person:last-of-type {
+  margin-bottom: 0;
+}
+
+.profile-stats {
+  max-width: 320px;
+  margin: 0 auto;
+}
+
+.profile-stat-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  padding: 0.55rem 0;
+  border-bottom: 1px solid var(--line);
+  font-size: 0.85rem;
+}
+
+.profile-stat-label {
+  color: var(--gray);
+  letter-spacing: 0.06em;
+  font-size: 0.68rem;
+  font-family: Georgia, var(--font-serif);
+}
+
+.profile-stat-value {
+  color: var(--dark);
 }
 
 .profile-header {
@@ -673,44 +726,6 @@ body {
   margin: 0;
   color: var(--gray);
   font-size: 0.78rem;
-}
-
-/* ---------- drink ---------- */
-.drink-list-flat {
-  text-align: center;
-}
-
-.drink-category {
-  color: var(--gray);
-  font-size: 0.72rem;
-  letter-spacing: 0.25em;
-  margin: 0 0 0.6rem;
-  font-family: Georgia, var(--font-serif);
-}
-
-.drink-items {
-  font-family: var(--font-serif);
-  font-size: 0.95rem;
-  color: var(--dark);
-  line-height: 1.9;
-  margin: 0 0 2.2rem;
-}
-
-.drink-list-flat p:last-child {
-  margin-bottom: 0;
-}
-
-/* ---------- photo sharing ---------- */
-.photo-message {
-  text-align: center;
-  color: var(--dark);
-  font-size: 0.9rem;
-  line-height: 1.8;
-  margin: 0 0 1.8rem;
-}
-
-#photo {
-  text-align: center;
 }
 
 /* ---------- footer ---------- */
