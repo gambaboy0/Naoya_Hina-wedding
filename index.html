@@ -27,7 +27,10 @@
     </div>
     <p class="splash-date" id="splash-date"></p>
   </div>
-  <button type="button" id="splash-skip" class="splash-skip">skip</button>
+  <div class="splash-actions">
+    <button type="button" id="splash-skip" class="splash-skip">skip</button>
+    <button type="button" id="splash-stop" class="splash-skip splash-stop">stop</button>
+  </div>
 </section>
 
 <!-- ============ fixed index toggle ============ -->
@@ -48,7 +51,7 @@
   </nav>
 </div>
 
-<!-- ============ MAIN (single long scroll) ============ -->
+<!-- ============ MAIN ============ -->
 <main id="app" hidden>
 
   <!-- TOP -->
@@ -58,82 +61,66 @@
       <p class="top-greeting-label">Greeting</p>
       <div id="top-message" class="top-message"></div>
     </div>
-    <nav class="top-nav-grid">
-      <a href="#top" class="nav-square">
-        <span class="nav-square-en">Top</span>
-        <span class="nav-square-jp">トップ</span>
-      </a>
-      <a href="#profile" class="nav-square">
-        <span class="nav-square-en">Profile</span>
-        <span class="nav-square-jp">プロフィール</span>
-      </a>
-      <a href="#seating" class="nav-square">
-        <span class="nav-square-en">Seating</span>
-        <span class="nav-square-jp">お席</span>
-      </a>
-      <a href="#menu" class="nav-square">
-        <span class="nav-square-en">Menu</span>
-        <span class="nav-square-jp">お食事</span>
-      </a>
-      <a href="#drink" class="nav-square">
-        <span class="nav-square-en">Drink</span>
-        <span class="nav-square-jp">お飲み物</span>
-      </a>
-      <a href="#photo" class="nav-square">
-        <span class="nav-square-en">Photo</span>
-        <span class="nav-square-jp">写真共有</span>
-      </a>
-    </nav>
+    <nav class="top-nav-grid" id="nav-grid-top"></nav>
   </section>
 
-  <!-- PROFILE -->
+  <!-- PROFILE (simple: photo + 7 facts) -->
   <section class="page section" id="profile" data-page="profile" hidden>
     <p class="section-eyebrow">02</p>
     <h2 class="section-title">PROFILE</h2>
 
-    <div class="profile-header">
-      <p class="profile-header-en">Groom Profiles</p>
-      <p class="profile-header-jp">新郎プロフィール</p>
+    <div class="profile-person">
+      <div class="profile-header">
+        <p class="profile-header-en">Groom Profiles</p>
+        <p class="profile-header-jp" id="profile-groom-name"></p>
+      </div>
+      <div id="profile-groom-photo"></div>
+      <div id="profile-groom-stats" class="profile-stats"></div>
     </div>
-    <div id="profile-groom-timeline" class="profile-timeline"></div>
+
+    <div class="profile-person">
+      <div class="profile-header">
+        <p class="profile-header-en">Bride Profiles</p>
+        <p class="profile-header-jp" id="profile-bride-name"></p>
+      </div>
+      <div id="profile-bride-photo"></div>
+      <div id="profile-bride-stats" class="profile-stats"></div>
+    </div>
+
+    <nav class="profile-nav-grid" id="nav-grid-profile"></nav>
+  </section>
+
+  <!-- PERSONAL HISTORY (life-stage timeline, was the old PROFILE page) -->
+  <section class="page section" id="history" data-page="history" hidden>
+    <p class="section-eyebrow">03</p>
+    <h2 class="section-title">PERSONAL HISTORY</h2>
 
     <div class="profile-header">
-      <p class="profile-header-en">Bride Profiles</p>
-      <p class="profile-header-jp">新婦プロフィール</p>
+      <p class="profile-header-en">Groom History</p>
+      <p class="profile-header-jp">新郎ヒストリー</p>
     </div>
-    <div id="profile-bride-timeline" class="profile-timeline"></div>
+    <div id="history-groom-timeline" class="profile-timeline"></div>
 
-    <nav class="profile-nav-grid">
-      <a href="#top" class="nav-square">
-        <span class="nav-square-en">Top</span>
-        <span class="nav-square-jp">トップ</span>
-      </a>
-      <a href="#profile" class="nav-square">
-        <span class="nav-square-en">Profile</span>
-        <span class="nav-square-jp">プロフィール</span>
-      </a>
-      <a href="#seating" class="nav-square">
-        <span class="nav-square-en">Seating</span>
-        <span class="nav-square-jp">お席</span>
-      </a>
-      <a href="#menu" class="nav-square">
-        <span class="nav-square-en">Menu</span>
-        <span class="nav-square-jp">お食事</span>
-      </a>
-      <a href="#drink" class="nav-square">
-        <span class="nav-square-en">Drink</span>
-        <span class="nav-square-jp">お飲み物</span>
-      </a>
-      <a href="#photo" class="nav-square">
-        <span class="nav-square-en">Photo</span>
-        <span class="nav-square-jp">写真共有</span>
-      </a>
-    </nav>
+    <div class="profile-header">
+      <p class="profile-header-en">Bride History</p>
+      <p class="profile-header-jp">新婦ヒストリー</p>
+    </div>
+    <div id="history-bride-timeline" class="profile-timeline"></div>
+
+    <nav class="profile-nav-grid" id="nav-grid-history"></nav>
+  </section>
+
+  <!-- OUR HISTORY (the couple's story) -->
+  <section class="page section" id="our-history" data-page="our-history" hidden>
+    <p class="section-eyebrow">04</p>
+    <h2 class="section-title">OUR HISTORY</h2>
+    <div id="our-history-timeline" class="profile-timeline"></div>
+    <nav class="profile-nav-grid" id="nav-grid-our-history"></nav>
   </section>
 
   <!-- SEATING LIST -->
   <section class="page section" id="seating" data-page="seating" hidden>
-    <p class="section-eyebrow">03</p>
+    <p class="section-eyebrow">05</p>
     <h2 class="section-title">SEATING LIST</h2>
     <p id="venue-info" class="venue-info"></p>
     <div class="stage-label">STAGE / ステージ</div>
@@ -148,25 +135,10 @@
 
   <!-- MENU -->
   <section class="page section" id="menu" data-page="menu" hidden>
-    <p class="section-eyebrow">04</p>
+    <p class="section-eyebrow">06</p>
     <h2 class="section-title">MENU</h2>
     <div id="food-list" class="course-list-flat"></div>
     <p class="section-caption">※アレルギー等ございましたら受付までお申し付けください</p>
-  </section>
-
-  <!-- DRINK -->
-  <section class="page section" id="drink" data-page="drink" hidden>
-    <p class="section-eyebrow">05</p>
-    <h2 class="section-title">DRINK</h2>
-    <div id="drink-list" class="drink-list-flat"></div>
-  </section>
-
-  <!-- PHOTO SHARING -->
-  <section class="page section" id="photo" data-page="photo" hidden>
-    <p class="section-eyebrow">06</p>
-    <h2 class="section-title">PHOTO SHARING</h2>
-    <p id="photo-message" class="photo-message"></p>
-    <a id="photo-share-link" class="btn-outline" href="#" target="_blank" rel="noopener">SHARE</a>
   </section>
 
   <footer class="footer">

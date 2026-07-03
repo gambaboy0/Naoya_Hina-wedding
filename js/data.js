@@ -27,13 +27,44 @@ const TOP_MESSAGE = {
   ],
 };
 
-// timelineの各itemは { stage, photo, text } の形です。
+// ---------- PROFILE ページ（写真＋定番情報7項目） ----------
 // photo は "assets/img/profile/xxx.jpg" のように実際の写真を用意したら差し替えてください。
-// 空のままにしておくと、その段に写真のプレースホルダーが表示されます。
+// 空のままにしておくと写真プレースホルダーが表示されます。
 const GROOM_PROFILE = {
   role: "GROOM",
   name: "直弥",
-  nameRomaji: "NAOYA",
+  photo: "",
+  stats: [
+    { label: "BIRTHDAY", value: "1997.01.01" },
+    { label: "BIRTHPLACE", value: "東京都" },
+    { label: "BLOOD TYPE", value: "A" },
+    { label: "MBTI", value: "INFJ" },
+    { label: "HOBBY", value: "旅行" },
+    { label: "SPECIALTY", value: "料理" },
+    { label: "FAVORITE FOOD", value: "ラーメン" },
+  ],
+};
+
+const BRIDE_PROFILE = {
+  role: "BRIDE",
+  name: "日那",
+  photo: "",
+  stats: [
+    { label: "BIRTHDAY", value: "1998.05.20" },
+    { label: "BIRTHPLACE", value: "神奈川県" },
+    { label: "BLOOD TYPE", value: "O" },
+    { label: "MBTI", value: "ENFJ" },
+    { label: "HOBBY", value: "カフェ巡り" },
+    { label: "SPECIALTY", value: "写真撮影" },
+    { label: "FAVORITE FOOD", value: "スイーツ" },
+  ],
+};
+
+// ---------- PERSONAL HISTORY ページ（生い立ちの時系列） ----------
+// timelineの各itemは { stage, photo, text } の形です。
+// photo は実際の写真を用意したら差し替えてください（空欄はプレースホルダー表示）。
+const GROOM_HISTORY = {
+  role: "GROOM",
   timeline: [
     { stage: "誕生時", photo: "", text: "○年○月○日、○○県にて元気な産声をあげました。" },
     { stage: "幼少期", photo: "", text: "好奇心旺盛で、いつも笑顔の絶えない子どもでした。" },
@@ -45,10 +76,8 @@ const GROOM_PROFILE = {
   ],
 };
 
-const BRIDE_PROFILE = {
+const BRIDE_HISTORY = {
   role: "BRIDE",
-  name: "日那",
-  nameRomaji: "HINA",
   timeline: [
     { stage: "誕生時", photo: "", text: "○年○月○日、○○県にて誕生しました。" },
     { stage: "幼少期", photo: "", text: "人見知りせず、誰とでもすぐ仲良くなる子どもでした。" },
@@ -59,6 +88,15 @@ const BRIDE_PROFILE = {
     { stage: "社会人", photo: "", text: "仕事にやりがいを感じながら、日々前向きに過ごしています。" },
   ],
 };
+
+// ---------- OUR HISTORY ページ（お二人のストーリー） ----------
+const OUR_HISTORY = [
+  { stage: "出会い", photo: "", text: "共通の友人の紹介で出会いました。" },
+  { stage: "交際スタート", photo: "", text: "自然と惹かれ合い、お付き合いが始まりました。" },
+  { stage: "プロポーズ", photo: "", text: "忘れられない特別な一日に、プロポーズを受けました。" },
+  { stage: "ご入籍", photo: "", text: "2026年4月22日、入籍しました。" },
+  { stage: "結婚式", photo: "", text: "2026年8月23日、皆さまに見守られ結婚式を迎えます。" },
+];
 
 const TABLES = [
   {
@@ -123,23 +161,23 @@ const MENU_FOOD = [
   { jp: "デザート", en: "Dessert", desc: "ウェディングケーキ＆季節のフルーツ" },
 ];
 
-const DRINK = {
-  alcohol: ["シャンパン", "ビール", "ハイボール", "赤ワイン", "白ワイン", "ウイスキー"],
-  nonAlcohol: ["ノンアルコールビール", "オレンジジュース", "アップルジュース", "ウーロン茶", "アイスティー"],
-};
+// ---------- ナビゲーションボタン（各ページ下部＋TOPページに共通表示） ----------
+// replay: true のボタンはページ遷移ではなく、オープニング画面を再生する特別な動作をします。
+const NAV_ITEMS = [
+  { id: "profile", en: "Profile", jp: "プロフィール" },
+  { id: "history", en: "Personal History", jp: "生い立ち" },
+  { id: "our-history", en: "Our History", jp: "二人の道" },
+  { id: "seating", en: "Seating", jp: "お座席" },
+  { id: "menu", en: "Menu", jp: "お食事" },
+  { id: "top", en: "Top", jp: "トップページ", replay: true },
+];
 
-const PHOTO_SHARE = {
-  lines: ["本日撮影いただいたお写真を", "こちらよりシェアしてください"],
-  buttonLabel: "SHARE",
-  // 実際のGoogleフォト等の共有アルバムURLに差し替えてください
-  url: "#",
-};
-
+// ---------- ハンバーガーメニュー（INDEXパネル）用 ----------
 const SECTIONS = [
-  { id: "top", en: "TOP" },
   { id: "profile", en: "PROFILE" },
+  { id: "history", en: "PERSONAL HISTORY" },
+  { id: "our-history", en: "OUR HISTORY" },
   { id: "seating", en: "SEATING LIST" },
   { id: "menu", en: "MENU" },
-  { id: "drink", en: "DRINK" },
-  { id: "photo", en: "PHOTO SHARING" },
+  { id: "top", en: "TOP" },
 ];

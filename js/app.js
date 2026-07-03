@@ -11,12 +11,17 @@
   const SPLASH_DURATION_MS = 5000;
   const SPLASH_FADE_MS = 400;
   let splashTimerId = null;
+  let splashStopped = false;
 
-  function revealMain() {
+  function clearSplashTimer() {
     if (splashTimerId !== null) {
       window.clearTimeout(splashTimerId);
       splashTimerId = null;
     }
+  }
+
+  function revealMain() {
+    clearSplashTimer();
     const splash = $("#splash");
     if (splash.hidden || splash.classList.contains("is-leaving")) return;
     splash.classList.add("is-leaving");
@@ -28,7 +33,31 @@
   }
 
   function startSplashTimer() {
+    clearSplashTimer();
+    if (splashStopped) return;
     splashTimerId = window.setTimeout(revealMain, SPLASH_DURATION_MS);
+  }
+
+  function toggleSplashStop() {
+    splashStopped = !splashStopped;
+    $("#splash-stop").classList.toggle("is-active", splashStopped);
+    if (splashStopped) {
+      clearSplashTimer();
+    } else {
+      startSplashTimer();
+    }
+  }
+
+  function replaySplash() {
+    splashStopped = false;
+    $("#splash-stop").classList.remove("is-active");
+    navigate("top");
+    const splash = $("#splash");
+    splash.classList.remove("is-leaving");
+    splash.hidden = false;
+    $("#index-toggle").hidden = true;
+    $("#back-toggle").hidden = true;
+    startSplashTimer();
   }
 
   // ---------- page router ----------
@@ -75,7 +104,28 @@
       .join("");
   }
 
-  // ---------- index (numbered anchor list) ----------
+  // ---------- nav grids (TOP / PROFILE / PERSONAL HISTORY / OUR HISTORY 共通) ----------
+  function buildNavGridHtml() {
+    return NAV_ITEMS.map((item) => {
+      const inner =
+        '<span class="nav-square-en">' + item.en + "</span>" +
+        '<span class="nav-square-jp">' + item.jp + "</span>";
+      if (item.replay) {
+        return '<button type="button" class="nav-square" data-replay-splash>' + inner + "</button>";
+      }
+      return '<a href="#' + item.id + '" class="nav-square">' + inner + "</a>";
+    }).join("");
+  }
+
+  function renderNavGrids() {
+    const html = buildNavGridHtml();
+    ["#nav-grid-top", "#nav-grid-profile", "#nav-grid-history", "#nav-grid-our-history"].forEach((sel) => {
+      const el = $(sel);
+      if (el) el.innerHTML = html;
+    });
+  }
+
+  // ---------- index (numbered anchor list, hamburger panel) ----------
   function renderIndexLists() {
     const items = SECTIONS.map((s, i) => {
       const num = String(i + 1).padStart(2, "0");
@@ -100,9 +150,9 @@
     document.body.classList.remove("modal-open");
   }
 
-  // ---------- profile (life-stage timeline) ----------
-  function renderProfileTimeline(container, person) {
-    container.innerHTML = person.timeline
+  // ---------- shared timeline renderer (PERSONAL HISTORY / OUR HISTORY) ----------
+  function renderTimelineList(container, entries) {
+    container.innerHTML = entries
       .map((entry) => {
         const photoHtml = entry.photo
           ? '<img class="timeline-photo" src="' + entry.photo + '" alt="' + entry.stage + '">'
@@ -118,9 +168,35 @@
       .join("");
   }
 
+  function renderHistory() {
+    renderTimelineList($("#history-groom-timeline"), GROOM_HISTORY.timeline);
+    renderTimelineList($("#history-bride-timeline"), BRIDE_HISTORY.timeline);
+  }
+
+  function renderOurHistory() {
+    renderTimelineList($("#our-history-timeline"), OUR_HISTORY);
+  }
+
+  // ---------- profile (photo + 7 facts) ----------
+  function renderProfilePerson(prefix, person) {
+    $("#profile-" + prefix + "-name").textContent = person.name;
+    $("#profile-" + prefix + "-photo").innerHTML = person.photo
+      ? '<img class="timeline-photo" src="' + person.photo + '" alt="' + person.name + '">'
+      : '<div class="timeline-photo-placeholder">' + person.name + "のお写真</div>";
+    $("#profile-" + prefix + "-stats").innerHTML = person.stats
+      .map(
+        (s) =>
+          '<div class="profile-stat-row">' +
+          '<span class="profile-stat-label">' + s.label + "</span>" +
+          '<span class="profile-stat-value">' + s.value + "</span>" +
+          "</div>"
+      )
+      .join("");
+  }
+
   function renderProfile() {
-    renderProfileTimeline($("#profile-groom-timeline"), GROOM_PROFILE);
-    renderProfileTimeline($("#profile-bride-timeline"), BRIDE_PROFILE);
+    renderProfilePerson("groom", GROOM_PROFILE);
+    renderProfilePerson("bride", BRIDE_PROFILE);
   }
 
   // ---------- venue grid + seating list ----------
@@ -255,7 +331,7 @@
     document.body.classList.add("modal-open");
   }
 
-  // ---------- food / drink ----------
+  // ---------- food ----------
   function renderFood() {
     const box = $("#food-list");
     box.innerHTML = "";
@@ -270,23 +346,6 @@
     });
   }
 
-  function renderDrink() {
-    const box = $("#drink-list");
-    box.innerHTML =
-      '<p class="drink-category">ALCOHOL</p>' +
-      '<p class="drink-items">' + DRINK.alcohol.join(" / ") + "</p>" +
-      '<p class="drink-category">NON ALCOHOL</p>' +
-      '<p class="drink-items">' + DRINK.nonAlcohol.join(" / ") + "</p>";
-  }
-
-  // ---------- photo sharing ----------
-  function renderPhotoShare() {
-    $("#photo-message").innerHTML = PHOTO_SHARE.lines.map((l) => "<span>" + l + "</span>").join("<br>");
-    const link = $("#photo-share-link");
-    link.textContent = PHOTO_SHARE.buttonLabel;
-    link.href = PHOTO_SHARE.url;
-  }
-
   function closeAnyModal() {
     const el = $("#guest-modal");
     if (el && !el.hidden) el.hidden = true;
@@ -298,6 +357,16 @@
     const skipBtn = e.target.closest("#splash-skip");
     if (skipBtn) {
       revealMain();
+      return;
+    }
+    const stopBtn = e.target.closest("#splash-stop");
+    if (stopBtn) {
+      toggleSplashStop();
+      return;
+    }
+    const replayBtn = e.target.closest("[data-replay-splash]");
+    if (replayBtn) {
+      replaySplash();
       return;
     }
     const navEl = e.target.closest("[data-nav]");
@@ -338,13 +407,14 @@
   window.addEventListener("DOMContentLoaded", () => {
     renderCoupleInfo();
     renderTopMessage();
+    renderNavGrids();
     renderIndexLists();
     renderProfile();
+    renderHistory();
+    renderOurHistory();
     renderVenue();
     renderSeats();
     renderFood();
-    renderDrink();
-    renderPhotoShare();
     render();
     startSplashTimer();
   });
