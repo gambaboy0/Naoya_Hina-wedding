@@ -27,36 +27,37 @@ const TOP_MESSAGE = {
   ],
 };
 
+// timelineの各itemは { stage, photo, text } の形です。
+// photo は "assets/img/profile/xxx.jpg" のように実際の写真を用意したら差し替えてください。
+// 空のままにしておくと、その段に写真のプレースホルダーが表示されます。
 const GROOM_PROFILE = {
   role: "GROOM",
   name: "直弥",
   nameRomaji: "NAOYA",
-  // 生年月日・出身地・血液型・MBTIはサンプル値です。実際の情報に差し替えてください。
-  stats: [
-    { label: "BIRTHDAY", value: "1997.01.01" },
-    { label: "BIRTH PLACE", value: "東京都" },
-    { label: "BLOOD TYPE", value: "A" },
-    { label: "MBTI", value: "INFJ" },
+  timeline: [
+    { stage: "誕生時", photo: "", text: "○年○月○日、○○県にて元気な産声をあげました。" },
+    { stage: "幼少期", photo: "", text: "好奇心旺盛で、いつも笑顔の絶えない子どもでした。" },
+    { stage: "小学生", photo: "", text: "外で駆け回るのが大好きで、放課後は友達と毎日遊んでいました。" },
+    { stage: "中学生", photo: "", text: "部活動に打ち込み、仲間と過ごす時間が何より楽しい時期でした。" },
+    { stage: "高校生", photo: "", text: "勉強と部活の両立に励みながら、将来の夢を思い描いていました。" },
+    { stage: "大学生", photo: "", text: "新しい出会いに恵まれ、様々なことに挑戦した4年間でした。" },
+    { stage: "社会人", photo: "", text: "社会人として日々奮闘しながら、充実した毎日を送っています。" },
   ],
-  message:
-    "本日は僕たちのためにお集まりいただき、本当にありがとうございます。" +
-    "至らない点も多い二人ですが、これからも変わらぬお付き合いをよろしくお願いします。",
 };
 
 const BRIDE_PROFILE = {
   role: "BRIDE",
   name: "日那",
   nameRomaji: "HINA",
-  // 生年月日・出身地・血液型・MBTIはサンプル値です。実際の情報に差し替えてください。
-  stats: [
-    { label: "BIRTHDAY", value: "1998.05.20" },
-    { label: "BIRTH PLACE", value: "神奈川県" },
-    { label: "BLOOD TYPE", value: "O" },
-    { label: "MBTI", value: "ENFJ" },
+  timeline: [
+    { stage: "誕生時", photo: "", text: "○年○月○日、○○県にて誕生しました。" },
+    { stage: "幼少期", photo: "", text: "人見知りせず、誰とでもすぐ仲良くなる子どもでした。" },
+    { stage: "小学生", photo: "", text: "習い事に励みながら、家族と過ごす時間を大切にしていました。" },
+    { stage: "中学生", photo: "", text: "友人たちと笑い合いながら過ごした、かけがえのない時間でした。" },
+    { stage: "高校生", photo: "", text: "多くの経験を通して、少しずつ自分の将来を考え始めました。" },
+    { stage: "大学生", photo: "", text: "新しい環境で視野を広げ、多くの友人と出会いました。" },
+    { stage: "社会人", photo: "", text: "仕事にやりがいを感じながら、日々前向きに過ごしています。" },
   ],
-  message:
-    "遠方より、またお忙しい中お越しいただき感謝しております。" +
-    "皆様のおかげで今日という日を迎えられました。楽しんでいってくださいね。",
 };
 
 const TABLES = [

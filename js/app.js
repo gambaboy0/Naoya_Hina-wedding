@@ -100,37 +100,27 @@
     document.body.classList.remove("modal-open");
   }
 
-  // ---------- profile ----------
-  function renderProfilePerson(container, person) {
-    const statsHtml = person.stats
-      .map(
-        (s) =>
-          '<div class="profile-stat-row">' +
-          '<span class="profile-stat-label">' + s.label + "</span>" +
-          '<span class="profile-stat-value">' + s.value + "</span>" +
+  // ---------- profile (life-stage timeline) ----------
+  function renderProfileTimeline(container, person) {
+    container.innerHTML = person.timeline
+      .map((entry) => {
+        const photoHtml = entry.photo
+          ? '<img class="timeline-photo" src="' + entry.photo + '" alt="' + entry.stage + '">'
+          : '<div class="timeline-photo-placeholder">' + entry.stage + "のお写真</div>";
+        return (
+          '<div class="timeline-entry">' +
+          photoHtml +
+          '<p class="timeline-stage">' + entry.stage + "</p>" +
+          '<p class="timeline-text">' + entry.text + "</p>" +
           "</div>"
-      )
+        );
+      })
       .join("");
-    container.innerHTML =
-      '<p class="profile-role">' + person.role + "</p>" +
-      '<h3 class="profile-name">' + person.nameRomaji + "</h3>" +
-      '<div class="profile-stats">' + statsHtml + "</div>" +
-      '<button type="button" class="btn-outline" data-message="' + person.role + '">MESSAGE</button>';
   }
 
   function renderProfile() {
-    renderProfilePerson($("#profile-groom"), GROOM_PROFILE);
-    renderProfilePerson($("#profile-bride"), BRIDE_PROFILE);
-  }
-
-  function openMessageModal(role) {
-    const person = role === "GROOM" ? GROOM_PROFILE : BRIDE_PROFILE;
-    $("#message-modal-body").innerHTML =
-      '<p class="modal-eyebrow">MESSAGE FROM</p>' +
-      '<h3 class="modal-name">' + person.name + "</h3>" +
-      '<p class="modal-message-text">' + person.message + "</p>";
-    $("#message-modal").hidden = false;
-    document.body.classList.add("modal-open");
+    renderProfileTimeline($("#profile-groom-timeline"), GROOM_PROFILE);
+    renderProfileTimeline($("#profile-bride-timeline"), BRIDE_PROFILE);
   }
 
   // ---------- venue grid + seating list ----------
@@ -298,10 +288,8 @@
   }
 
   function closeAnyModal() {
-    ["#guest-modal", "#message-modal"].forEach((sel) => {
-      const el = $(sel);
-      if (el && !el.hidden) el.hidden = true;
-    });
+    const el = $("#guest-modal");
+    if (el && !el.hidden) el.hidden = true;
     document.body.classList.remove("modal-open");
   }
 
@@ -330,11 +318,6 @@
     const closeIndexEl = e.target.closest("[data-close-index]");
     if (closeIndexEl) {
       closeIndexPanel();
-      return;
-    }
-    const msgBtn = e.target.closest("[data-message]");
-    if (msgBtn) {
-      openMessageModal(msgBtn.dataset.message);
       return;
     }
     const closeEl = e.target.closest("[data-close]");

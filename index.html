@@ -87,14 +87,48 @@
   </section>
 
   <!-- PROFILE -->
-  <section class="page section section-flush" id="profile" data-page="profile" hidden>
+  <section class="page section" id="profile" data-page="profile" hidden>
     <p class="section-eyebrow">02</p>
     <h2 class="section-title">PROFILE</h2>
-    <div class="profile-photo" style="background-image:url('assets/img/kimono.jpg')"></div>
-    <div class="section-body">
-      <div id="profile-groom" class="profile-block"></div>
-      <div id="profile-bride" class="profile-block"></div>
+
+    <div class="profile-header">
+      <p class="profile-header-en">Groom Profiles</p>
+      <p class="profile-header-jp">新郎プロフィール</p>
     </div>
+    <div id="profile-groom-timeline" class="profile-timeline"></div>
+
+    <div class="profile-header">
+      <p class="profile-header-en">Bride Profiles</p>
+      <p class="profile-header-jp">新婦プロフィール</p>
+    </div>
+    <div id="profile-bride-timeline" class="profile-timeline"></div>
+
+    <nav class="profile-nav-grid">
+      <a href="#top" class="nav-square">
+        <span class="nav-square-en">Top</span>
+        <span class="nav-square-jp">トップ</span>
+      </a>
+      <a href="#profile" class="nav-square">
+        <span class="nav-square-en">Profile</span>
+        <span class="nav-square-jp">プロフィール</span>
+      </a>
+      <a href="#seating" class="nav-square">
+        <span class="nav-square-en">Seating</span>
+        <span class="nav-square-jp">お席</span>
+      </a>
+      <a href="#menu" class="nav-square">
+        <span class="nav-square-en">Menu</span>
+        <span class="nav-square-jp">お食事</span>
+      </a>
+      <a href="#drink" class="nav-square">
+        <span class="nav-square-en">Drink</span>
+        <span class="nav-square-jp">お飲み物</span>
+      </a>
+      <a href="#photo" class="nav-square">
+        <span class="nav-square-en">Photo</span>
+        <span class="nav-square-jp">写真共有</span>
+      </a>
+    </nav>
   </section>
 
   <!-- SEATING LIST -->
@@ -147,15 +181,6 @@
   <div class="modal-sheet" role="dialog" aria-modal="true">
     <button type="button" class="modal-close" data-close aria-label="閉じる">×</button>
     <div id="guest-modal-body"></div>
-  </div>
-</div>
-
-<!-- ============ PROFILE MESSAGE MODAL ============ -->
-<div id="message-modal" class="modal" hidden>
-  <div class="modal-backdrop" data-close></div>
-  <div class="modal-sheet" role="dialog" aria-modal="true">
-    <button type="button" class="modal-close" data-close aria-label="閉じる">×</button>
-    <div id="message-modal-body"></div>
   </div>
 </div>
 
