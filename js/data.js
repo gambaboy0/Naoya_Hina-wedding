@@ -4,10 +4,16 @@
  */
 
 const COUPLE = {
-  groomName: "太郎",
-  brideName: "花子",
-  familyName: "川島",
-  dateLabel: "2026.11.15 SUN",
+  groomName: "直弥",
+  groomNameRomaji: "Naoya",
+  brideName: "日那",
+  brideNameRomaji: "Hina",
+  dateLabel: "2026.8.23 SUN",
+};
+
+const VENUE = {
+  name: "NEEDs 富山 ヴィクトリアハウス",
+  address: "富山県富山市新庄本町3丁目2-30",
 };
 
 const GREETING = {
@@ -28,8 +34,9 @@ const GREETING = {
 
 const GROOM_PROFILE = {
   role: "GROOM",
-  name: "太郎",
-  nameRomaji: "TARO",
+  name: "直弥",
+  nameRomaji: "NAOYA",
+  // 生年月日・出身地・血液型・MBTIはサンプル値です。実際の情報に差し替えてください。
   stats: [
     { label: "BIRTHDAY", value: "1997.01.01" },
     { label: "BIRTH PLACE", value: "東京都" },
@@ -43,8 +50,9 @@ const GROOM_PROFILE = {
 
 const BRIDE_PROFILE = {
   role: "BRIDE",
-  name: "花子",
-  nameRomaji: "HANAKO",
+  name: "日那",
+  nameRomaji: "HINA",
+  // 生年月日・出身地・血液型・MBTIはサンプル値です。実際の情報に差し替えてください。
   stats: [
     { label: "BIRTHDAY", value: "1998.05.20" },
     { label: "BIRTH PLACE", value: "神奈川県" },
@@ -78,15 +86,15 @@ const TABLES = [
   {
     id: 3,
     guests: [
-      { name: "川島 誠", kana: "かわしま まこと", side: "groom", relation: "父方の叔父", note: "" },
-      { name: "川島 文子", kana: "かわしま ふみこ", side: "groom", relation: "父方の叔母", note: "" },
+      { name: "川島 誠", kana: "かわしま まこと", side: "bride", relation: "父方の叔父", note: "" },
+      { name: "川島 文子", kana: "かわしま ふみこ", side: "bride", relation: "父方の叔母", note: "" },
       { name: "伊藤 大輔", kana: "いとう だいすけ", side: "groom", relation: "いとこ", note: "" },
     ],
   },
   {
     id: 4,
     guests: [
-      { name: "山本 花", kana: "やまもと はな", side: "bride", relation: "学生時代の親友", note: "花子ちゃん、結婚おめでとう！" },
+      { name: "山本 花", kana: "やまもと はな", side: "bride", relation: "学生時代の親友", note: "日那ちゃん、結婚おめでとう！" },
       { name: "加藤 美咲", kana: "かとう みさき", side: "bride", relation: "大学時代の友人", note: "" },
       { name: "吉田 恵", kana: "よしだ めぐみ", side: "bride", relation: "会社の同僚", note: "" },
       { name: "斎藤 直人", kana: "さいとう なおと", side: "bride", relation: "会社の上司", note: "" },

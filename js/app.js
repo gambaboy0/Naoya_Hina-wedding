@@ -25,6 +25,18 @@
     window.setTimeout(revealMain, SPLASH_DURATION_MS);
   }
 
+  // ---------- couple info (title / TOP / footer / venue) ----------
+  function renderCoupleInfo() {
+    const names = COUPLE.groomNameRomaji + " & " + COUPLE.brideNameRomaji;
+    document.getElementById("page-title").textContent = names + " ご結婚式 | デジタル席次表";
+    $("#top-date").textContent = COUPLE.dateLabel;
+    $("#top-names").textContent = names;
+    $("#footer-text").textContent = names + " Wedding · " + COUPLE.dateLabel.slice(0, 4);
+    if (typeof VENUE !== "undefined") {
+      $("#venue-info").textContent = VENUE.name + "　" + VENUE.address;
+    }
+  }
+
   // ---------- index (numbered anchor list) ----------
   function renderIndexLists() {
     const items = SECTIONS.map((s, i) => {
@@ -301,6 +313,7 @@
   });
 
   window.addEventListener("DOMContentLoaded", () => {
+    renderCoupleInfo();
     renderIndexLists();
     renderGreeting();
     renderProfile();
