@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>川島家 ご結婚式 | デジタル席次表</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- ============ SPLASH (gate) ============ -->
+<section id="splash" class="splash">
+  <div class="media-bg" style="background-image:url('assets/img/top.jpg')"></div>
+  <div class="splash-overlay"></div>
+  <p class="splash-welcome">Welcome to<br>our wedding</p>
+</section>
+
+<!-- ============ fixed index toggle ============ -->
+<button type="button" id="index-toggle" class="index-toggle" aria-label="INDEX" hidden>
+  <span></span><span></span><span></span>
+</button>
+
+<!-- ============ slide-in index panel ============ -->
+<div id="index-panel" class="index-panel" hidden>
+  <div class="index-panel-backdrop" data-close-index></div>
+  <nav class="index-panel-sheet">
+    <button type="button" class="modal-close" data-close-index aria-label="閉じる">×</button>
+    <p class="index-panel-title">INDEX</p>
+    <ol class="index-list" id="index-list-panel"></ol>
+  </nav>
+</div>
+
+<!-- ============ MAIN (single long scroll) ============ -->
+<main id="app" hidden>
+
+  <!-- TOP -->
+  <section class="section section-top-flat" id="top">
+    <p class="couple-date">2026.11.15&nbsp;SUN</p>
+    <img class="top-photo" src="assets/img/kimono.jpg" alt="">
+    <h1 class="couple-names-serif">Taro &amp; Hanako</h1>
+  </section>
+
+  <!-- INDEX (inline) -->
+  <section class="section" id="index" aria-label="INDEX">
+    <h2 class="section-title">INDEX</h2>
+    <ol class="index-list" id="index-list-inline"></ol>
+  </section>
+
+  <!-- GREETING -->
+  <section class="section" id="greeting">
+    <p class="section-eyebrow">02</p>
+    <h2 class="section-title">GREETING</h2>
+    <div id="greeting-text" class="greeting-text"></div>
+    <p class="couple-names-plain" id="greeting-names"></p>
+  </section>
+
+  <!-- PROFILE -->
+  <section class="section section-flush" id="profile">
+    <p class="section-eyebrow">03</p>
+    <h2 class="section-title">PROFILE</h2>
+    <div class="profile-photo" style="background-image:url('assets/img/menu-bg.jpg')"></div>
+    <div class="section-body">
+      <div id="profile-groom" class="profile-block"></div>
+      <div id="profile-bride" class="profile-block"></div>
+    </div>
+  </section>
+
+  <!-- SEATING LIST -->
+  <section class="section" id="seating">
+    <p class="section-eyebrow">04</p>
+    <h2 class="section-title">SEATING LIST</h2>
+    <div class="stage-label">STAGE / ステージ</div>
+    <div id="venue-grid" class="venue-grid"></div>
+    <div class="search-box">
+      <input type="search" id="guest-search" placeholder="お名前で検索（例：山田）" autocomplete="off">
+    </div>
+    <div id="search-results" class="search-results" hidden></div>
+    <div id="tables-list" class="tables-list"></div>
+    <p class="section-caption">お名前をタップするとご紹介が表示されます</p>
+  </section>
+
+  <!-- MENU -->
+  <section class="section" id="menu">
+    <p class="section-eyebrow">05</p>
+    <h2 class="section-title">MENU</h2>
+    <div id="food-list" class="course-list-flat"></div>
+    <p class="section-caption">※アレルギー等ございましたら受付までお申し付けください</p>
+  </section>
+
+  <!-- DRINK -->
+  <section class="section" id="drink">
+    <p class="section-eyebrow">06</p>
+    <h2 class="section-title">DRINK</h2>
+    <div id="drink-list" class="drink-list-flat"></div>
+  </section>
+
+  <!-- PHOTO SHARING -->
+  <section class="section" id="photo">
+    <p class="section-eyebrow">07</p>
+    <h2 class="section-title">PHOTO SHARING</h2>
+    <p id="photo-message" class="photo-message"></p>
+    <a id="photo-share-link" class="btn-outline" href="#" target="_blank" rel="noopener">SHARE</a>
+  </section>
+
+  <footer class="footer">
+    <p>Kawashima Wedding &middot; 2026</p>
+  </footer>
+
+</main>
+
+<!-- ============ GUEST DETAIL MODAL ============ -->
+<div id="guest-modal" class="modal" hidden>
+  <div class="modal-backdrop" data-close></div>
+  <div class="modal-sheet" role="dialog" aria-modal="true">
+    <button type="button" class="modal-close" data-close aria-label="閉じる">×</button>
+    <div id="guest-modal-body"></div>
+  </div>
+</div>
+
+<!-- ============ PROFILE MESSAGE MODAL ============ -->
+<div id="message-modal" class="modal" hidden>
+  <div class="modal-backdrop" data-close></div>
+  <div class="modal-sheet" role="dialog" aria-modal="true">
+    <button type="button" class="modal-close" data-close aria-label="閉じる">×</button>
+    <div id="message-modal-body"></div>
+  </div>
+</div>
+
+<script src="js/data.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
