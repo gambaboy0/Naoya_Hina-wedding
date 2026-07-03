@@ -76,15 +76,6 @@
     document.body.classList.remove("modal-open");
   }
 
-  // ---------- greeting ----------
-  function renderGreeting() {
-    const html = GREETING.lines
-      .map((line) => (line === "" ? '<p class="greeting-gap"></p>' : "<p>" + line + "</p>"))
-      .join("");
-    $("#greeting-text").innerHTML = html;
-    $("#greeting-names").textContent = COUPLE.groomName + "　" + COUPLE.brideName;
-  }
-
   // ---------- profile ----------
   function renderProfilePerson(container, person) {
     const statsHtml = person.stats
@@ -334,7 +325,6 @@
     renderCoupleInfo();
     renderTopMessage();
     renderIndexLists();
-    renderGreeting();
     renderProfile();
     renderVenue();
     renderSeats();

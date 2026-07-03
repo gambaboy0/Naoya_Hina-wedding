@@ -27,22 +27,6 @@ const TOP_MESSAGE = {
   ],
 };
 
-const GREETING = {
-  lines: [
-    "本日はご多用中にもかかわらず",
-    "お集まりいただきありがとうございます",
-    "",
-    "皆様にあたたかく見守られ",
-    "今日の日を迎えられることを嬉しく思います",
-    "",
-    "未熟なふたりですが手を取り合い",
-    "共に歩んでゆきたいと思います",
-    "",
-    "これからも末永いお付き合いをお願いいたします",
-    "どうぞ楽しいひとときをお過ごしください",
-  ],
-};
-
 const GROOM_PROFILE = {
   role: "GROOM",
   name: "直弥",
@@ -152,7 +136,6 @@ const PHOTO_SHARE = {
 
 const SECTIONS = [
   { id: "top", en: "TOP" },
-  { id: "greeting", en: "GREETING" },
   { id: "profile", en: "PROFILE" },
   { id: "seating", en: "SEATING LIST" },
   { id: "menu", en: "MENU" },
