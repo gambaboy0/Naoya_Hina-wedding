@@ -10,9 +10,15 @@
   // ---------- splash ----------
   const SPLASH_DURATION_MS = 3000;
   const SPLASH_FADE_MS = 400;
+  let splashTimerId = null;
 
   function revealMain() {
+    if (splashTimerId !== null) {
+      window.clearTimeout(splashTimerId);
+      splashTimerId = null;
+    }
     const splash = $("#splash");
+    if (splash.hidden || splash.classList.contains("is-leaving")) return;
     splash.classList.add("is-leaving");
     window.setTimeout(() => {
       splash.hidden = true;
@@ -22,19 +28,26 @@
   }
 
   function startSplashTimer() {
-    window.setTimeout(revealMain, SPLASH_DURATION_MS);
+    splashTimerId = window.setTimeout(revealMain, SPLASH_DURATION_MS);
   }
 
-  // ---------- couple info (title / TOP / footer / venue) ----------
+  // ---------- couple info (title / splash / TOP / footer / venue) ----------
   function renderCoupleInfo() {
     const names = COUPLE.groomNameRomaji + " & " + COUPLE.brideNameRomaji;
     document.getElementById("page-title").textContent = names + " ご結婚式 | デジタル席次表";
-    $("#top-date").textContent = COUPLE.dateLabel;
-    $("#top-names").textContent = names;
+    $("#splash-names").textContent = names;
+    $("#splash-date").textContent = COUPLE.dateLabel;
     $("#footer-text").textContent = names + " Wedding · " + COUPLE.dateLabel.slice(0, 4);
     if (typeof VENUE !== "undefined") {
       $("#venue-info").textContent = VENUE.name + "　" + VENUE.address;
     }
+  }
+
+  // ---------- TOP message (greeting to guests) ----------
+  function renderTopMessage() {
+    $("#top-message").innerHTML = TOP_MESSAGE.paragraphs
+      .map((lines) => "<p>" + lines.join("<br>") + "</p>")
+      .join("");
   }
 
   // ---------- index (numbered anchor list) ----------
@@ -279,6 +292,11 @@
 
   // ---------- global event delegation ----------
   document.addEventListener("click", (e) => {
+    const skipBtn = e.target.closest("#splash-skip");
+    if (skipBtn) {
+      revealMain();
+      return;
+    }
     const indexToggle = e.target.closest("#index-toggle");
     if (indexToggle) {
       openIndexPanel();
@@ -314,6 +332,7 @@
 
   window.addEventListener("DOMContentLoaded", () => {
     renderCoupleInfo();
+    renderTopMessage();
     renderIndexLists();
     renderGreeting();
     renderProfile();

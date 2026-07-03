@@ -7,6 +7,7 @@
   --line: #e6e2da;
   --cream: #faf8f4;
   --rose: #c98a8a;
+  --sea: #2f8fa3;
 
   --font-serif: "YuMincho", "Yu Mincho", "Hiragino Mincho ProN", "HGS明朝E", serif;
   --font-sans: "YuGothic", "Yu Gothic", "Hiragino Kaku Gothic ProN", "Noto Sans JP", sans-serif;
@@ -57,22 +58,78 @@ body {
   background: linear-gradient(180deg, rgba(58, 51, 40, 0.4), rgba(58, 51, 40, 0.12) 45%, rgba(58, 51, 40, 0.5));
 }
 
-.splash-welcome {
+.splash-content {
   position: relative;
   z-index: 1;
   min-height: 100vh;
-  margin: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  font-family: "Great Vibes", "YuMincho", cursive;
-  font-weight: 400;
   color: var(--white);
-  font-size: 3rem;
-  line-height: 1.35;
-  text-shadow: 0 2px 14px rgba(0, 0, 0, 0.4);
-  padding: 0 1.5rem;
+  text-align: center;
+}
+
+.splash-names {
+  position: absolute;
+  top: 2.4rem;
+  left: 1.5rem;
+  right: 1.5rem;
+  margin: 0;
+  font-family: "Great Vibes", "YuMincho", cursive;
+  font-size: 2.3rem;
+  line-height: 1.2;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+}
+
+.splash-reception {
+  position: absolute;
+  top: 64%;
+  left: 1.5rem;
+  right: 1.5rem;
+}
+
+.splash-reception-title {
+  margin: 0 0 0.6rem;
+  font-family: "Great Vibes", "YuMincho", cursive;
+  font-size: 1.9rem;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+}
+
+.splash-quote {
+  margin: 0;
+  font-family: "Great Vibes", "YuMincho", cursive;
+  font-size: 1.05rem;
+  line-height: 1.7;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+}
+
+.splash-date {
+  position: absolute;
+  bottom: 4.6rem;
+  left: 1.5rem;
+  right: 1.5rem;
+  margin: 0;
+  font-family: "Great Vibes", "YuMincho", cursive;
+  font-size: 1.5rem;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+}
+
+.splash-skip {
+  position: absolute;
+  bottom: 0.9rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+  appearance: none;
+  background: rgba(255, 255, 255, 0.22);
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  color: var(--white);
+  font-family: var(--font-sans);
+  font-size: 0.68rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 0.35rem 1rem;
+  border-radius: 999px;
+  cursor: pointer;
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
 }
 
 .splash.is-leaving {
@@ -232,35 +289,46 @@ body {
   margin-top: 1.6rem;
 }
 
-/* ---------- TOP (photo + names, editorial style) ---------- */
-.section-top-flat {
-  padding-top: 4rem;
-  text-align: center;
+/* ---------- TOP (full-width photo + greeting + nav) ---------- */
+.section-top-compact {
+  padding: 0;
 }
 
-.couple-date {
-  font-family: Georgia, var(--font-serif);
-  font-size: 0.85rem;
-  letter-spacing: 0.18em;
-  color: var(--gray);
-  margin: 0 0 1.6rem;
-}
-
-.top-photo {
+.top-photo-full {
   width: 100%;
-  height: auto;
+  height: 38vh;
+  object-fit: cover;
   display: block;
-  border: 1px solid var(--wine-border);
-  margin-bottom: 1.8rem;
 }
 
-.couple-names-serif {
-  font-family: Georgia, var(--font-serif);
-  font-weight: 400;
-  font-size: 2rem;
-  letter-spacing: 0.06em;
+.top-greeting-block {
+  background: var(--cream);
+  padding: 1.2rem 1.5rem 1.4rem;
+  text-align: left;
+}
+
+.top-greeting-label {
+  font-family: "Great Vibes", "YuMincho", cursive;
+  color: var(--sea);
+  font-size: 1.7rem;
+  margin: 0 0 0.5rem;
+  text-align: left;
+}
+
+.top-message {
+  text-align: left;
   color: var(--dark);
-  margin: 0;
+  font-family: var(--font-serif);
+  font-size: 0.82rem;
+  line-height: 1.7;
+}
+
+.top-message p {
+  margin: 0 0 0.7rem;
+}
+
+.top-message p:last-child {
+  margin-bottom: 0;
 }
 
 /* ---------- greeting ---------- */

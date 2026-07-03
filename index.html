@@ -15,7 +15,19 @@
 <section id="splash" class="splash">
   <div class="media-bg" style="background-image:url('assets/img/top.jpg')"></div>
   <div class="splash-overlay"></div>
-  <p class="splash-welcome">Welcome to<br>our wedding</p>
+  <div class="splash-content">
+    <p class="splash-names" id="splash-names"></p>
+    <div class="splash-reception">
+      <p class="splash-reception-title">wedding reception</p>
+      <p class="splash-quote">
+        In this time when we can be happy<br>
+        if we don't marry,<br>
+        I want to marry you.
+      </p>
+    </div>
+    <p class="splash-date" id="splash-date"></p>
+  </div>
+  <button type="button" id="splash-skip" class="splash-skip">skip</button>
 </section>
 
 <!-- ============ fixed index toggle ============ -->
@@ -37,10 +49,13 @@
 <main id="app" hidden>
 
   <!-- TOP -->
-  <section class="section section-top-flat" id="top">
-    <p class="couple-date" id="top-date"></p>
-    <img class="top-photo" src="assets/img/kimono.jpg" alt="">
-    <h1 class="couple-names-serif" id="top-names"></h1>
+  <section class="section-top-compact" id="top">
+    <img class="top-photo-full" src="assets/img/menu-bg.jpg" alt="">
+    <div class="top-greeting-block">
+      <p class="top-greeting-label">Greeting</p>
+      <div id="top-message" class="top-message"></div>
+    </div>
+    <!-- メニューボタンはこの後の指示に合わせて追加予定 -->
   </section>
 
   <!-- INDEX (inline) -->
@@ -61,7 +76,7 @@
   <section class="section section-flush" id="profile">
     <p class="section-eyebrow">03</p>
     <h2 class="section-title">PROFILE</h2>
-    <div class="profile-photo" style="background-image:url('assets/img/menu-bg.jpg')"></div>
+    <div class="profile-photo" style="background-image:url('assets/img/kimono.jpg')"></div>
     <div class="section-body">
       <div id="profile-groom" class="profile-block"></div>
       <div id="profile-bride" class="profile-block"></div>
