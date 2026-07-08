@@ -6,10 +6,19 @@
 const COUPLE = {
   groomName: "直弥",
   groomNameRomaji: "Naoya",
+  groomFullName: "細川 直弥",
   brideName: "日那",
   brideNameRomaji: "Hina",
+  brideFullName: "川島 日那",
   dateLabel: "2026.8.23 SUN",
 };
+
+// 全体座席図の行構成（上から前列・中列・後列。各行は左から右の順）
+const SEATING_ROWS = [
+  ["1-1", "1-2", "1-3"],
+  ["2-1", "2-2"],
+  ["3-1", "3-2", "3-3"],
+];
 
 const VENUE = {
   name: "NEEDs 富山 ヴィクトリアハウス",

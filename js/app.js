@@ -331,30 +331,30 @@
     document.body.classList.add("modal-open");
   }
 
-  // ---------- round table diagram (共通描画: 属性検索の結果／全体座席図カルーセル) ----------
-  function polarPercent(index, total, radiusPercent) {
-    const angleDeg = -90 + index * (360 / total);
-    const angleRad = (angleDeg * Math.PI) / 180;
-    return {
-      x: 50 + radiusPercent * Math.cos(angleRad),
-      y: 50 + radiusPercent * Math.sin(angleRad),
-    };
+  // ---------- chart table block (共通描画: 属性検索の結果／全体座席図) ----------
+  // guests配列は座席表画像の行順（左,右,左,右…）なので、
+  // 偶数index→左列・奇数index→右列に分けると画像と同じ並びになる。
+  function buildChartSeatHtml(table, gi) {
+    const g = table.guests[gi];
+    return (
+      '<button type="button" class="chart-seat" data-table="' + table.id + '" data-gi="' + gi + '">' +
+      '<span class="chart-seat-rel">' + sideLabel(g.side) + g.relation + "</span>" +
+      '<span class="chart-seat-name">' + g.name + "様</span>" +
+      "</button>"
+    );
   }
 
-  function buildRoundTableHtml(table) {
-    const seatsHtml = table.guests
-      .map((g, i) => {
-        const pos = polarPercent(i, table.guests.length, 44);
-        return (
-          '<button type="button" class="round-table-seat" style="left:' + pos.x.toFixed(1) + '%;top:' + pos.y.toFixed(1) + '%;" ' +
-          'data-table="' + table.id + '" data-gi="' + i + '">' + g.name + "</button>"
-        );
-      })
-      .join("");
+  function buildChartTableHtml(table) {
+    const left = [];
+    const right = [];
+    table.guests.forEach((g, gi) => {
+      (gi % 2 === 0 ? left : right).push(buildChartSeatHtml(table, gi));
+    });
     return (
-      '<div class="round-table">' +
-      '<div class="round-table-circle"><span class="round-table-number">' + table.id + "</span></div>" +
-      seatsHtml +
+      '<div class="chart-table">' +
+      '<div class="chart-col">' + left.join("") + "</div>" +
+      '<div class="chart-table-circle">' + table.id + "</div>" +
+      '<div class="chart-col">' + right.join("") + "</div>" +
       "</div>"
     );
   }
@@ -389,7 +389,7 @@
       result.innerHTML = "";
       return;
     }
-    result.innerHTML = '<p class="picked-table-label">' + table.id + " テーブル</p>" + buildRoundTableHtml(table);
+    result.innerHTML = '<p class="picked-table-label">' + table.id + " テーブル</p>" + buildChartTableHtml(table);
   }
 
   function setupGuestFinder() {
@@ -403,16 +403,24 @@
     $("#guest-picker").addEventListener("change", (e) => showPickedTable(e.target.value));
   }
 
-  // ---------- 全体座席図（横フリックカルーセル） ----------
-  function renderTableCarousel() {
-    const el = $("#table-carousel");
-    el.innerHTML = TABLES.map(
-      (t) =>
-        '<div class="table-carousel-slide">' +
-        '<p class="picked-table-label">' + t.id + " テーブル</p>" +
-        buildRoundTableHtml(t) +
-        "</div>"
-    ).join("");
+  // ---------- 全体座席図（印刷席次表風の1枚レイアウト） ----------
+  function renderFullChart() {
+    const el = $("#full-chart");
+    const coupleHtml =
+      '<div class="chart-couple">' +
+      '<span class="chart-couple-role">新郎</span><span class="chart-couple-name">' + COUPLE.groomFullName + "</span>" +
+      '<span class="chart-couple-role">新婦</span><span class="chart-couple-name">' + COUPLE.brideFullName + "</span>" +
+      "</div>";
+    const rowsHtml = SEATING_ROWS.map((row) => {
+      const tablesHtml = row
+        .map((id) => {
+          const table = TABLES.find((t) => t.id === id);
+          return table ? buildChartTableHtml(table) : "";
+        })
+        .join("");
+      return '<div class="chart-row">' + tablesHtml + "</div>";
+    }).join("");
+    el.innerHTML = coupleHtml + rowsHtml;
   }
 
   // ---------- food ----------
@@ -478,7 +486,7 @@
       closeAnyModal();
       return;
     }
-    const seatBtn = e.target.closest(".round-table-seat");
+    const seatBtn = e.target.closest(".chart-seat");
     if (seatBtn) {
       const table = TABLES.find((t) => t.id === seatBtn.dataset.table);
       if (table) {
@@ -508,7 +516,7 @@
     renderVenue();
     renderSeats();
     setupGuestFinder();
-    renderTableCarousel();
+    renderFullChart();
     renderFood();
     render();
     startSplashTimer();

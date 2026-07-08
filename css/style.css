@@ -606,48 +606,63 @@ body {
   margin: 1rem 0 0.6rem;
 }
 
-/* ---------- round table diagram ---------- */
-.round-table {
-  position: relative;
-  width: 100%;
-  max-width: 320px;
-  aspect-ratio: 1;
-  margin: 0 auto;
+/* ---------- chart table block (2列レイアウトのテーブル) ---------- */
+.chart-table {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  flex-shrink: 0;
 }
 
-.round-table-circle {
-  position: absolute;
-  inset: 22%;
-  border: 1px solid var(--wine);
+.chart-col {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  flex-shrink: 0;
+}
+
+.chart-table-circle {
+  flex-shrink: 0;
+  width: 2rem;
+  height: 2rem;
   border-radius: 50%;
-  background: var(--cream);
+  background: #cfe6ec;
+  color: var(--dark);
+  font-family: Georgia, var(--font-serif);
+  font-size: 0.62rem;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.round-table-number {
-  font-family: Georgia, var(--font-serif);
-  color: var(--wine);
-  font-size: 1.1rem;
-}
-
-.round-table-seat {
-  position: absolute;
-  transform: translate(-50%, -50%);
+.chart-seat {
   appearance: none;
   border: none;
   background: none;
-  width: 4.6rem;
-  padding: 0.1rem;
+  padding: 0;
+  text-align: center;
   font-family: var(--font-sans);
-  font-size: 0.62rem;
-  line-height: 1.3;
-  color: var(--dark);
   cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  min-width: 4.6em;
 }
 
-/* ---------- 全体座席図カルーセル ---------- */
+.chart-seat-rel {
+  font-size: 0.5rem;
+  color: var(--gray);
+  letter-spacing: 0.02em;
+}
+
+.chart-seat-name {
+  font-size: 0.66rem;
+  color: var(--dark);
+  line-height: 1.3;
+  white-space: nowrap;
+}
+
+/* ---------- 全体座席図（印刷席次表風レイアウト） ---------- */
 .carousel-title {
   text-align: center;
   font-family: Georgia, var(--font-serif);
@@ -658,19 +673,59 @@ body {
   margin: 2.6rem 0 1.2rem;
 }
 
-.table-carousel {
-  display: flex;
+.full-chart-scroll {
   overflow-x: auto;
-  scroll-snap-type: x mandatory;
   -webkit-overflow-scrolling: touch;
-  gap: 1rem;
   margin: 0 -1.6rem 1.6rem;
   padding: 0 1.6rem 0.6rem;
 }
 
-.table-carousel-slide {
-  flex: 0 0 100%;
-  scroll-snap-align: center;
+.full-chart {
+  min-width: 620px;
+  width: max-content;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--white);
+  padding: 1.2rem 1rem 1.4rem;
+}
+
+.chart-couple {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 0.4rem;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: var(--cream);
+  width: fit-content;
+  margin: 0 auto 1.6rem;
+  padding: 0.4rem 1rem;
+}
+
+.chart-couple-role {
+  font-size: 0.55rem;
+  color: var(--gray);
+}
+
+.chart-couple-name {
+  font-family: var(--font-serif);
+  font-size: 0.85rem;
+  color: var(--dark);
+}
+
+.chart-couple-name:first-of-type {
+  margin-right: 0.7rem;
+}
+
+.chart-row {
+  display: flex;
+  justify-content: space-around;
+  gap: 1.2rem;
+  margin-bottom: 1.6rem;
+}
+
+.chart-row:last-child {
+  margin-bottom: 0;
 }
 
 .stage-label {
