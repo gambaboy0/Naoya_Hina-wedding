@@ -728,41 +728,6 @@ body {
   margin-bottom: 0;
 }
 
-.stage-label {
-  background: var(--cream);
-  color: var(--gray);
-  text-align: center;
-  font-size: 0.75rem;
-  letter-spacing: 0.08em;
-  padding: 0.5rem;
-  border-radius: 8px;
-  margin-bottom: 1.2rem;
-}
-
-.venue-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 0.7rem;
-  margin-bottom: 2rem;
-}
-
-.venue-table {
-  appearance: none;
-  aspect-ratio: 1;
-  border-radius: 50%;
-  border: 1px solid var(--wine);
-  background: var(--white);
-  color: var(--dark);
-  font-family: Georgia, var(--font-serif);
-  font-weight: 400;
-  font-size: 0.85rem;
-  cursor: pointer;
-}
-
-.venue-table:active {
-  background: var(--wine-border);
-}
-
 .search-box {
   margin-bottom: 0.9rem;
 }

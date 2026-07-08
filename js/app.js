@@ -199,28 +199,7 @@
     renderProfilePerson("bride", BRIDE_PROFILE);
   }
 
-  // ---------- venue grid + seating list ----------
-  function renderVenue() {
-    const grid = $("#venue-grid");
-    grid.innerHTML = "";
-    TABLES.forEach((t) => {
-      const btn = document.createElement("button");
-      btn.type = "button";
-      btn.className = "venue-table";
-      btn.textContent = t.id;
-      btn.addEventListener("click", () => goToTable(t.id));
-      grid.appendChild(btn);
-    });
-  }
-
-  function goToTable(id) {
-    const card = $("#table-" + id);
-    if (!card) return;
-    const body = card.querySelector(".table-card-body");
-    if (body) body.hidden = false;
-    window.setTimeout(() => card.scrollIntoView({ behavior: "smooth", block: "start" }), 30);
-  }
-
+  // ---------- seating list ----------
   function renderSeats() {
     const list = $("#tables-list");
     list.innerHTML = "";
@@ -513,7 +492,6 @@
     renderProfile();
     renderHistory();
     renderOurHistory();
-    renderVenue();
     renderSeats();
     setupGuestFinder();
     renderFullChart();
