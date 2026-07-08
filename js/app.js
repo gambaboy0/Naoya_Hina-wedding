@@ -331,6 +331,90 @@
     document.body.classList.add("modal-open");
   }
 
+  // ---------- round table diagram (共通描画: 属性検索の結果／全体座席図カルーセル) ----------
+  function polarPercent(index, total, radiusPercent) {
+    const angleDeg = -90 + index * (360 / total);
+    const angleRad = (angleDeg * Math.PI) / 180;
+    return {
+      x: 50 + radiusPercent * Math.cos(angleRad),
+      y: 50 + radiusPercent * Math.sin(angleRad),
+    };
+  }
+
+  function buildRoundTableHtml(table) {
+    const seatsHtml = table.guests
+      .map((g, i) => {
+        const pos = polarPercent(i, table.guests.length, 44);
+        return (
+          '<button type="button" class="round-table-seat" style="left:' + pos.x.toFixed(1) + '%;top:' + pos.y.toFixed(1) + '%;" ' +
+          'data-table="' + table.id + '" data-gi="' + i + '">' + g.name + "</button>"
+        );
+      })
+      .join("");
+    return (
+      '<div class="round-table">' +
+      '<div class="round-table-circle"><span class="round-table-number">' + table.id + "</span></div>" +
+      seatsHtml +
+      "</div>"
+    );
+  }
+
+  // ---------- guest finder (属性ボタン → ドロップダウン → 丸テーブル表示) ----------
+  function populateGuestPicker(side, category) {
+    const picker = $("#guest-picker");
+    picker.innerHTML = '<option value="">お名前を選んでください</option>';
+    TABLES.forEach((t) => {
+      t.guests.forEach((g, gi) => {
+        if (g.side === side && g.category === category) {
+          const opt = document.createElement("option");
+          opt.value = t.id + "::" + gi;
+          opt.textContent = g.name;
+          picker.appendChild(opt);
+        }
+      });
+    });
+    picker.disabled = false;
+    $("#picked-table-result").innerHTML = "";
+  }
+
+  function showPickedTable(value) {
+    const result = $("#picked-table-result");
+    if (!value) {
+      result.innerHTML = "";
+      return;
+    }
+    const [tableId] = value.split("::");
+    const table = TABLES.find((t) => t.id === tableId);
+    if (!table) {
+      result.innerHTML = "";
+      return;
+    }
+    result.innerHTML = '<p class="picked-table-label">' + table.id + " テーブル</p>" + buildRoundTableHtml(table);
+  }
+
+  function setupGuestFinder() {
+    $$(".category-btn").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        $$(".category-btn").forEach((b) => b.classList.remove("is-active"));
+        btn.classList.add("is-active");
+        populateGuestPicker(btn.dataset.side, btn.dataset.category);
+      });
+    });
+    $("#guest-picker").addEventListener("change", (e) => showPickedTable(e.target.value));
+  }
+
+  // ---------- 全体座席図（横フリックカルーセル） ----------
+  function renderTableCarousel() {
+    const el = $("#table-carousel");
+    el.innerHTML = TABLES.map(
+      (t) =>
+        '<div class="table-carousel-slide">' +
+        '<p class="picked-table-label">' + t.id + " テーブル</p>" +
+        buildRoundTableHtml(t) +
+        "</div>"
+    ).join("");
+  }
+
   // ---------- food ----------
   function renderFood() {
     const box = $("#food-list");
@@ -392,6 +476,15 @@
     const closeEl = e.target.closest("[data-close]");
     if (closeEl) {
       closeAnyModal();
+      return;
+    }
+    const seatBtn = e.target.closest(".round-table-seat");
+    if (seatBtn) {
+      const table = TABLES.find((t) => t.id === seatBtn.dataset.table);
+      if (table) {
+        const guest = table.guests[Number(seatBtn.dataset.gi)];
+        if (guest) openGuestModal(guest, table.id);
+      }
     }
   });
 
@@ -414,6 +507,8 @@
     renderOurHistory();
     renderVenue();
     renderSeats();
+    setupGuestFinder();
+    renderTableCarousel();
     renderFood();
     render();
     startSplashTimer();

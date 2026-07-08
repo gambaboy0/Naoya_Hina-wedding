@@ -123,6 +123,21 @@
     <p class="section-eyebrow">05</p>
     <h2 class="section-title">SEATING LIST</h2>
     <p id="venue-info" class="venue-info"></p>
+
+    <!-- 属性からお席を探す -->
+    <div class="guest-finder">
+      <div class="category-buttons">
+        <button type="button" class="category-btn" data-side="groom" data-category="family">新郎親族</button>
+        <button type="button" class="category-btn" data-side="bride" data-category="family">新婦親族</button>
+        <button type="button" class="category-btn" data-side="groom" data-category="friend">新郎友人</button>
+        <button type="button" class="category-btn" data-side="bride" data-category="friend">新婦友人</button>
+      </div>
+      <select id="guest-picker" class="guest-picker" disabled>
+        <option value="">上のボタンから選んでください</option>
+      </select>
+      <div id="picked-table-result" class="picked-table-result"></div>
+    </div>
+
     <div class="stage-label">STAGE / ステージ</div>
     <div id="venue-grid" class="venue-grid"></div>
     <div class="search-box">
@@ -130,6 +145,11 @@
     </div>
     <div id="search-results" class="search-results" hidden></div>
     <div id="tables-list" class="tables-list"></div>
+
+    <!-- 全体座席図（横フリック） -->
+    <h3 class="carousel-title">全体座席図</h3>
+    <div class="table-carousel" id="table-carousel"></div>
+
     <p class="section-caption">お名前をタップするとご紹介が表示されます</p>
   </section>
 
