@@ -234,7 +234,7 @@
       header.type = "button";
       header.className = "table-card-header";
       header.innerHTML =
-        '<span class="table-card-title">' + t.id + "番テーブル</span>" +
+        '<span class="table-card-title">' + t.id + " テーブル</span>" +
         '<span class="table-count">' + t.guests.length + "名</span>";
 
       const body = document.createElement("div");
@@ -307,7 +307,7 @@
         row.className = "guest-row search-result-row";
         row.innerHTML =
           '<span class="guest-name">' + m.guest.name + "</span>" +
-          '<span class="guest-table-badge">' + m.tableId + "番テーブル</span>";
+          '<span class="guest-table-badge">' + m.tableId + " テーブル</span>";
         row.addEventListener("click", () => openGuestModal(m.guest, m.tableId));
         resultsBox.appendChild(row);
       });
@@ -322,7 +322,7 @@
       '<h3 class="modal-name">' + guest.name + "</h3>" +
       (guest.kana ? '<p class="modal-kana">' + guest.kana + "</p>" : "") +
       '<p class="modal-relation">' + relationText + "</p>" +
-      '<p class="modal-table">お席：' + tableId + "番テーブル</p>" +
+      '<p class="modal-table">お席：' + tableId + " テーブル</p>" +
       (guest.note
         ? '<div class="modal-note"><p class="modal-note-label">ひとこと</p><p class="modal-note-text">' + guest.note + "</p></div>"
         : "");

@@ -574,7 +574,7 @@ body {
   color: var(--dark);
   font-family: Georgia, var(--font-serif);
   font-weight: 400;
-  font-size: 1.05rem;
+  font-size: 0.85rem;
   cursor: pointer;
 }
 
