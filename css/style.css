@@ -641,12 +641,22 @@ body {
   border: none;
   background: none;
   padding: 0;
-  text-align: center;
   font-family: var(--font-sans);
   cursor: pointer;
   display: flex;
   flex-direction: column;
   min-width: 4.6em;
+}
+
+/* 左列はテーブル円側（右）に、右列はテーブル円側（左）にそろえる */
+.chart-col:first-child .chart-seat {
+  align-items: flex-end;
+  text-align: right;
+}
+
+.chart-col:last-child .chart-seat {
+  align-items: flex-start;
+  text-align: left;
 }
 
 .chart-seat-rel {
