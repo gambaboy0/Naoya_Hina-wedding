@@ -43,19 +43,51 @@ body {
   position: fixed;
   inset: 0;
   z-index: 100;
+  background: #1c1815;
+  overflow: hidden;
 }
 
-.media-bg {
+/* 背景（動画 or スライドショー） */
+.splash-media {
+  position: absolute;
+  inset: 0;
+}
+
+.splash-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.splash-slide {
   position: absolute;
   inset: 0;
   background-size: cover;
   background-position: center;
+  opacity: 0;
+  transition: opacity 1.4s ease;
+  animation: kenburns 16s ease-in-out infinite alternate;
+}
+
+.splash-slide.is-active {
+  opacity: 1;
+}
+
+@keyframes kenburns {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.1);
+  }
 }
 
 .splash-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, rgba(58, 51, 40, 0.4), rgba(58, 51, 40, 0.12) 45%, rgba(58, 51, 40, 0.5));
+  background: linear-gradient(180deg, rgba(28, 24, 21, 0.55), rgba(28, 24, 21, 0.2) 42%, rgba(28, 24, 21, 0.62));
 }
 
 .splash-content {
@@ -66,49 +98,58 @@ body {
   text-align: center;
 }
 
-.splash-names {
+/* 文字は3点のみ・時間差フェードイン */
+@keyframes splashFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.splash-welcome {
   position: absolute;
-  top: 2.4rem;
-  left: 1.5rem;
-  right: 1.5rem;
+  top: 14%;
+  left: 1.2rem;
+  right: 1.2rem;
   margin: 0;
-  font-family: "Great Vibes", "YuMincho", cursive;
-  font-size: 2.3rem;
-  line-height: 1.2;
-  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
-}
-
-.splash-reception {
-  position: absolute;
-  top: 64%;
-  left: 1.5rem;
-  right: 1.5rem;
-}
-
-.splash-reception-title {
-  margin: 0 0 0.6rem;
   font-family: "Great Vibes", "YuMincho", cursive;
   font-size: 1.9rem;
-  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+  line-height: 1.4;
+  text-shadow: 0 2px 14px rgba(0, 0, 0, 0.65);
+  opacity: 0;
+  animation: splashFadeIn 1.2s ease 0.5s forwards;
 }
 
-.splash-quote {
+.splash-names {
+  position: absolute;
+  top: 44%;
+  left: 1.2rem;
+  right: 1.2rem;
   margin: 0;
   font-family: "Great Vibes", "YuMincho", cursive;
-  font-size: 1.05rem;
-  line-height: 1.7;
-  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+  font-size: 3.1rem;
+  line-height: 1.2;
+  text-shadow: 0 2px 16px rgba(0, 0, 0, 0.7);
+  opacity: 0;
+  animation: splashFadeIn 1.2s ease 1.4s forwards;
 }
 
 .splash-date {
   position: absolute;
-  bottom: 4.6rem;
-  left: 1.5rem;
-  right: 1.5rem;
+  bottom: 5rem;
+  left: 1.2rem;
+  right: 1.2rem;
   margin: 0;
-  font-family: "Great Vibes", "YuMincho", cursive;
-  font-size: 1.5rem;
-  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+  font-family: Georgia, var(--font-serif);
+  font-size: 1.15rem;
+  letter-spacing: 0.28em;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.65);
+  opacity: 0;
+  animation: splashFadeIn 1.2s ease 2.3s forwards;
 }
 
 .splash-actions {
@@ -258,10 +299,11 @@ body {
   border-bottom: 1px solid var(--line);
 }
 
-.index-list a {
+.index-list a,
+.index-list .idx-row {
   display: flex;
   align-items: baseline;
-  gap: 1rem;
+  gap: 0.8rem;
   padding: 1rem 0.15rem;
   text-decoration: none;
   color: var(--dark);
@@ -274,9 +316,22 @@ body {
 }
 
 .index-list .idx-en {
-  font-family: Georgia, var(--font-serif);
-  letter-spacing: 0.1em;
-  font-size: 1.02rem;
+  font-family: "Great Vibes", "YuMincho", cursive;
+  color: var(--sea);
+  font-size: 1.15rem;
+  line-height: 1.1;
+}
+
+.index-list .idx-jp {
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  color: var(--dark);
+  margin-left: auto;
+}
+
+.index-list li.is-disabled .idx-en,
+.index-list li.is-disabled .idx-jp {
+  color: var(--gray);
 }
 
 /* ---------- generic section ---------- */
@@ -296,12 +351,26 @@ body {
 
 .section-title {
   text-align: center;
-  font-family: Georgia, var(--font-serif);
   font-weight: 400;
-  letter-spacing: 0.12em;
-  font-size: 1.7rem;
   color: var(--dark);
   margin: 0 0 2.4rem;
+}
+
+/* トップページのボタンと同一表記（英語＋日本語）の2行タイトル */
+.section-title-en {
+  display: block;
+  font-family: "Great Vibes", "YuMincho", cursive;
+  color: var(--sea);
+  font-size: 2.1rem;
+  line-height: 1.2;
+  margin-bottom: 0.35rem;
+}
+
+.section-title-jp {
+  display: block;
+  font-family: var(--font-serif);
+  font-size: 0.88rem;
+  letter-spacing: 0.14em;
 }
 
 .section-caption {
@@ -311,55 +380,68 @@ body {
   margin-top: 1.6rem;
 }
 
-/* ---------- TOP (full-width photo + greeting + nav) ---------- */
+/* ---------- TOP (tall photo + greeting overlay + nav) ---------- */
 .section-top-compact {
   padding: 0;
 }
 
+.top-hero {
+  position: relative;
+}
+
 .top-photo-full {
   width: 100%;
-  height: 33vh;
+  height: 68vh;
   object-fit: cover;
+  object-position: center bottom;
   display: block;
 }
 
-.top-greeting-block {
-  background: var(--cream);
-  padding: 1.2rem 1.5rem 1.4rem;
+/* あいさつ文は写真の上部に重ねる（顔は中央〜下部にある想定の構図） */
+.top-hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  padding: 1.3rem 1.5rem 3rem;
+  background: linear-gradient(180deg, rgba(28, 24, 21, 0.62), rgba(28, 24, 21, 0.35) 62%, rgba(28, 24, 21, 0));
+  color: var(--white);
   text-align: left;
 }
 
 .top-greeting-label {
   font-family: "Great Vibes", "YuMincho", cursive;
-  color: var(--sea);
-  font-size: 1.7rem;
+  color: var(--white);
+  font-size: 1.6rem;
   margin: 0 0 0.5rem;
   text-align: left;
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.5);
 }
 
 .top-message {
   text-align: left;
-  color: var(--dark);
+  color: var(--white);
   font-family: var(--font-serif);
-  font-size: 0.82rem;
-  line-height: 1.7;
+  font-size: 0.78rem;
+  line-height: 1.65;
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.55);
 }
 
 .top-message p {
-  margin: 0 0 0.7rem;
+  margin: 0 0 0.6rem;
 }
 
 .top-message p:last-child {
   margin-bottom: 0;
 }
 
-/* ---------- top nav grid (square buttons) ---------- */
+/* ---------- top nav grid (square buttons / 2段×4列) ---------- */
 .top-nav-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 0.55rem;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.5rem;
   background: var(--cream);
-  padding: 0 1.5rem 1.6rem;
+  padding: 1.4rem 1rem 1.6rem;
 }
 
 .nav-square {
@@ -384,17 +466,31 @@ body {
 .nav-square-en {
   font-family: "Great Vibes", "YuMincho", cursive;
   color: var(--sea);
-  font-size: 1rem;
+  font-size: 0.82rem;
   line-height: 1.15;
   text-align: center;
-  padding: 0 0.2rem;
+  padding: 0 0.15rem;
 }
 
 .nav-square-jp {
   font-family: var(--font-sans);
   color: var(--dark);
-  font-size: 0.62rem;
-  letter-spacing: 0.04em;
+  font-size: 0.55rem;
+  letter-spacing: 0.02em;
+  text-align: center;
+}
+
+/* Coming Soon（準備中）ボタン */
+.nav-square.is-disabled {
+  background: var(--cream);
+  border-style: dashed;
+  box-shadow: none;
+  cursor: default;
+}
+
+.nav-square.is-disabled .nav-square-en,
+.nav-square.is-disabled .nav-square-jp {
+  color: var(--gray);
 }
 
 /* ---------- profile family (PROFILE / PERSONAL HISTORY / OUR HISTORY) ---------- */
@@ -512,8 +608,8 @@ body {
 
 .profile-nav-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 0.55rem;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.5rem;
   margin-top: 2.8rem;
 }
 
@@ -539,17 +635,18 @@ body {
   color: var(--white);
 }
 
-/* ---------- seating list ---------- */
-.venue-info {
-  text-align: center;
-  color: var(--gray);
-  font-size: 0.78rem;
-  margin: -1.4rem 0 1.6rem;
-}
-
 /* ---------- guest finder (属性ボタン -> ドロップダウン -> 丸テーブル) ---------- */
 .guest-finder {
   margin-bottom: 2.2rem;
+}
+
+.finder-guide {
+  text-align: center;
+  color: var(--dark);
+  font-family: var(--font-serif);
+  font-size: 0.82rem;
+  line-height: 1.8;
+  margin: 0 0 1.2rem;
 }
 
 .category-buttons {
@@ -738,41 +835,6 @@ body {
   margin-bottom: 0;
 }
 
-.search-box {
-  margin-bottom: 0.9rem;
-}
-
-#guest-search {
-  width: 100%;
-  padding: 0.7rem 0.9rem;
-  border: none;
-  border-bottom: 1px solid var(--line);
-  border-radius: 0;
-  font-size: 0.9rem;
-  font-family: var(--font-sans);
-  background: transparent;
-  color: var(--dark);
-}
-
-#guest-search:focus {
-  outline: none;
-  border-color: var(--wine);
-}
-
-.search-results {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  margin-bottom: 1rem;
-}
-
-.search-empty {
-  color: var(--gray);
-  font-size: 0.85rem;
-  text-align: center;
-  padding: 1rem 0;
-}
-
 .tables-list {
   display: flex;
   flex-direction: column;
@@ -835,17 +897,6 @@ body {
 }
 
 .guest-relation {
-  font-size: 0.72rem;
-  color: var(--gray);
-  flex-shrink: 0;
-  margin-left: 0.6rem;
-}
-
-.search-result-row {
-  border-bottom: 1px solid var(--line);
-}
-
-.guest-table-badge {
   font-size: 0.72rem;
   color: var(--gray);
   flex-shrink: 0;

@@ -8,10 +8,52 @@
   const sideLabel = (side) => SIDE_LABEL[side] || "";
 
   // ---------- splash ----------
-  const SPLASH_DURATION_MS = 5000;
   const SPLASH_FADE_MS = 400;
   let splashTimerId = null;
   let splashStopped = false;
+  let slideTimerId = null;
+
+  // スライド1巡分（3枚×3.5秒）＋余韻で自動遷移する
+  const SPLASH_DURATION_MS = OPENING.video
+    ? 8000
+    : (OPENING.slideDurationMs || 3500) * Math.max(OPENING.photos.length, 1);
+
+  // ---------- splash background (video or photo slideshow) ----------
+  function renderSplashMedia() {
+    const box = $("#splash-media");
+    if (OPENING.video) {
+      box.innerHTML =
+        '<video class="splash-video" src="' + OPENING.video + '" autoplay muted loop playsinline></video>';
+      return;
+    }
+    box.innerHTML = OPENING.photos
+      .map(
+        (src, i) =>
+          '<div class="splash-slide' + (i === 0 ? " is-active" : "") +
+          "\" style=\"background-image:url('" + src + "')\"></div>"
+      )
+      .join("");
+  }
+
+  function stopSlideshow() {
+    if (slideTimerId !== null) {
+      window.clearInterval(slideTimerId);
+      slideTimerId = null;
+    }
+  }
+
+  function startSlideshow() {
+    stopSlideshow();
+    if (OPENING.video) return;
+    const slides = $$(".splash-slide");
+    if (slides.length < 2) return;
+    let idx = 0;
+    slides.forEach((s, i) => s.classList.toggle("is-active", i === 0));
+    slideTimerId = window.setInterval(() => {
+      idx = (idx + 1) % slides.length;
+      slides.forEach((s, i) => s.classList.toggle("is-active", i === idx));
+    }, OPENING.slideDurationMs || 3500);
+  }
 
   function clearSplashTimer() {
     if (splashTimerId !== null) {
@@ -27,8 +69,9 @@
     splash.classList.add("is-leaving");
     window.setTimeout(() => {
       splash.hidden = true;
+      stopSlideshow();
       $("#app").hidden = false;
-      $("#index-toggle").hidden = false;
+      $("#index-toggle").hidden = parseHash() === "top";
     }, SPLASH_FADE_MS);
   }
 
@@ -57,6 +100,7 @@
     splash.hidden = false;
     $("#index-toggle").hidden = true;
     $("#back-toggle").hidden = true;
+    startSlideshow();
     startSplashTimer();
   }
 
@@ -70,6 +114,8 @@
       sec.hidden = sec.dataset.page !== page;
     });
     $("#back-toggle").hidden = page === "top";
+    // ハンバーガーメニューは詳細ページのみ表示（トップページ・スプラッシュ中は非表示）
+    $("#index-toggle").hidden = !$("#splash").hidden || page === "top";
     window.scrollTo(0, 0);
   }
 
@@ -85,16 +131,13 @@
     showPage(parseHash());
   }
 
-  // ---------- couple info (title / splash / TOP / footer / venue) ----------
+  // ---------- couple info (title / splash / TOP / footer) ----------
   function renderCoupleInfo() {
     const names = COUPLE.groomNameRomaji + " & " + COUPLE.brideNameRomaji;
     document.getElementById("page-title").textContent = names + " ご結婚式 | デジタル席次表";
     $("#splash-names").textContent = names;
     $("#splash-date").textContent = COUPLE.dateLabel;
     $("#footer-text").textContent = names + " Wedding · " + COUPLE.dateLabel.slice(0, 4);
-    if (typeof VENUE !== "undefined") {
-      $("#venue-info").textContent = VENUE.name + "　" + VENUE.address;
-    }
   }
 
   // ---------- TOP message (greeting to guests) ----------
@@ -110,6 +153,9 @@
       const inner =
         '<span class="nav-square-en">' + item.en + "</span>" +
         '<span class="nav-square-jp">' + item.jp + "</span>";
+      if (item.disabled) {
+        return '<div class="nav-square is-disabled">' + inner + "</div>";
+      }
       if (item.replay) {
         return '<button type="button" class="nav-square" data-replay-splash>' + inner + "</button>";
       }
@@ -125,18 +171,32 @@
     });
   }
 
-  // ---------- index (numbered anchor list, hamburger panel) ----------
+  // ---------- index (hamburger panel; トップページのボタンと同一表記) ----------
   function renderIndexLists() {
-    const items = SECTIONS.map((s, i) => {
+    const items = NAV_ITEMS.map((item, i) => {
       const num = String(i + 1).padStart(2, "0");
-      return (
-        '<li><a href="#' + s.id + '" data-index-link>' +
+      const inner =
         '<span class="idx-num">' + num + "</span>" +
-        '<span class="idx-en">' + s.en + "</span>" +
-        "</a></li>"
-      );
+        '<span class="idx-en">' + item.en + "</span>" +
+        '<span class="idx-jp">' + item.jp + "</span>";
+      if (item.disabled) {
+        return '<li class="is-disabled"><span class="idx-row">' + inner + "</span></li>";
+      }
+      return '<li><a href="#' + item.id + '" data-index-link>' + inner + "</a></li>";
     }).join("");
     $("#index-list-panel").innerHTML = items;
+  }
+
+  // ---------- section titles (トップページのボタンと同一表記に統一) ----------
+  function renderSectionTitles() {
+    $$("[data-title-for]").forEach((el) => {
+      const item = NAV_ITEMS.find((n) => n.id === el.dataset.titleFor);
+      if (item) {
+        el.innerHTML =
+          '<span class="section-title-en">' + item.en + "</span>" +
+          '<span class="section-title-jp">' + item.jp + "</span>";
+      }
+    });
   }
 
   // ---------- index slide-in panel ----------
@@ -242,55 +302,6 @@
       card.appendChild(body);
       list.appendChild(card);
     });
-
-    setupSearch();
-  }
-
-  function setupSearch() {
-    const input = $("#guest-search");
-    const resultsBox = $("#search-results");
-    const tablesList = $("#tables-list");
-    if (!input) return;
-
-    input.oninput = () => {
-      const q = input.value.trim();
-      if (!q) {
-        resultsBox.hidden = true;
-        tablesList.hidden = false;
-        return;
-      }
-      const matches = [];
-      TABLES.forEach((t) => {
-        t.guests.forEach((g) => {
-          if (g.name.includes(q) || (g.kana && g.kana.includes(q))) {
-            matches.push({ guest: g, tableId: t.id });
-          }
-        });
-      });
-
-      tablesList.hidden = true;
-      resultsBox.hidden = false;
-      resultsBox.innerHTML = "";
-
-      if (matches.length === 0) {
-        const empty = document.createElement("p");
-        empty.className = "search-empty";
-        empty.textContent = "該当するお名前が見つかりませんでした";
-        resultsBox.appendChild(empty);
-        return;
-      }
-
-      matches.forEach((m) => {
-        const row = document.createElement("button");
-        row.type = "button";
-        row.className = "guest-row search-result-row";
-        row.innerHTML =
-          '<span class="guest-name">' + m.guest.name + "</span>" +
-          '<span class="guest-table-badge">' + m.tableId + " テーブル</span>";
-        row.addEventListener("click", () => openGuestModal(m.guest, m.tableId));
-        resultsBox.appendChild(row);
-      });
-    };
   }
 
   function openGuestModal(guest, tableId) {
@@ -489,6 +500,7 @@
     renderTopMessage();
     renderNavGrids();
     renderIndexLists();
+    renderSectionTitles();
     renderProfile();
     renderHistory();
     renderOurHistory();
@@ -497,6 +509,8 @@
     renderFullChart();
     renderFood();
     render();
+    renderSplashMedia();
+    startSlideshow();
     startSplashTimer();
   });
 })();

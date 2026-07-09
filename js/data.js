@@ -13,6 +13,15 @@ const COUPLE = {
   dateLabel: "2026.8.23 SUN",
 };
 
+// ---------- オープニングページ（スプラッシュ）の背景 ----------
+// video に "assets/video/opening.mp4" のようなパスを設定すると動画モードになります。
+// 空欄の場合は photos の写真をクロスフェードで順番に表示します（後で差し替えOK）。
+const OPENING = {
+  video: "",
+  photos: ["assets/img/top.jpg", "assets/img/kimono.jpg", "assets/img/menu-bg.jpg"],
+  slideDurationMs: 3500,
+};
+
 // 全体座席図の行構成（上から前列・中列・後列。各行は左から右の順）
 const SEATING_ROWS = [
   ["1-1", "1-2", "1-3"],
@@ -20,12 +29,7 @@ const SEATING_ROWS = [
   ["3-1", "3-2", "3-3"],
 ];
 
-const VENUE = {
-  name: "NEEDs 富山 ヴィクトリアハウス",
-  address: "富山県富山市新庄本町3丁目2-30",
-};
-
-// トップページ（写真の下）に表示するGreetingの文面。
+// トップページ（写真の上部に重ねて）表示するGreetingの文面。
 // 配列の1要素が1段落、段落内の各文字列は改行して表示されます。
 const TOP_MESSAGE = {
   paragraphs: [
@@ -220,23 +224,16 @@ const MENU_FOOD = [
   { jp: "デザート", en: "Dessert", desc: "ウェディングケーキ＆季節のフルーツ" },
 ];
 
-// ---------- ナビゲーションボタン（各ページ下部＋TOPページに共通表示） ----------
+// ---------- ナビゲーションボタン（トップページ・各ページ下部・ハンバーガーメニュー共通） ----------
 // replay: true のボタンはページ遷移ではなく、オープニング画面を再生する特別な動作をします。
+// disabled: true のボタンは「準備中」のグレー表示になります（ラベルが決まったら差し替え）。
 const NAV_ITEMS = [
   { id: "profile", en: "Profile", jp: "プロフィール" },
   { id: "history", en: "Personal History", jp: "生い立ち" },
   { id: "our-history", en: "Our History", jp: "二人の道" },
   { id: "seating", en: "Seating", jp: "お座席" },
   { id: "menu", en: "Menu", jp: "お食事" },
+  { id: "", en: "Coming Soon", jp: "近日公開", disabled: true },
+  { id: "", en: "Coming Soon", jp: "近日公開", disabled: true },
   { id: "top", en: "Top", jp: "トップページ", replay: true },
-];
-
-// ---------- ハンバーガーメニュー（INDEXパネル）用 ----------
-const SECTIONS = [
-  { id: "profile", en: "PROFILE" },
-  { id: "history", en: "PERSONAL HISTORY" },
-  { id: "our-history", en: "OUR HISTORY" },
-  { id: "seating", en: "SEATING LIST" },
-  { id: "menu", en: "MENU" },
-  { id: "top", en: "TOP" },
 ];
