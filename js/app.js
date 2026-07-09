@@ -144,6 +144,11 @@
     document.getElementById("page-title").textContent = names + " ご結婚式 | デジタル席次表";
     $("#splash-names").textContent = names;
     $("#splash-date").textContent = COUPLE.dateLabel;
+    const tagline = $("#splash-tagline");
+    if (tagline) {
+      tagline.textContent = OPENING.tagline || "";
+      tagline.hidden = !OPENING.tagline;
+    }
     $("#footer-text").textContent = names + " Wedding · " + COUPLE.dateLabel.slice(0, 4);
   }
 

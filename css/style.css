@@ -1,16 +1,23 @@
 :root {
-  --wine: #55232e;
-  --wine-border: #e7dbdd;
-  --white: #ffffff;
-  --dark: #33302c;
-  --gray: #9a9386;
-  --line: #e6e2da;
-  --cream: #faf8f4;
-  --rose: #c98a8a;
-  --sea: #2f8fa3;
+  /* Favori「Journal E_Pop」参考のポップ配色（雑誌風） */
+  --orange: #d8500e;      /* メインアクセント（WEDDINGロゴのオレンジレッド） */
+  --yellow: #f5c831;      /* マスタードイエロー */
+  --yellow-pale: #fbeab0;
+  --lime: #c9d67c;        /* ピスタチオグリーン */
+  --lime-pale: #ecf0d3;
+  --navy: #2b3a5c;        /* 差し色ネイビー（リンク・新郎カラー） */
+  --rose: #e5735f;        /* コーラル（新婦カラー） */
+  --border-soft: #eee2c4;
+  --white: #fffdf6;       /* 温かみのある紙色 */
+  --dark: #322a1e;
+  --gray: #9a9077;
+  --line: #e7ddc3;
+  --cream: #faf5e6;
 
-  --font-serif: "YuMincho", "Yu Mincho", "Hiragino Mincho ProN", "HGS明朝E", serif;
-  --font-sans: "YuGothic", "Yu Gothic", "Hiragino Kaku Gothic ProN", "Noto Sans JP", sans-serif;
+  --font-pop: "Shrikhand", "Zen Maru Gothic", serif;               /* 英字ポップ見出し */
+  --font-hand: "Yusei Magic", "Zen Maru Gothic", sans-serif;        /* 手書きマーカー風 */
+  --font-serif: "Zen Maru Gothic", "Hiragino Maru Gothic ProN", "YuGothic", "Yu Gothic", sans-serif;
+  --font-sans: "Zen Maru Gothic", "Hiragino Maru Gothic ProN", "YuGothic", "Yu Gothic", sans-serif;
 }
 
 * {
@@ -112,13 +119,14 @@ body {
 
 .splash-welcome {
   position: absolute;
-  top: 14%;
+  top: 12%;
   left: 1.2rem;
   right: 1.2rem;
   margin: 0;
-  font-family: "Great Vibes", "YuMincho", cursive;
-  font-size: 1.9rem;
-  line-height: 1.4;
+  font-family: var(--font-pop);
+  font-size: 1.35rem;
+  line-height: 1.6;
+  color: var(--yellow);
   text-shadow: 0 2px 14px rgba(0, 0, 0, 0.65);
   opacity: 0;
   animation: splashFadeIn 1.2s ease 0.5s forwards;
@@ -126,16 +134,43 @@ body {
 
 .splash-names {
   position: absolute;
-  top: 44%;
+  top: 42%;
   left: 1.2rem;
   right: 1.2rem;
   margin: 0;
-  font-family: "Great Vibes", "YuMincho", cursive;
-  font-size: 3.1rem;
-  line-height: 1.2;
+  font-family: var(--font-pop);
+  font-size: 2.1rem;
+  line-height: 1.3;
   text-shadow: 0 2px 16px rgba(0, 0, 0, 0.7);
   opacity: 0;
   animation: splashFadeIn 1.2s ease 1.4s forwards;
+}
+
+/* 手書きマーカー風の一言（雑誌表紙のコピー風に少し傾ける） */
+.splash-tagline {
+  position: absolute;
+  top: 57%;
+  left: 1.2rem;
+  right: 1.2rem;
+  margin: 0;
+  font-family: var(--font-hand);
+  font-size: 1.05rem;
+  line-height: 1.6;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.65);
+  opacity: 0;
+  transform: rotate(-3deg);
+  animation: splashTaglineIn 1.2s ease 2s forwards;
+}
+
+@keyframes splashTaglineIn {
+  from {
+    opacity: 0;
+    transform: rotate(-3deg) translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: rotate(-3deg) translateY(0);
+  }
 }
 
 .splash-date {
@@ -144,12 +179,13 @@ body {
   left: 1.2rem;
   right: 1.2rem;
   margin: 0;
-  font-family: Georgia, var(--font-serif);
-  font-size: 1.15rem;
+  font-family: var(--font-sans);
+  font-weight: 700;
+  font-size: 1.1rem;
   letter-spacing: 0.28em;
   text-shadow: 0 2px 12px rgba(0, 0, 0, 0.65);
   opacity: 0;
-  animation: splashFadeIn 1.2s ease 2.3s forwards;
+  animation: splashFadeIn 1.2s ease 2.6s forwards;
 }
 
 .splash-actions {
@@ -197,8 +233,8 @@ body {
   width: 2.6rem;
   height: 2.6rem;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.88);
-  border: 1px solid var(--line);
+  background: rgba(255, 253, 246, 0.92);
+  border: 2px solid var(--dark);
   flex-direction: column;
   align-items: center;
   justify-content: center;
@@ -225,8 +261,8 @@ body {
   width: 2.6rem;
   height: 2.6rem;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.88);
-  border: 1px solid var(--line);
+  background: rgba(255, 253, 246, 0.92);
+  border: 2px solid var(--dark);
   align-items: center;
   justify-content: center;
   color: var(--dark);
@@ -281,9 +317,9 @@ body {
 }
 
 .index-panel-title {
-  font-family: Georgia, var(--font-serif);
-  letter-spacing: 0.14em;
-  color: var(--dark);
+  font-family: var(--font-pop);
+  letter-spacing: 0.1em;
+  color: var(--orange);
   font-size: 1rem;
   margin: 0 0 1.2rem;
 }
@@ -312,14 +348,14 @@ body {
 .index-list .idx-num {
   font-size: 0.68rem;
   color: var(--gray);
-  font-family: Georgia, var(--font-serif);
+  font-family: var(--font-sans);
 }
 
 .index-list .idx-en {
-  font-family: "Great Vibes", "YuMincho", cursive;
-  color: var(--sea);
-  font-size: 1.15rem;
-  line-height: 1.1;
+  font-family: var(--font-pop);
+  color: var(--orange);
+  font-size: 0.85rem;
+  line-height: 1.3;
 }
 
 .index-list .idx-jp {
@@ -342,11 +378,12 @@ body {
 
 .section-eyebrow {
   text-align: center;
-  color: var(--gray);
+  color: var(--orange);
+  font-weight: 700;
   font-size: 0.72rem;
   letter-spacing: 0.3em;
   margin: 0 0 0.5rem;
-  font-family: Georgia, var(--font-serif);
+  font-family: var(--font-sans);
 }
 
 .section-title {
@@ -359,18 +396,19 @@ body {
 /* トップページのボタンと同一表記（英語＋日本語）の2行タイトル */
 .section-title-en {
   display: block;
-  font-family: "Great Vibes", "YuMincho", cursive;
-  color: var(--sea);
-  font-size: 2.1rem;
-  line-height: 1.2;
-  margin-bottom: 0.35rem;
+  font-family: var(--font-pop);
+  color: var(--orange);
+  font-size: 1.35rem;
+  line-height: 1.35;
+  margin-bottom: 0.4rem;
 }
 
 .section-title-jp {
   display: block;
   font-family: var(--font-serif);
+  font-weight: 700;
   font-size: 0.88rem;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.18em;
 }
 
 .section-caption {
@@ -410,9 +448,9 @@ body {
 }
 
 .top-greeting-label {
-  font-family: "Great Vibes", "YuMincho", cursive;
-  color: var(--white);
-  font-size: 1.6rem;
+  font-family: var(--font-pop);
+  color: var(--yellow);
+  font-size: 1.1rem;
   margin: 0 0 0.5rem;
   text-align: left;
   text-shadow: 0 1px 8px rgba(0, 0, 0, 0.5);
@@ -438,24 +476,27 @@ body {
 /* ---------- top nav grid (square buttons / 2段×4列) ---------- */
 .top-nav-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 0.5rem;
-  background: var(--cream);
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.55rem;
+  background: var(--yellow);
   padding: 1.4rem 1rem 1.6rem;
 }
 
 .nav-square {
   appearance: none;
   aspect-ratio: 1;
+  min-width: 0;
+  min-height: 0;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: 0.3rem;
   background: var(--white);
-  border: 1px solid var(--line);
-  border-radius: 10px;
-  box-shadow: 0 2px 6px rgba(51, 48, 44, 0.06);
+  border: 2px solid var(--dark);
+  border-radius: 12px;
+  box-shadow: 3px 3px 0 rgba(50, 42, 30, 0.25);
   text-decoration: none;
   font: inherit;
   padding: 0.3rem;
@@ -463,17 +504,32 @@ body {
   width: 100%;
 }
 
+.nav-square:active {
+  transform: translate(2px, 2px);
+  box-shadow: 1px 1px 0 rgba(50, 42, 30, 0.25);
+}
+
+/* 3色ローテの塗り分け（薄黄 → 白 → 薄黄緑） */
+.nav-square:nth-child(3n + 1) {
+  background: var(--yellow-pale);
+}
+
+.nav-square:nth-child(3n) {
+  background: var(--lime-pale);
+}
+
 .nav-square-en {
-  font-family: "Great Vibes", "YuMincho", cursive;
-  color: var(--sea);
-  font-size: 0.82rem;
-  line-height: 1.15;
+  font-family: var(--font-pop);
+  color: var(--orange);
+  font-size: 0.62rem;
+  line-height: 1.3;
   text-align: center;
   padding: 0 0.15rem;
 }
 
 .nav-square-jp {
   font-family: var(--font-sans);
+  font-weight: 700;
   color: var(--dark);
   font-size: 0.55rem;
   letter-spacing: 0.02em;
@@ -526,7 +582,7 @@ body {
   color: var(--gray);
   letter-spacing: 0.06em;
   font-size: 0.68rem;
-  font-family: Georgia, var(--font-serif);
+  font-family: var(--font-sans);
 }
 
 .profile-stat-value {
@@ -545,17 +601,18 @@ body {
 }
 
 .profile-header-en {
-  font-family: "Great Vibes", "YuMincho", cursive;
-  color: var(--sea);
-  font-size: 1.8rem;
+  font-family: var(--font-pop);
+  color: var(--orange);
+  font-size: 1.15rem;
   margin: 0 0 0.4rem;
 }
 
 .profile-header-jp {
   font-family: var(--font-serif);
+  font-weight: 700;
   color: var(--dark);
   font-size: 0.9rem;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.12em;
   margin: 0;
 }
 
@@ -580,7 +637,7 @@ body {
 
 .timeline-photo {
   object-fit: cover;
-  border: 1px solid var(--wine-border);
+  border: 1px solid var(--border-soft);
 }
 
 .timeline-photo-placeholder {
@@ -593,12 +650,17 @@ body {
   font-size: 0.78rem;
 }
 
+/* 時代ラベルは黄色マーカーで塗ったハイライト風に */
 .timeline-stage {
-  font-family: Georgia, var(--font-serif);
-  color: var(--sea);
-  letter-spacing: 0.12em;
-  font-size: 0.72rem;
-  margin: 0 0 0.4rem;
+  font-family: var(--font-sans);
+  font-weight: 700;
+  color: var(--dark);
+  letter-spacing: 0.1em;
+  font-size: 0.82rem;
+  width: fit-content;
+  margin: 0 auto 0.45rem;
+  padding: 0 0.4em;
+  background: linear-gradient(transparent 55%, var(--yellow) 55%);
 }
 
 .timeline-text {
@@ -610,7 +672,7 @@ body {
 
 .profile-nav-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 0.5rem;
   margin-top: 2.8rem;
 }
@@ -619,21 +681,23 @@ body {
 .btn-outline {
   display: inline-block;
   appearance: none;
-  border: 1px solid var(--wine);
-  color: var(--wine);
-  background: transparent;
-  font-family: Georgia, var(--font-serif);
+  border: 2px solid var(--dark);
+  color: var(--dark);
+  background: var(--yellow);
+  font-family: var(--font-sans);
+  font-weight: 700;
   letter-spacing: 0.14em;
   font-size: 0.85rem;
   padding: 0.7rem 2.2rem;
   border-radius: 999px;
+  box-shadow: 3px 3px 0 rgba(50, 42, 30, 0.25);
   cursor: pointer;
   text-decoration: none;
   transition: background 0.15s ease, color 0.15s ease;
 }
 
 .btn-outline:active {
-  background: var(--wine);
+  background: var(--orange);
   color: var(--white);
 }
 
@@ -658,9 +722,11 @@ body {
   width: 2rem;
   height: 2rem;
   border-radius: 50%;
-  background: #cfe6ec;
+  background: var(--yellow);
+  border: 2px solid var(--dark);
   color: var(--dark);
-  font-family: Georgia, var(--font-serif);
+  font-family: var(--font-sans);
+  font-weight: 700;
   font-size: 0.62rem;
   display: flex;
   align-items: center;
@@ -706,11 +772,11 @@ body {
 /* ---------- 全体座席図（印刷席次表風レイアウト） ---------- */
 .carousel-title {
   text-align: center;
-  font-family: Georgia, var(--font-serif);
+  font-family: var(--font-sans);
   color: var(--dark);
-  font-weight: 400;
-  font-size: 1.1rem;
-  letter-spacing: 0.1em;
+  font-weight: 700;
+  font-size: 1.05rem;
+  letter-spacing: 0.12em;
   margin: 2.6rem 0 1.2rem;
 }
 
@@ -728,8 +794,8 @@ body {
 .full-chart {
   min-width: 620px;
   width: max-content;
-  border: 1px solid var(--line);
-  border-radius: 10px;
+  border: 2px solid var(--dark);
+  border-radius: 12px;
   background: var(--white);
   padding: 1.2rem 1rem 1.4rem;
 }
@@ -785,7 +851,7 @@ body {
 
 .map-spot-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 0.5rem;
   margin-bottom: 1.6rem;
 }
@@ -799,17 +865,17 @@ body {
   justify-content: center;
   gap: 0.4rem;
   background: var(--white);
-  border: 1px solid var(--line);
-  border-radius: 10px;
-  box-shadow: 0 2px 6px rgba(51, 48, 44, 0.06);
+  border: 2px solid var(--dark);
+  border-radius: 12px;
+  box-shadow: 3px 3px 0 rgba(50, 42, 30, 0.25);
   font: inherit;
   padding: 0.4rem;
   cursor: pointer;
 }
 
 .map-spot-btn.is-active {
-  border-color: var(--wine);
-  background: var(--cream);
+  border-color: var(--orange);
+  background: var(--yellow-pale);
 }
 
 /* 準備中の空き枠 */
@@ -832,9 +898,9 @@ body {
   width: 1.5rem;
   height: 1.5rem;
   border-radius: 50%;
-  background: #e8862e;
+  background: var(--orange);
   color: var(--white);
-  font-family: Georgia, var(--font-serif);
+  font-family: var(--font-sans);
   font-size: 0.8rem;
   display: flex;
   align-items: center;
@@ -853,8 +919,8 @@ body {
 
 .toyama-map {
   height: 340px;
-  border: 1px solid var(--line);
-  border-radius: 10px;
+  border: 2px solid var(--dark);
+  border-radius: 12px;
   margin-bottom: 1.2rem;
   z-index: 0;
 }
@@ -867,9 +933,9 @@ body {
   width: 26px;
   height: 26px;
   border-radius: 50%;
-  background: #e8862e;
+  background: var(--orange);
   color: #fff;
-  font-family: Georgia, serif;
+  font-family: var(--font-sans);
   font-size: 0.82rem;
   border: 2px solid #fff;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.35);
@@ -877,18 +943,19 @@ body {
 
 .map-spot-desc {
   background: var(--cream);
-  border: 1px solid var(--line);
-  border-radius: 10px;
+  border: 2px solid var(--dark);
+  border-radius: 12px;
+  box-shadow: 3px 3px 0 rgba(50, 42, 30, 0.25);
   padding: 1.1rem 1.2rem 1.2rem;
   margin-bottom: 0.4rem;
 }
 
 .map-desc-no {
   letter-spacing: 0.2em;
-  color: #e8862e;
+  color: var(--orange);
   font-size: 0.66rem;
   margin: 0 0 0.35rem;
-  font-family: Georgia, var(--font-serif);
+  font-family: var(--font-sans);
 }
 
 .map-desc-name {
@@ -920,10 +987,10 @@ body {
 
 .map-desc-link {
   display: inline-block;
-  color: var(--sea);
+  color: var(--navy);
   font-size: 0.8rem;
   text-decoration: none;
-  border-bottom: 1px solid var(--sea);
+  border-bottom: 1px solid var(--navy);
   padding-bottom: 1px;
 }
 
@@ -986,20 +1053,22 @@ body {
   display: block;
   margin: 0 auto 1.6rem;
   appearance: none;
-  border: 1px solid var(--wine);
-  color: var(--wine);
-  background: var(--white);
+  border: 2px solid var(--dark);
+  color: var(--dark);
+  background: var(--yellow);
   font-family: var(--font-serif);
+  font-weight: 700;
   font-size: 0.8rem;
   letter-spacing: 0.08em;
   padding: 0.6rem 1.8rem;
   border-radius: 999px;
+  box-shadow: 3px 3px 0 rgba(50, 42, 30, 0.25);
   cursor: pointer;
 }
 
 .to-top-btn:active {
-  background: var(--wine);
-  color: var(--white);
+  transform: translate(2px, 2px);
+  box-shadow: 1px 1px 0 rgba(50, 42, 30, 0.25);
 }
 
 /* ---------- menu (food) ---------- */
@@ -1018,7 +1087,7 @@ body {
   color: var(--gray);
   font-size: 0.7rem;
   letter-spacing: 0.2em;
-  font-family: Georgia, var(--font-serif);
+  font-family: var(--font-sans);
 }
 
 .course-jp {
@@ -1048,29 +1117,30 @@ body {
 
 .qa-rankings .carousel-title {
   margin-bottom: 0;
-  font-family: "Great Vibes", "YuMincho", cursive;
-  color: var(--sea);
-  font-size: 1.7rem;
+  font-family: var(--font-pop);
+  color: var(--orange);
+  font-size: 1.25rem;
 }
 
 .qa-card {
-  background: var(--cream);
-  border: 1px solid var(--line);
+  background: var(--white);
+  border: 2px solid var(--dark);
   border-radius: 12px;
   padding: 1.1rem 1.2rem 1.2rem;
-  box-shadow: 0 2px 6px rgba(51, 48, 44, 0.06);
+  box-shadow: 3px 3px 0 rgba(50, 42, 30, 0.25);
 }
 
 .qa-q-label {
-  font-family: Georgia, var(--font-serif);
-  color: var(--sea);
-  letter-spacing: 0.2em;
-  font-size: 0.7rem;
+  font-family: var(--font-pop);
+  color: var(--orange);
+  letter-spacing: 0.12em;
+  font-size: 0.72rem;
   margin: 0 0 0.35rem;
 }
 
 .qa-question {
   font-family: var(--font-serif);
+  font-weight: 700;
   color: var(--dark);
   font-size: 0.95rem;
   line-height: 1.6;
@@ -1095,7 +1165,7 @@ body {
 }
 
 .qa-answer-groom .qa-answer-name {
-  background: var(--sea);
+  background: var(--navy);
 }
 
 .qa-answer-bride .qa-answer-name {
@@ -1137,8 +1207,8 @@ body {
 }
 
 .qa-rank-no {
-  font-family: Georgia, var(--font-serif);
-  color: #e8862e;
+  font-family: var(--font-sans);
+  color: var(--orange);
   font-size: 0.72rem;
   margin-right: 0.4rem;
 }
@@ -1150,7 +1220,7 @@ body {
   color: var(--gray);
   font-size: 0.72rem;
   letter-spacing: 0.14em;
-  font-family: Georgia, var(--font-serif);
+  font-family: var(--font-sans);
 }
 
 .footer p {
@@ -1185,6 +1255,8 @@ body.modal-open {
   width: 100%;
   max-width: 480px;
   background: var(--white);
+  border: 2px solid var(--dark);
+  border-bottom: none;
   border-radius: 20px 20px 0 0;
   padding: 1.8rem 1.5rem 2.4rem;
   animation: slideUp 0.22s ease;
@@ -1216,11 +1288,11 @@ body.modal-open {
 }
 
 .modal-eyebrow {
-  letter-spacing: 0.2em;
-  color: var(--gray);
+  letter-spacing: 0.12em;
+  color: var(--orange);
   font-size: 0.68rem;
   margin: 0 0 0.4rem;
-  font-family: Georgia, var(--font-serif);
+  font-family: var(--font-pop);
 }
 
 .modal-name {
@@ -1237,7 +1309,7 @@ body.modal-open {
 }
 
 .modal-relation {
-  color: var(--wine);
+  color: var(--orange);
   font-size: 0.85rem;
   margin: 0 0 0.9rem;
 }
@@ -1252,7 +1324,7 @@ body.modal-open {
 
 .modal-note {
   margin-top: 0.9rem;
-  background: var(--cream);
+  background: var(--yellow-pale);
   border-radius: 10px;
   padding: 0.75rem 0.9rem;
 }
@@ -1260,7 +1332,7 @@ body.modal-open {
 .modal-note-label {
   margin: 0 0 0.25rem;
   font-size: 0.72rem;
-  color: var(--wine);
+  color: var(--orange);
   font-weight: 700;
 }
 

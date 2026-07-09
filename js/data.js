@@ -20,6 +20,8 @@ const OPENING = {
   video: "",
   photos: ["assets/img/top.jpg", "assets/img/kimono.jpg", "assets/img/menu-bg.jpg"],
   slideDurationMs: 3000,
+  // 手書き風の一言（空欄""にすると非表示になります）
+  tagline: "今日という素晴らしい日に カンパイ!!",
 };
 
 // 全体座席図の行構成（上から前列・中列・後列。各行は左から右の順）
