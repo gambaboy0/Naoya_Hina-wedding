@@ -172,7 +172,7 @@
 
   function renderNavGrids() {
     const html = buildNavGridHtml();
-    ["#nav-grid-top", "#nav-grid-profile", "#nav-grid-history", "#nav-grid-our-history", "#nav-grid-seating", "#nav-grid-menu", "#nav-grid-map"].forEach((sel) => {
+    ["#nav-grid-top", "#nav-grid-profile", "#nav-grid-history", "#nav-grid-our-history", "#nav-grid-seating", "#nav-grid-menu", "#nav-grid-drink", "#nav-grid-map"].forEach((sel) => {
       const el = $(sel);
       if (el) el.innerHTML = html;
     });
@@ -316,15 +316,26 @@
   function populateGuestPicker(side, category) {
     const picker = $("#guest-picker");
     picker.innerHTML = '<option value="">お名前を選んでください</option>';
+    const matches = [];
     TABLES.forEach((t) => {
       t.guests.forEach((g, gi) => {
         if (g.side === side && g.category === category) {
-          const opt = document.createElement("option");
-          opt.value = t.id + "::" + gi;
-          opt.textContent = g.name;
-          picker.appendChild(opt);
+          matches.push({ guest: g, value: t.id + "::" + gi });
         }
       });
+    });
+    // 五十音順（yomiが未設定の場合は名前で代用）
+    matches.sort((a, b) =>
+      (a.guest.yomi || a.guest.kana || a.guest.name).localeCompare(
+        b.guest.yomi || b.guest.kana || b.guest.name,
+        "ja"
+      )
+    );
+    matches.forEach((m) => {
+      const opt = document.createElement("option");
+      opt.value = m.value;
+      opt.textContent = m.guest.name;
+      picker.appendChild(opt);
     });
     picker.disabled = false;
     $("#picked-table-result").innerHTML = "";
@@ -469,9 +480,13 @@
       '<p class="map-desc-address">' + s.address + "</p>" +
       buildSpotPhotosHtml(s, index) +
       '<p class="map-desc-text">' + s.desc + "</p>" +
+      '<div class="map-desc-links">' +
       '<a class="map-desc-link" href="https://www.google.com/maps/search/?api=1&query=' +
       encodeURIComponent(s.gquery) +
-      '" target="_blank" rel="noopener">Googleマップで開く →</a>';
+      '" target="_blank" rel="noopener">Googleマップで開く →</a>' +
+      (s.web ? '<a class="map-desc-link" href="' + s.web + '" target="_blank" rel="noopener">公式サイト →</a>' : "") +
+      (s.instagram ? '<a class="map-desc-link" href="' + s.instagram + '" target="_blank" rel="noopener">Instagram →</a>' : "") +
+      "</div>";
 
     // 地図をその場所へなめらかにズームし、地図＋説明文が見える位置までスライド
     initToyamaMap();
@@ -482,11 +497,12 @@
     $("#toyama-map").scrollIntoView({ behavior: "smooth", block: "start" });
   }
 
-  // ---------- food ----------
-  function renderFood() {
-    const box = $("#food-list");
+  // ---------- food / drink ----------
+  function renderCourseList(sel, items) {
+    const box = $(sel);
+    if (!box) return;
     box.innerHTML = "";
-    MENU_FOOD.forEach((c) => {
+    items.forEach((c) => {
       const row = document.createElement("div");
       row.className = "course-row-flat";
       row.innerHTML =
@@ -495,6 +511,11 @@
         (c.desc ? '<p class="course-desc">' + c.desc + "</p>" : "");
       box.appendChild(row);
     });
+  }
+
+  function renderFood() {
+    renderCourseList("#food-list", MENU_FOOD);
+    renderCourseList("#drink-list", MENU_DRINK);
   }
 
   function closeAnyModal() {

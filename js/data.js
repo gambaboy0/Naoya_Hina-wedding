@@ -19,7 +19,7 @@ const COUPLE = {
 const OPENING = {
   video: "",
   photos: ["assets/img/top.jpg", "assets/img/kimono.jpg", "assets/img/menu-bg.jpg"],
-  slideDurationMs: 3500,
+  slideDurationMs: 3000,
 };
 
 // 全体座席図の行構成（上から前列・中列・後列。各行は左から右の順）
@@ -113,105 +113,107 @@ const OUR_HISTORY = [
 
 // 実際の座席表（会場管理ツールの画像）から書き起こしたデータです。
 // ふりがな(kana)・ひとことメッセージ(note)は元データに無いため空欄にしています。
+// yomi は座席検索プルダウンを五十音順に並べるための読み仮名です（画面には表示されません）。
+// ※読みはAIによる推定のため、新郎新婦に確認して間違いがあれば修正してください。
 const TABLES = [
   {
     id: "1-1",
     guests: [
-      { name: "福永 桃子", kana: "", side: "groom", category: "friend", relation: "友人", note: "" },
-      { name: "鈴木 脩斗", kana: "", side: "groom", category: "friend", relation: "友人", note: "" },
-      { name: "北出 智也", kana: "", side: "groom", category: "friend", relation: "友人", note: "" },
-      { name: "根岸 昂也", kana: "", side: "groom", category: "friend", relation: "友人", note: "" },
-      { name: "大島 一輝", kana: "", side: "groom", category: "friend", relation: "友人", note: "" },
-      { name: "布施 綾太", kana: "", side: "groom", category: "friend", relation: "友人", note: "" },
-      { name: "加藤 遼", kana: "", side: "groom", category: "friend", relation: "友人", note: "" },
-      { name: "澤井 恭助", kana: "", side: "groom", category: "friend", relation: "友人", note: "" },
+      { name: "福永 桃子", yomi: "ふくなが ももこ", kana: "", side: "groom", category: "friend", relation: "友人", note: "" },
+      { name: "鈴木 脩斗", yomi: "すずき しゅうと", kana: "", side: "groom", category: "friend", relation: "友人", note: "" },
+      { name: "北出 智也", yomi: "きたで ともや", kana: "", side: "groom", category: "friend", relation: "友人", note: "" },
+      { name: "根岸 昂也", yomi: "ねぎし こうや", kana: "", side: "groom", category: "friend", relation: "友人", note: "" },
+      { name: "大島 一輝", yomi: "おおしま かずき", kana: "", side: "groom", category: "friend", relation: "友人", note: "" },
+      { name: "布施 綾太", yomi: "ふせ りょうた", kana: "", side: "groom", category: "friend", relation: "友人", note: "" },
+      { name: "加藤 遼", yomi: "かとう りょう", kana: "", side: "groom", category: "friend", relation: "友人", note: "" },
+      { name: "澤井 恭助", yomi: "さわい きょうすけ", kana: "", side: "groom", category: "friend", relation: "友人", note: "" },
     ],
   },
   {
     id: "1-2",
     guests: [
-      { name: "渡辺 修平", kana: "", side: "groom", category: "friend", relation: "友人", note: "" },
-      { name: "大脇 盛夫", kana: "", side: "groom", category: "friend", relation: "友人", note: "" },
-      { name: "宮島 公志", kana: "", side: "groom", category: "friend", relation: "友人", note: "" },
-      { name: "山腰 航", kana: "", side: "groom", category: "friend", relation: "友人", note: "" },
-      { name: "澤野 拓哉", kana: "", side: "groom", category: "friend", relation: "友人", note: "" },
-      { name: "猿渡 蒼周", kana: "", side: "groom", category: "friend", relation: "友人", note: "" },
+      { name: "渡辺 修平", yomi: "わたなべ しゅうへい", kana: "", side: "groom", category: "friend", relation: "友人", note: "" },
+      { name: "大脇 盛夫", yomi: "おおわき もりお", kana: "", side: "groom", category: "friend", relation: "友人", note: "" },
+      { name: "宮島 公志", yomi: "みやじま こうじ", kana: "", side: "groom", category: "friend", relation: "友人", note: "" },
+      { name: "山腰 航", yomi: "やまこし わたる", kana: "", side: "groom", category: "friend", relation: "友人", note: "" },
+      { name: "澤野 拓哉", yomi: "さわの たくや", kana: "", side: "groom", category: "friend", relation: "友人", note: "" },
+      { name: "猿渡 蒼周", yomi: "さわたり そうしゅう", kana: "", side: "groom", category: "friend", relation: "友人", note: "" },
     ],
   },
   {
     id: "1-3",
     guests: [
-      { name: "舟見 卓馬", kana: "", side: "bride", category: "friend", relation: "同僚", note: "" },
-      { name: "田口 愛", kana: "", side: "bride", category: "friend", relation: "同僚", note: "" },
-      { name: "島崎 平", kana: "", side: "bride", category: "friend", relation: "同僚", note: "" },
-      { name: "高橋 夕歌", kana: "", side: "bride", category: "friend", relation: "同僚", note: "" },
-      { name: "窪田 小雪", kana: "", side: "bride", category: "friend", relation: "同僚", note: "" },
-      { name: "荒井 優里亜", kana: "", side: "bride", category: "friend", relation: "同僚", note: "" },
-      { name: "幅崎 千晶", kana: "", side: "bride", category: "friend", relation: "同僚", note: "" },
-      { name: "山田 恵梨香", kana: "", side: "bride", category: "friend", relation: "同僚", note: "" },
+      { name: "舟見 卓馬", yomi: "ふなみ たくま", kana: "", side: "bride", category: "friend", relation: "同僚", note: "" },
+      { name: "田口 愛", yomi: "たぐち あい", kana: "", side: "bride", category: "friend", relation: "同僚", note: "" },
+      { name: "島崎 平", yomi: "しまざき たいら", kana: "", side: "bride", category: "friend", relation: "同僚", note: "" },
+      { name: "高橋 夕歌", yomi: "たかはし ゆうか", kana: "", side: "bride", category: "friend", relation: "同僚", note: "" },
+      { name: "窪田 小雪", yomi: "くぼた こゆき", kana: "", side: "bride", category: "friend", relation: "同僚", note: "" },
+      { name: "荒井 優里亜", yomi: "あらい ゆりあ", kana: "", side: "bride", category: "friend", relation: "同僚", note: "" },
+      { name: "幅崎 千晶", yomi: "はばさき ちあき", kana: "", side: "bride", category: "friend", relation: "同僚", note: "" },
+      { name: "山田 恵梨香", yomi: "やまだ えりか", kana: "", side: "bride", category: "friend", relation: "同僚", note: "" },
     ],
   },
   {
     id: "2-1",
     guests: [
-      { name: "松田 堯之", kana: "", side: "groom", category: "friend", relation: "友人", note: "" },
-      { name: "植村 俊亮", kana: "", side: "groom", category: "friend", relation: "同僚", note: "" },
-      { name: "長島 貴之", kana: "", side: "groom", category: "friend", relation: "友人", note: "" },
-      { name: "近田 理夫", kana: "", side: "groom", category: "friend", relation: "同僚", note: "" },
-      { name: "西村 光夫", kana: "", side: "groom", category: "friend", relation: "同僚", note: "" },
-      { name: "石田尾 樹", kana: "", side: "groom", category: "friend", relation: "同僚", note: "" },
+      { name: "松田 堯之", yomi: "まつだ たかゆき", kana: "", side: "groom", category: "friend", relation: "友人", note: "" },
+      { name: "植村 俊亮", yomi: "うえむら しゅんすけ", kana: "", side: "groom", category: "friend", relation: "同僚", note: "" },
+      { name: "長島 貴之", yomi: "ながしま たかゆき", kana: "", side: "groom", category: "friend", relation: "友人", note: "" },
+      { name: "近田 理夫", yomi: "ちかだ みちお", kana: "", side: "groom", category: "friend", relation: "同僚", note: "" },
+      { name: "西村 光夫", yomi: "にしむら みつお", kana: "", side: "groom", category: "friend", relation: "同僚", note: "" },
+      { name: "石田尾 樹", yomi: "いしだお いつき", kana: "", side: "groom", category: "friend", relation: "同僚", note: "" },
     ],
   },
   {
     id: "2-2",
     guests: [
-      { name: "黒川 恵里", kana: "", side: "bride", category: "friend", relation: "友人", note: "" },
-      { name: "金尾 有花", kana: "", side: "bride", category: "friend", relation: "友人", note: "" },
-      { name: "津田 奈菜子", kana: "", side: "bride", category: "friend", relation: "友人", note: "" },
-      { name: "橋本 明日佳", kana: "", side: "bride", category: "friend", relation: "友人", note: "" },
-      { name: "佐藤 百華", kana: "", side: "bride", category: "friend", relation: "友人", note: "" },
-      { name: "片桐 行人", kana: "", side: "bride", category: "friend", relation: "友人", note: "" },
-      { name: "明柴 聰史", kana: "", side: "bride", category: "friend", relation: "恩師", note: "" },
-      { name: "伊井 信之助", kana: "", side: "bride", category: "friend", relation: "友人", note: "" },
+      { name: "黒川 恵里", yomi: "くろかわ えり", kana: "", side: "bride", category: "friend", relation: "友人", note: "" },
+      { name: "金尾 有花", yomi: "かなお ゆか", kana: "", side: "bride", category: "friend", relation: "友人", note: "" },
+      { name: "津田 奈菜子", yomi: "つだ ななこ", kana: "", side: "bride", category: "friend", relation: "友人", note: "" },
+      { name: "橋本 明日佳", yomi: "はしもと あすか", kana: "", side: "bride", category: "friend", relation: "友人", note: "" },
+      { name: "佐藤 百華", yomi: "さとう ももか", kana: "", side: "bride", category: "friend", relation: "友人", note: "" },
+      { name: "片桐 行人", yomi: "かたぎり ゆきと", kana: "", side: "bride", category: "friend", relation: "友人", note: "" },
+      { name: "明柴 聰史", yomi: "あけしば さとし", kana: "", side: "bride", category: "friend", relation: "恩師", note: "" },
+      { name: "伊井 信之助", yomi: "いい しんのすけ", kana: "", side: "bride", category: "friend", relation: "友人", note: "" },
     ],
   },
   {
     id: "3-1",
     guests: [
-      { name: "竹澤 朋", kana: "", side: "groom", category: "family", relation: "義兄", note: "" },
-      { name: "細川 和恵", kana: "", side: "groom", category: "family", relation: "伯母", note: "" },
-      { name: "竹澤 侑希", kana: "", side: "groom", category: "family", relation: "姪", note: "" },
-      { name: "細川 良清", kana: "", side: "groom", category: "family", relation: "伯父", note: "" },
-      { name: "竹澤 眞美子", kana: "", side: "groom", category: "family", relation: "姉", note: "" },
-      { name: "細川 満弘", kana: "", side: "groom", category: "family", relation: "伯父", note: "" },
-      { name: "細川 眞紀子", kana: "", side: "groom", category: "family", relation: "母", note: "" },
-      { name: "細川 優", kana: "", side: "groom", category: "family", relation: "父", note: "" },
+      { name: "竹澤 朋", yomi: "たけざわ とも", kana: "", side: "groom", category: "family", relation: "義兄", note: "" },
+      { name: "細川 和恵", yomi: "ほそかわ かずえ", kana: "", side: "groom", category: "family", relation: "伯母", note: "" },
+      { name: "竹澤 侑希", yomi: "たけざわ ゆうき", kana: "", side: "groom", category: "family", relation: "姪", note: "" },
+      { name: "細川 良清", yomi: "ほそかわ よしきよ", kana: "", side: "groom", category: "family", relation: "伯父", note: "" },
+      { name: "竹澤 眞美子", yomi: "たけざわ まみこ", kana: "", side: "groom", category: "family", relation: "姉", note: "" },
+      { name: "細川 満弘", yomi: "ほそかわ みつひろ", kana: "", side: "groom", category: "family", relation: "伯父", note: "" },
+      { name: "細川 眞紀子", yomi: "ほそかわ まきこ", kana: "", side: "groom", category: "family", relation: "母", note: "" },
+      { name: "細川 優", yomi: "ほそかわ まさる", kana: "", side: "groom", category: "family", relation: "父", note: "" },
     ],
   },
   {
     id: "3-2",
     guests: [
-      { name: "細川 裕美", kana: "", side: "groom", category: "family", relation: "伯母", note: "" },
-      { name: "細川 幸芳", kana: "", side: "groom", category: "family", relation: "伯父", note: "" },
-      { name: "細川 紀子", kana: "", side: "groom", category: "family", relation: "伯母", note: "" },
-      { name: "細川 公也", kana: "", side: "groom", category: "family", relation: "伯父", note: "" },
-      { name: "細川 操", kana: "", side: "groom", category: "family", relation: "伯母", note: "" },
-      { name: "細川 頼男", kana: "", side: "groom", category: "family", relation: "伯父", note: "" },
-      { name: "東 真知子", kana: "", side: "groom", category: "family", relation: "叔母", note: "" },
-      { name: "東 泰希", kana: "", side: "groom", category: "family", relation: "叔父", note: "" },
+      { name: "細川 裕美", yomi: "ほそかわ ひろみ", kana: "", side: "groom", category: "family", relation: "伯母", note: "" },
+      { name: "細川 幸芳", yomi: "ほそかわ ゆきよし", kana: "", side: "groom", category: "family", relation: "伯父", note: "" },
+      { name: "細川 紀子", yomi: "ほそかわ のりこ", kana: "", side: "groom", category: "family", relation: "伯母", note: "" },
+      { name: "細川 公也", yomi: "ほそかわ きみや", kana: "", side: "groom", category: "family", relation: "伯父", note: "" },
+      { name: "細川 操", yomi: "ほそかわ みさお", kana: "", side: "groom", category: "family", relation: "伯母", note: "" },
+      { name: "細川 頼男", yomi: "ほそかわ よりお", kana: "", side: "groom", category: "family", relation: "伯父", note: "" },
+      { name: "東 真知子", yomi: "あずま まちこ", kana: "", side: "groom", category: "family", relation: "叔母", note: "" },
+      { name: "東 泰希", yomi: "あずま たいき", kana: "", side: "groom", category: "family", relation: "叔父", note: "" },
     ],
   },
   {
     id: "3-3",
     guests: [
-      { name: "川島 隆之", kana: "", side: "bride", category: "family", relation: "親族", note: "" },
-      { name: "川島 敏子", kana: "", side: "bride", category: "family", relation: "親族", note: "" },
-      { name: "川島 敬子", kana: "", side: "bride", category: "family", relation: "叔母", note: "" },
-      { name: "川島 悠呂", kana: "", side: "bride", category: "family", relation: "弟", note: "" },
-      { name: "川島 茂", kana: "", side: "bride", category: "family", relation: "叔父", note: "" },
-      { name: "銘形 寿賀子", kana: "", side: "bride", category: "family", relation: "大叔母", note: "" },
-      { name: "川島 満", kana: "", side: "bride", category: "family", relation: "父", note: "" },
-      { name: "川島 江里奈", kana: "", side: "bride", category: "family", relation: "母", note: "" },
+      { name: "川島 隆之", yomi: "かわしま たかゆき", kana: "", side: "bride", category: "family", relation: "親族", note: "" },
+      { name: "川島 敏子", yomi: "かわしま としこ", kana: "", side: "bride", category: "family", relation: "親族", note: "" },
+      { name: "川島 敬子", yomi: "かわしま けいこ", kana: "", side: "bride", category: "family", relation: "叔母", note: "" },
+      { name: "川島 悠呂", yomi: "かわしま ゆうろ", kana: "", side: "bride", category: "family", relation: "弟", note: "" },
+      { name: "川島 茂", yomi: "かわしま しげる", kana: "", side: "bride", category: "family", relation: "叔父", note: "" },
+      { name: "銘形 寿賀子", yomi: "めいがた すがこ", kana: "", side: "bride", category: "family", relation: "大叔母", note: "" },
+      { name: "川島 満", yomi: "かわしま みつる", kana: "", side: "bride", category: "family", relation: "父", note: "" },
+      { name: "川島 江里奈", yomi: "かわしま えりな", kana: "", side: "bride", category: "family", relation: "母", note: "" },
     ],
   },
 ];
@@ -229,6 +231,17 @@ const MENU_FOOD = [
   { en: "Café ou Thé", jp: "コーヒー又は紅茶", desc: "" },
 ];
 
+// お飲物メニュー（仮の内容です）。式場の正式なドリンクメニューが決まったら差し替えてください。
+const MENU_DRINK = [
+  { en: "Beer", jp: "ビール", desc: "" },
+  { en: "Wine", jp: "赤ワイン・白ワイン", desc: "" },
+  { en: "Japanese Sake", jp: "日本酒", desc: "" },
+  { en: "Shochu", jp: "焼酎", desc: "" },
+  { en: "Cocktail", jp: "カクテル各種", desc: "" },
+  { en: "Whisky", jp: "ハイボール", desc: "" },
+  { en: "Soft Drink", jp: "ソフトドリンク各種", desc: "オレンジジュース・ウーロン茶 ほか" },
+];
+
 // ---------- ナビゲーションボタン（トップページ・各ページ下部・ハンバーガーメニュー共通） ----------
 // replay: true のボタンはページ遷移ではなく、オープニング画面を再生する特別な動作をします。
 // disabled: true のボタンは「準備中」のグレー表示になります（ラベルが決まったら差し替え）。
@@ -238,8 +251,8 @@ const NAV_ITEMS = [
   { id: "our-history", en: "Our History", jp: "二人の道" },
   { id: "seating", en: "Seating", jp: "お座席" },
   { id: "menu", en: "Menu", jp: "お食事" },
+  { id: "drink", en: "Drink", jp: "お飲物" },
   { id: "map", en: "Map", jp: "おすすめマップ" },
-  { id: "", en: "Coming Soon", jp: "近日公開", disabled: true },
   { id: "top", en: "Top", jp: "トップページ", replay: true },
 ];
 
@@ -255,6 +268,8 @@ const MAP_INTRO = [
 // desc は仮文です。zoom はボタンを押したときの拡大率（数字が大きいほど拡大）。
 // photos: ふたりの写真を { src: "assets/img/map/xxx.jpg", caption: "写真の説明" } の形で
 //         複数枚追加できます（小さく並び、タップで拡大表示されます）。
+// web / instagram: お店の公式サイトやInstagramのURLを設定すると説明カードにリンクが表示されます。
+//         例: web: "https://example.com", instagram: "https://www.instagram.com/xxx/"
 // placeholder: true の項目は「準備中」のグレー枠になります（場所が決まったら差し替え）。
 const MAP_SPOTS = [
   {
