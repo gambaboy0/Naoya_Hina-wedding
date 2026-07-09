@@ -165,7 +165,7 @@
 
   function renderNavGrids() {
     const html = buildNavGridHtml();
-    ["#nav-grid-top", "#nav-grid-profile", "#nav-grid-history", "#nav-grid-our-history"].forEach((sel) => {
+    ["#nav-grid-top", "#nav-grid-profile", "#nav-grid-history", "#nav-grid-our-history", "#nav-grid-seating"].forEach((sel) => {
       const el = $(sel);
       if (el) el.innerHTML = html;
     });
