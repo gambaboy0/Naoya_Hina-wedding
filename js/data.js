@@ -49,12 +49,12 @@ const GROOM_PROFILE = {
   name: "直弥",
   photo: "",
   stats: [
-    { label: "BIRTHDAY", value: "4.27" }, // 生まれ年は確認中
+    { label: "BIRTHDAY", value: "1994.3.27" },
     { label: "BIRTHPLACE", value: "岐阜県" },
     { label: "BLOOD TYPE", value: "B" }, // 二人とも同じ血液型とのこと
     { label: "MBTI", value: "INFP-A（仲介者）" }, // ※要再確認
-    { label: "WORK", value: "株式会社藤越" },
-    { label: "HOBBY", value: "ゴルフ・キャンプ・旅行" },
+    { label: "WORK", value: "株式会社不二越" },
+    { label: "HOBBY", value: "ゴルフ キャンプ 旅行" },
     { label: "FAVORITE FOOD", value: "お寿司" },
   ],
 };
@@ -70,7 +70,7 @@ const BRIDE_PROFILE = {
     { label: "MBTI", value: "ENTP-T（討論者）" },
     { label: "WORK", value: "社会福祉法人セーナー苑" },
     { label: "HOBBY", value: "旅行" },
-    { label: "FAVORITE FOOD", value: "チーズ・お肉・お魚・じゃがいも・うなぎ・お寿司" },
+    { label: "FAVORITE FOOD", value: "チーズ お肉 お魚 じゃがいも うなぎ お寿司" },
   ],
 };
 
