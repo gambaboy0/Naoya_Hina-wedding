@@ -159,16 +159,18 @@
   <section class="page section" id="map" data-page="map" hidden>
     <p class="section-eyebrow">07</p>
     <h2 class="section-title" data-title-for="map"></h2>
+    <p class="map-intro" id="map-intro"></p>
 
-    <!-- 9つの場所ボタン（3×3） -->
+    <!-- 12の場所ボタン（3列×4段） -->
     <div class="map-spot-grid" id="map-spot-grid"></div>
 
     <!-- 富山県地図（Leaflet） -->
     <div id="toyama-map" class="toyama-map"></div>
 
-    <!-- 選んだ場所の説明 -->
+    <!-- 選んだ場所の説明（ふたりの写真＋紹介文） -->
     <div id="map-spot-desc" class="map-spot-desc" hidden></div>
 
+    <button type="button" class="to-top-btn" data-scroll-top>&uarr; ページ上部へ</button>
     <nav class="profile-nav-grid" id="nav-grid-map"></nav>
   </section>
 
@@ -184,6 +186,15 @@
   <div class="modal-sheet" role="dialog" aria-modal="true">
     <button type="button" class="modal-close" data-close aria-label="閉じる">×</button>
     <div id="guest-modal-body"></div>
+  </div>
+</div>
+
+<!-- ============ PHOTO LIGHTBOX MODAL (おすすめマップの写真拡大) ============ -->
+<div id="photo-modal" class="modal" hidden>
+  <div class="modal-backdrop" data-close></div>
+  <div class="modal-sheet" role="dialog" aria-modal="true">
+    <button type="button" class="modal-close" data-close aria-label="閉じる">×</button>
+    <div id="photo-modal-body"></div>
   </div>
 </div>
 

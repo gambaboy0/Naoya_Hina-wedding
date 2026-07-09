@@ -389,6 +389,7 @@
       maxZoom: 19,
     }).addTo(toyamaMap);
     MAP_SPOTS.forEach((s) => {
+      if (s.placeholder || s.lat === undefined) return;
       const icon = L.divIcon({
         className: "spot-marker",
         html: "<span>" + s.no + "</span>",
@@ -402,15 +403,56 @@
   }
 
   function renderMapSpots() {
+    const intro = $("#map-intro");
+    if (intro) intro.innerHTML = MAP_INTRO.join("<br>");
     const grid = $("#map-spot-grid");
     if (!grid) return;
-    grid.innerHTML = MAP_SPOTS.map(
-      (s, i) =>
-        '<button type="button" class="map-spot-btn" data-spot="' + i + '">' +
+    grid.innerHTML = MAP_SPOTS.map((s, i) => {
+      const inner =
         '<span class="map-spot-no">' + s.no + "</span>" +
-        '<span class="map-spot-name">' + s.name + "</span>" +
-        "</button>"
-    ).join("");
+        '<span class="map-spot-name">' + s.name + "</span>";
+      if (s.placeholder) {
+        return '<div class="map-spot-btn is-placeholder">' + inner + "</div>";
+      }
+      return '<button type="button" class="map-spot-btn" data-spot="' + i + '">' + inner + "</button>";
+    }).join("");
+  }
+
+  // ふたりの写真サムネイル（写真が未登録の間はプレースホルダーを表示）
+  function buildSpotPhotosHtml(spot, spotIndex) {
+    const photos = spot.photos || [];
+    if (photos.length === 0) {
+      return (
+        '<div class="map-desc-photos">' +
+        [1, 2, 3]
+          .map((n) => '<div class="map-photo-thumb map-photo-placeholder">お写真' + n + "</div>")
+          .join("") +
+        "</div>"
+      );
+    }
+    return (
+      '<div class="map-desc-photos">' +
+      photos
+        .map(
+          (p, pi) =>
+            '<button type="button" class="map-photo-thumb" data-spot-photo="' + spotIndex + "::" + pi + '">' +
+            '<img src="' + p.src + '" alt="' + (p.caption || spot.name) + '">' +
+            "</button>"
+        )
+        .join("") +
+      "</div>"
+    );
+  }
+
+  function openPhotoModal(spotIndex, photoIndex) {
+    const spot = MAP_SPOTS[spotIndex];
+    const photo = spot && spot.photos ? spot.photos[photoIndex] : null;
+    if (!photo) return;
+    $("#photo-modal-body").innerHTML =
+      '<img class="photo-modal-img" src="' + photo.src + '" alt="">' +
+      '<p class="photo-modal-caption">' + (photo.caption || spot.name) + "</p>";
+    $("#photo-modal").hidden = false;
+    document.body.classList.add("modal-open");
   }
 
   function selectMapSpot(index) {
@@ -425,6 +467,7 @@
       '<p class="map-desc-no">SPOT ' + s.no + "</p>" +
       '<h3 class="map-desc-name">' + s.name + "</h3>" +
       '<p class="map-desc-address">' + s.address + "</p>" +
+      buildSpotPhotosHtml(s, index) +
       '<p class="map-desc-text">' + s.desc + "</p>" +
       '<a class="map-desc-link" href="https://www.google.com/maps/search/?api=1&query=' +
       encodeURIComponent(s.gquery) +
@@ -455,8 +498,10 @@
   }
 
   function closeAnyModal() {
-    const el = $("#guest-modal");
-    if (el && !el.hidden) el.hidden = true;
+    ["#guest-modal", "#photo-modal"].forEach((sel) => {
+      const el = $(sel);
+      if (el && !el.hidden) el.hidden = true;
+    });
     document.body.classList.remove("modal-open");
   }
 
@@ -502,9 +547,20 @@
       closeAnyModal();
       return;
     }
-    const spotBtn = e.target.closest(".map-spot-btn");
+    const photoThumb = e.target.closest("[data-spot-photo]");
+    if (photoThumb) {
+      const parts = photoThumb.dataset.spotPhoto.split("::");
+      openPhotoModal(Number(parts[0]), Number(parts[1]));
+      return;
+    }
+    const spotBtn = e.target.closest(".map-spot-btn[data-spot]");
     if (spotBtn) {
       selectMapSpot(Number(spotBtn.dataset.spot));
+      return;
+    }
+    const scrollTopBtn = e.target.closest("[data-scroll-top]");
+    if (scrollTopBtn) {
+      window.scrollTo({ top: 0, behavior: "smooth" });
       return;
     }
     const seatBtn = e.target.closest(".chart-seat");
