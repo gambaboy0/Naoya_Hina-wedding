@@ -117,6 +117,13 @@
     // ハンバーガーメニューは詳細ページのみ表示（トップページ・スプラッシュ中は非表示）
     $("#index-toggle").hidden = !$("#splash").hidden || page === "top";
     window.scrollTo(0, 0);
+    // Leafletはhidden中にサイズを取れないため、マップページ表示時に初期化する
+    if (page === "map") {
+      window.setTimeout(() => {
+        initToyamaMap();
+        if (toyamaMap) toyamaMap.invalidateSize();
+      }, 60);
+    }
   }
 
   function navigate(page) {
@@ -165,7 +172,7 @@
 
   function renderNavGrids() {
     const html = buildNavGridHtml();
-    ["#nav-grid-top", "#nav-grid-profile", "#nav-grid-history", "#nav-grid-our-history", "#nav-grid-seating", "#nav-grid-menu"].forEach((sel) => {
+    ["#nav-grid-top", "#nav-grid-profile", "#nav-grid-history", "#nav-grid-our-history", "#nav-grid-seating", "#nav-grid-menu", "#nav-grid-map"].forEach((sel) => {
       const el = $(sel);
       if (el) el.innerHTML = html;
     });
@@ -369,6 +376,69 @@
     el.innerHTML = coupleHtml + rowsHtml;
   }
 
+  // ---------- recommended map (Leaflet + OpenStreetMap) ----------
+  const TOYAMA_CENTER = [36.62, 137.25];
+  const TOYAMA_ZOOM = 9;
+  let toyamaMap = null;
+
+  function initToyamaMap() {
+    if (toyamaMap || typeof L === "undefined" || !$("#toyama-map")) return;
+    toyamaMap = L.map("toyama-map", { scrollWheelZoom: false }).setView(TOYAMA_CENTER, TOYAMA_ZOOM);
+    L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+      maxZoom: 19,
+    }).addTo(toyamaMap);
+    MAP_SPOTS.forEach((s) => {
+      const icon = L.divIcon({
+        className: "spot-marker",
+        html: "<span>" + s.no + "</span>",
+        iconSize: [26, 26],
+        iconAnchor: [13, 13],
+      });
+      L.marker([s.lat, s.lng], { icon })
+        .addTo(toyamaMap)
+        .bindPopup("<b>" + s.no + ". " + s.name + "</b>");
+    });
+  }
+
+  function renderMapSpots() {
+    const grid = $("#map-spot-grid");
+    if (!grid) return;
+    grid.innerHTML = MAP_SPOTS.map(
+      (s, i) =>
+        '<button type="button" class="map-spot-btn" data-spot="' + i + '">' +
+        '<span class="map-spot-no">' + s.no + "</span>" +
+        '<span class="map-spot-name">' + s.name + "</span>" +
+        "</button>"
+    ).join("");
+  }
+
+  function selectMapSpot(index) {
+    const s = MAP_SPOTS[index];
+    if (!s) return;
+    $$(".map-spot-btn").forEach((b, i) => b.classList.toggle("is-active", i === index));
+
+    // 説明文を地図の下に表示
+    const desc = $("#map-spot-desc");
+    desc.hidden = false;
+    desc.innerHTML =
+      '<p class="map-desc-no">SPOT ' + s.no + "</p>" +
+      '<h3 class="map-desc-name">' + s.name + "</h3>" +
+      '<p class="map-desc-address">' + s.address + "</p>" +
+      '<p class="map-desc-text">' + s.desc + "</p>" +
+      '<a class="map-desc-link" href="https://www.google.com/maps/search/?api=1&query=' +
+      encodeURIComponent(s.gquery) +
+      '" target="_blank" rel="noopener">Googleマップで開く →</a>';
+
+    // 地図をその場所へなめらかにズームし、地図＋説明文が見える位置までスライド
+    initToyamaMap();
+    if (toyamaMap) {
+      toyamaMap.invalidateSize();
+      toyamaMap.flyTo([s.lat, s.lng], s.zoom, { duration: 2 });
+    }
+    $("#toyama-map").scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+
   // ---------- food ----------
   function renderFood() {
     const box = $("#food-list");
@@ -432,6 +502,11 @@
       closeAnyModal();
       return;
     }
+    const spotBtn = e.target.closest(".map-spot-btn");
+    if (spotBtn) {
+      selectMapSpot(Number(spotBtn.dataset.spot));
+      return;
+    }
     const seatBtn = e.target.closest(".chart-seat");
     if (seatBtn) {
       const table = TABLES.find((t) => t.id === seatBtn.dataset.table);
@@ -462,6 +537,7 @@
     renderOurHistory();
     setupGuestFinder();
     renderFullChart();
+    renderMapSpots();
     renderFood();
     render();
     renderSplashMedia();
