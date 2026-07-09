@@ -60,50 +60,50 @@
     <nav class="top-nav-grid" id="nav-grid-top"></nav>
   </section>
 
-  <!-- PROFILE (simple: photo + 7 facts) -->
-  <section class="page section" id="profile" data-page="profile" hidden>
+  <!-- GROOM (profile + personal history) -->
+  <section class="page section" id="groom" data-page="groom" hidden>
     <p class="section-eyebrow">02</p>
-    <h2 class="section-title" data-title-for="profile"></h2>
+    <h2 class="section-title" data-title-for="groom"></h2>
 
     <div class="profile-person">
       <div class="profile-header">
-        <p class="profile-header-en">Groom Profiles</p>
+        <p class="profile-header-en">Profile</p>
         <p class="profile-header-jp" id="profile-groom-name"></p>
       </div>
       <div id="profile-groom-photo"></div>
       <div id="profile-groom-stats" class="profile-stats"></div>
     </div>
 
+    <div class="profile-header">
+      <p class="profile-header-en">History</p>
+      <p class="profile-header-jp">生い立ち</p>
+    </div>
+    <div id="history-groom-timeline" class="profile-timeline"></div>
+
+    <nav class="profile-nav-grid" id="nav-grid-groom"></nav>
+  </section>
+
+  <!-- BRIDE (profile + personal history) -->
+  <section class="page section" id="bride" data-page="bride" hidden>
+    <p class="section-eyebrow">03</p>
+    <h2 class="section-title" data-title-for="bride"></h2>
+
     <div class="profile-person">
       <div class="profile-header">
-        <p class="profile-header-en">Bride Profiles</p>
+        <p class="profile-header-en">Profile</p>
         <p class="profile-header-jp" id="profile-bride-name"></p>
       </div>
       <div id="profile-bride-photo"></div>
       <div id="profile-bride-stats" class="profile-stats"></div>
     </div>
 
-    <nav class="profile-nav-grid" id="nav-grid-profile"></nav>
-  </section>
-
-  <!-- PERSONAL HISTORY (life-stage timeline, was the old PROFILE page) -->
-  <section class="page section" id="history" data-page="history" hidden>
-    <p class="section-eyebrow">03</p>
-    <h2 class="section-title" data-title-for="history"></h2>
-
     <div class="profile-header">
-      <p class="profile-header-en">Groom History</p>
-      <p class="profile-header-jp">新郎ヒストリー</p>
-    </div>
-    <div id="history-groom-timeline" class="profile-timeline"></div>
-
-    <div class="profile-header">
-      <p class="profile-header-en">Bride History</p>
-      <p class="profile-header-jp">新婦ヒストリー</p>
+      <p class="profile-header-en">History</p>
+      <p class="profile-header-jp">生い立ち</p>
     </div>
     <div id="history-bride-timeline" class="profile-timeline"></div>
 
-    <nav class="profile-nav-grid" id="nav-grid-history"></nav>
+    <nav class="profile-nav-grid" id="nav-grid-bride"></nav>
   </section>
 
   <!-- OUR HISTORY (the couple's story) -->
@@ -125,21 +125,6 @@
       <div class="full-chart" id="full-chart"></div>
     </div>
 
-    <!-- 座席検索（属性ボタン → お名前選択） -->
-    <h3 class="carousel-title">座席検索</h3>
-    <div class="guest-finder">
-      <div class="category-buttons">
-        <button type="button" class="category-btn" data-side="groom" data-category="family">新郎親族</button>
-        <button type="button" class="category-btn" data-side="bride" data-category="family">新婦親族</button>
-        <button type="button" class="category-btn" data-side="groom" data-category="friend">新郎友人</button>
-        <button type="button" class="category-btn" data-side="bride" data-category="friend">新婦友人</button>
-      </div>
-      <select id="guest-picker" class="guest-picker" disabled>
-        <option value="">上のボタンから選んでください</option>
-      </select>
-      <div id="picked-table-result" class="picked-table-result"></div>
-    </div>
-
     <p class="section-caption">お名前をタップするとご紹介が表示されます</p>
 
     <nav class="profile-nav-grid" id="nav-grid-seating"></nav>
@@ -155,14 +140,14 @@
     <nav class="profile-nav-grid" id="nav-grid-menu"></nav>
   </section>
 
-  <!-- DRINK -->
-  <section class="page section" id="drink" data-page="drink" hidden>
+  <!-- Q&A (お互いへの質問と回答) -->
+  <section class="page section" id="qa" data-page="qa" hidden>
     <p class="section-eyebrow">07</p>
-    <h2 class="section-title" data-title-for="drink"></h2>
-    <div id="drink-list" class="course-list-flat"></div>
-    <p class="section-caption">※内容は変更になる場合がございます</p>
+    <h2 class="section-title" data-title-for="qa"></h2>
+    <div id="qa-list" class="qa-list"></div>
+    <div id="qa-rankings" class="qa-rankings"></div>
 
-    <nav class="profile-nav-grid" id="nav-grid-drink"></nav>
+    <nav class="profile-nav-grid" id="nav-grid-qa"></nav>
   </section>
 
   <!-- RECOMMENDED MAP (新郎新婦の思い出の場所) -->

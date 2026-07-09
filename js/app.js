@@ -172,7 +172,7 @@
 
   function renderNavGrids() {
     const html = buildNavGridHtml();
-    ["#nav-grid-top", "#nav-grid-profile", "#nav-grid-history", "#nav-grid-our-history", "#nav-grid-seating", "#nav-grid-menu", "#nav-grid-drink", "#nav-grid-map"].forEach((sel) => {
+    ["#nav-grid-top", "#nav-grid-groom", "#nav-grid-bride", "#nav-grid-our-history", "#nav-grid-seating", "#nav-grid-menu", "#nav-grid-qa", "#nav-grid-map"].forEach((sel) => {
       const el = $(sel);
       if (el) el.innerHTML = html;
     });
@@ -277,7 +277,7 @@
       '<p class="modal-relation">' + relationText + "</p>" +
       '<p class="modal-table">お席：' + tableId + " テーブル</p>" +
       (guest.note
-        ? '<div class="modal-note"><p class="modal-note-label">ひとこと</p><p class="modal-note-text">' + guest.note + "</p></div>"
+        ? '<div class="modal-note"><p class="modal-note-label">ご紹介</p><p class="modal-note-text">' + guest.note + "</p></div>"
         : "");
 
     $("#guest-modal").hidden = false;
@@ -310,61 +310,6 @@
       '<div class="chart-col">' + right.join("") + "</div>" +
       "</div>"
     );
-  }
-
-  // ---------- guest finder (属性ボタン → ドロップダウン → 丸テーブル表示) ----------
-  function populateGuestPicker(side, category) {
-    const picker = $("#guest-picker");
-    picker.innerHTML = '<option value="">お名前を選んでください</option>';
-    const matches = [];
-    TABLES.forEach((t) => {
-      t.guests.forEach((g, gi) => {
-        if (g.side === side && g.category === category) {
-          matches.push({ guest: g, value: t.id + "::" + gi });
-        }
-      });
-    });
-    // 五十音順（yomiが未設定の場合は名前で代用）
-    matches.sort((a, b) =>
-      (a.guest.yomi || a.guest.kana || a.guest.name).localeCompare(
-        b.guest.yomi || b.guest.kana || b.guest.name,
-        "ja"
-      )
-    );
-    matches.forEach((m) => {
-      const opt = document.createElement("option");
-      opt.value = m.value;
-      opt.textContent = m.guest.name;
-      picker.appendChild(opt);
-    });
-    picker.disabled = false;
-    $("#picked-table-result").innerHTML = "";
-  }
-
-  function showPickedTable(value) {
-    const result = $("#picked-table-result");
-    if (!value) {
-      result.innerHTML = "";
-      return;
-    }
-    const [tableId] = value.split("::");
-    const table = TABLES.find((t) => t.id === tableId);
-    if (!table) {
-      result.innerHTML = "";
-      return;
-    }
-    result.innerHTML = '<p class="picked-table-label">' + table.id + " テーブル</p>" + buildChartTableHtml(table);
-  }
-
-  function setupGuestFinder() {
-    $$(".category-btn").forEach((btn) => {
-      btn.addEventListener("click", () => {
-        $$(".category-btn").forEach((b) => b.classList.remove("is-active"));
-        btn.classList.add("is-active");
-        populateGuestPicker(btn.dataset.side, btn.dataset.category);
-      });
-    });
-    $("#guest-picker").addEventListener("change", (e) => showPickedTable(e.target.value));
   }
 
   // ---------- 全体座席図（印刷席次表風の1枚レイアウト） ----------
@@ -481,8 +426,8 @@
       buildSpotPhotosHtml(s, index) +
       '<p class="map-desc-text">' + s.desc + "</p>" +
       '<div class="map-desc-links">' +
-      '<a class="map-desc-link" href="https://www.google.com/maps/search/?api=1&query=' +
-      encodeURIComponent(s.gquery) +
+      '<a class="map-desc-link" href="' +
+      (s.gmap || "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(s.gquery)) +
       '" target="_blank" rel="noopener">Googleマップで開く →</a>' +
       (s.web ? '<a class="map-desc-link" href="' + s.web + '" target="_blank" rel="noopener">公式サイト →</a>' : "") +
       (s.instagram ? '<a class="map-desc-link" href="' + s.instagram + '" target="_blank" rel="noopener">Instagram →</a>' : "") +
@@ -515,7 +460,60 @@
 
   function renderFood() {
     renderCourseList("#food-list", MENU_FOOD);
-    renderCourseList("#drink-list", MENU_DRINK);
+  }
+
+  // ---------- Q&A (お互いへの質問と回答 + ランキング企画) ----------
+  const QA_EMPTY_TEXT = "回答をお楽しみに";
+
+  function buildQaAnswerHtml(role, name, text) {
+    return (
+      '<div class="qa-answer qa-answer-' + role + '">' +
+      '<span class="qa-answer-name">' + name + "</span>" +
+      '<span class="qa-answer-text' + (text ? "" : " is-empty") + '">' + (text || QA_EMPTY_TEXT) + "</span>" +
+      "</div>"
+    );
+  }
+
+  function renderQa() {
+    const list = $("#qa-list");
+    if (!list) return;
+    list.innerHTML = QA_ITEMS.map((item, i) => {
+      return (
+        '<div class="qa-card">' +
+        '<p class="qa-q-label">Q' + String(i + 1).padStart(2, "0") + "</p>" +
+        '<p class="qa-question">' + item.q + "</p>" +
+        buildQaAnswerHtml("groom", COUPLE.groomName, item.groom) +
+        buildQaAnswerHtml("bride", COUPLE.brideName, item.bride) +
+        "</div>"
+      );
+    }).join("");
+
+    const buildRankColHtml = (role, name, answers) =>
+      '<div class="qa-rank-col qa-answer-' + role + '">' +
+      '<p class="qa-rank-name"><span class="qa-answer-name">' + name + "</span></p>" +
+      answers
+        .map(
+          (v, i) =>
+            '<p class="qa-rank-item' + (v ? "" : " is-empty") + '">' +
+            '<span class="qa-rank-no">' + (i + 1) + "位</span>" +
+            (v || "？？？") +
+            "</p>"
+        )
+        .join("") +
+      "</div>";
+
+    $("#qa-rankings").innerHTML =
+      '<h3 class="carousel-title">Ranking</h3>' +
+      QA_RANKINGS.map(
+        (r) =>
+          '<div class="qa-card qa-rank-card">' +
+          '<p class="qa-question">' + r.title + "</p>" +
+          '<div class="qa-rank-cols">' +
+          buildRankColHtml("groom", COUPLE.groomName, r.groom) +
+          buildRankColHtml("bride", COUPLE.brideName, r.bride) +
+          "</div>" +
+          "</div>"
+      ).join("");
   }
 
   function closeAnyModal() {
@@ -612,10 +610,10 @@
     renderProfile();
     renderHistory();
     renderOurHistory();
-    setupGuestFinder();
     renderFullChart();
     renderMapSpots();
     renderFood();
+    renderQa();
     render();
     renderSplashMedia();
     startSlideshow();

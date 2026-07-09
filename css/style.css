@@ -493,9 +493,9 @@ body {
   color: var(--gray);
 }
 
-/* ---------- profile family (PROFILE / PERSONAL HISTORY / OUR HISTORY) ---------- */
-#profile,
-#history,
+/* ---------- profile family (GROOM / BRIDE / OUR HISTORY) ---------- */
+#groom,
+#bride,
 #our-history {
   background: var(--cream);
 }
@@ -531,6 +531,8 @@ body {
 
 .profile-stat-value {
   color: var(--dark);
+  text-align: right;
+  margin-left: 1.2rem;
 }
 
 .profile-header {
@@ -633,65 +635,6 @@ body {
 .btn-outline:active {
   background: var(--wine);
   color: var(--white);
-}
-
-/* ---------- guest finder (属性ボタン -> ドロップダウン -> 丸テーブル) ---------- */
-.guest-finder {
-  margin-bottom: 2.2rem;
-}
-
-.category-buttons {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 0.6rem;
-  margin-bottom: 0.8rem;
-}
-
-.category-btn {
-  appearance: none;
-  padding: 0.8rem 0.5rem;
-  border-radius: 999px;
-  border: 1px solid var(--wine);
-  background: var(--white);
-  color: var(--wine);
-  font-family: var(--font-serif);
-  font-size: 0.85rem;
-  cursor: pointer;
-}
-
-.category-btn.is-active {
-  background: var(--wine);
-  color: var(--white);
-}
-
-.guest-picker {
-  width: 100%;
-  padding: 0.7rem 0.9rem;
-  border: 1px solid var(--line);
-  border-radius: 999px;
-  font-size: 0.85rem;
-  font-family: var(--font-sans);
-  background: var(--white);
-  color: var(--dark);
-  margin-bottom: 0.4rem;
-}
-
-.guest-picker:disabled {
-  color: var(--gray);
-  background: var(--cream);
-}
-
-.picked-table-result:empty {
-  margin: 0;
-}
-
-.picked-table-label {
-  text-align: center;
-  font-family: Georgia, var(--font-serif);
-  color: var(--dark);
-  font-size: 0.95rem;
-  letter-spacing: 0.06em;
-  margin: 1rem 0 0.6rem;
 }
 
 /* ---------- chart table block (2列レイアウトのテーブル) ---------- */
@@ -1089,6 +1032,115 @@ body {
   margin: 0;
   color: var(--gray);
   font-size: 0.78rem;
+}
+
+/* ---------- Q&A (お互いへの質問と回答 + ランキング) ---------- */
+.qa-list,
+.qa-rankings {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+}
+
+.qa-rankings {
+  margin-top: 2.6rem;
+}
+
+.qa-rankings .carousel-title {
+  margin-bottom: 0;
+  font-family: "Great Vibes", "YuMincho", cursive;
+  color: var(--sea);
+  font-size: 1.7rem;
+}
+
+.qa-card {
+  background: var(--cream);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 1.1rem 1.2rem 1.2rem;
+  box-shadow: 0 2px 6px rgba(51, 48, 44, 0.06);
+}
+
+.qa-q-label {
+  font-family: Georgia, var(--font-serif);
+  color: var(--sea);
+  letter-spacing: 0.2em;
+  font-size: 0.7rem;
+  margin: 0 0 0.35rem;
+}
+
+.qa-question {
+  font-family: var(--font-serif);
+  color: var(--dark);
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin: 0 0 0.7rem;
+}
+
+.qa-answer {
+  display: flex;
+  align-items: baseline;
+  gap: 0.7rem;
+  padding: 0.55rem 0;
+  border-top: 1px dashed var(--line);
+}
+
+.qa-answer-name {
+  flex-shrink: 0;
+  font-size: 0.68rem;
+  color: var(--white);
+  border-radius: 999px;
+  padding: 0.16rem 0.65rem;
+  letter-spacing: 0.06em;
+}
+
+.qa-answer-groom .qa-answer-name {
+  background: var(--sea);
+}
+
+.qa-answer-bride .qa-answer-name {
+  background: var(--rose);
+}
+
+.qa-answer-text {
+  color: var(--dark);
+  font-size: 0.85rem;
+  line-height: 1.7;
+}
+
+.qa-answer-text.is-empty {
+  color: var(--gray);
+}
+
+/* ランキングカード（新郎・新婦の2列TOP3） */
+.qa-rank-cols {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.8rem;
+  border-top: 1px dashed var(--line);
+  padding-top: 0.8rem;
+}
+
+.qa-rank-name {
+  margin: 0 0 0.5rem;
+}
+
+.qa-rank-item {
+  margin: 0 0 0.4rem;
+  font-size: 0.82rem;
+  color: var(--dark);
+  line-height: 1.5;
+}
+
+.qa-rank-item.is-empty {
+  color: var(--gray);
+}
+
+.qa-rank-no {
+  font-family: Georgia, var(--font-serif);
+  color: #e8862e;
+  font-size: 0.72rem;
+  margin-right: 0.4rem;
 }
 
 /* ---------- footer ---------- */

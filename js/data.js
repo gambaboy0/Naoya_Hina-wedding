@@ -40,7 +40,8 @@ const TOP_MESSAGE = {
   ],
 };
 
-// ---------- PROFILE ページ（写真＋定番情報7項目） ----------
+// ---------- 新郎・新婦プロフィール（写真＋7項目） ----------
+// 2026/7/9ミーティングで確定した内容です（特技は削除・仕事を追加）。
 // photo は "assets/img/profile/xxx.jpg" のように実際の写真を用意したら差し替えてください。
 // 空のままにしておくと写真プレースホルダーが表示されます。
 const GROOM_PROFILE = {
@@ -48,13 +49,13 @@ const GROOM_PROFILE = {
   name: "直弥",
   photo: "",
   stats: [
-    { label: "BIRTHDAY", value: "1997.01.01" },
-    { label: "BIRTHPLACE", value: "東京都" },
-    { label: "BLOOD TYPE", value: "A" },
-    { label: "MBTI", value: "INFJ" },
-    { label: "HOBBY", value: "旅行" },
-    { label: "SPECIALTY", value: "料理" },
-    { label: "FAVORITE FOOD", value: "ラーメン" },
+    { label: "BIRTHDAY", value: "4.27" }, // 生まれ年は確認中
+    { label: "BIRTHPLACE", value: "岐阜県" },
+    { label: "BLOOD TYPE", value: "B" }, // 二人とも同じ血液型とのこと
+    { label: "MBTI", value: "INFP-A（仲介者）" }, // ※要再確認
+    { label: "WORK", value: "株式会社藤越" },
+    { label: "HOBBY", value: "ゴルフ・キャンプ・旅行" },
+    { label: "FAVORITE FOOD", value: "お寿司" },
   ],
 };
 
@@ -63,13 +64,13 @@ const BRIDE_PROFILE = {
   name: "日那",
   photo: "",
   stats: [
-    { label: "BIRTHDAY", value: "1998.05.20" },
-    { label: "BIRTHPLACE", value: "神奈川県" },
-    { label: "BLOOD TYPE", value: "O" },
-    { label: "MBTI", value: "ENFJ" },
-    { label: "HOBBY", value: "カフェ巡り" },
-    { label: "SPECIALTY", value: "写真撮影" },
-    { label: "FAVORITE FOOD", value: "スイーツ" },
+    { label: "BIRTHDAY", value: "1997.6.15" },
+    { label: "BIRTHPLACE", value: "沖縄県" },
+    { label: "BLOOD TYPE", value: "B" },
+    { label: "MBTI", value: "ENTP-T（討論者）" },
+    { label: "WORK", value: "社会福祉法人セーナー苑" },
+    { label: "HOBBY", value: "旅行" },
+    { label: "FAVORITE FOOD", value: "チーズ・お肉・お魚・じゃがいも・うなぎ・お寿司" },
   ],
 };
 
@@ -112,9 +113,9 @@ const OUR_HISTORY = [
 ];
 
 // 実際の座席表（会場管理ツールの画像）から書き起こしたデータです。
-// ふりがな(kana)・ひとことメッセージ(note)は元データに無いため空欄にしています。
-// yomi は座席検索プルダウンを五十音順に並べるための読み仮名です（画面には表示されません）。
-// ※読みはAIによる推定のため、新郎新婦に確認して間違いがあれば修正してください。
+// note: ゲストの紹介文（全体座席図でお名前をタップすると表示されます）。
+//       友人ゲスト全員分の紹介文がLINEで届いたらここに貼り付けてください。
+// yomi は旧・座席検索機能用の読み仮名です（検索機能の廃止に伴い現在は未使用）。
 const TABLES = [
   {
     id: "1-1",
@@ -231,27 +232,39 @@ const MENU_FOOD = [
   { en: "Café ou Thé", jp: "コーヒー又は紅茶", desc: "" },
 ];
 
-// お飲物メニュー（仮の内容です）。式場の正式なドリンクメニューが決まったら差し替えてください。
-const MENU_DRINK = [
-  { en: "Beer", jp: "ビール", desc: "" },
-  { en: "Wine", jp: "赤ワイン・白ワイン", desc: "" },
-  { en: "Japanese Sake", jp: "日本酒", desc: "" },
-  { en: "Shochu", jp: "焼酎", desc: "" },
-  { en: "Cocktail", jp: "カクテル各種", desc: "" },
-  { en: "Whisky", jp: "ハイボール", desc: "" },
-  { en: "Soft Drink", jp: "ソフトドリンク各種", desc: "オレンジジュース・ウーロン茶 ほか" },
+// ---------- Q&A ページ（お互いへの質問と回答） ----------
+// 2026/7/9ミーティングで挙がった質問候補10個です（質問の追加・削除OK）。
+// groom / bride にお二人からの回答テキストを貼り付けてください。
+// 空欄のあいだは「お楽しみに」のプレースホルダーが表示されます。
+const QA_ITEMS = [
+  { q: "好きなアーティストは？", groom: "", bride: "" },
+  { q: "好きな芸能人は？", groom: "", bride: "" },
+  { q: "相手の第一印象は？", groom: "", bride: "" },
+  { q: "相手の今の印象は？", groom: "", bride: "" },
+  { q: "お互いをなんて呼んでいる？", groom: "", bride: "" },
+  { q: "地球最後の日に何をする？", groom: "", bride: "" },
+  { q: "最後の晩餐は何がいい？", groom: "", bride: "" },
+  { q: "結婚してから見つけた相手のいいところは？", groom: "", bride: "" },
+  { q: "来世で相手を見つける方法は？", groom: "", bride: "" },
+  { q: "一番の思い出の場所は？", groom: "", bride: "" },
+];
+
+// ランキング企画（お二人それぞれのTOP3。回答が届いたら差し替えてください）
+const QA_RANKINGS = [
+  { title: "ゲストの中で無人島に一緒に行くなら", groom: ["", "", ""], bride: ["", "", ""] },
+  { title: "好きなお酒ランキング", groom: ["", "", ""], bride: ["", "", ""] },
 ];
 
 // ---------- ナビゲーションボタン（トップページ・各ページ下部・ハンバーガーメニュー共通） ----------
 // replay: true のボタンはページ遷移ではなく、オープニング画面を再生する特別な動作をします。
 // disabled: true のボタンは「準備中」のグレー表示になります（ラベルが決まったら差し替え）。
 const NAV_ITEMS = [
-  { id: "profile", en: "Profile", jp: "プロフィール" },
-  { id: "history", en: "Personal History", jp: "生い立ち" },
+  { id: "groom", en: "Groom", jp: "新郎プロフィール" },
+  { id: "bride", en: "Bride", jp: "新婦プロフィール" },
   { id: "our-history", en: "Our History", jp: "二人の道" },
   { id: "seating", en: "Seating", jp: "お座席" },
   { id: "menu", en: "Menu", jp: "お食事" },
-  { id: "drink", en: "Drink", jp: "お飲物" },
+  { id: "qa", en: "Q&amp;A", jp: "ふたりに質問" },
   { id: "map", en: "Map", jp: "おすすめマップ" },
   { id: "top", en: "Top", jp: "トップページ", replay: true },
 ];
@@ -270,6 +283,8 @@ const MAP_INTRO = [
 //         複数枚追加できます（小さく並び、タップで拡大表示されます）。
 // web / instagram: お店の公式サイトやInstagramのURLを設定すると説明カードにリンクが表示されます。
 //         例: web: "https://example.com", instagram: "https://www.instagram.com/xxx/"
+// gmap: GoogleマップのリンクURLを直接設定できます（新郎新婦から共有されたリンクをそのまま貼り付け）。
+//       未設定の場合は gquery の検索クエリでGoogleマップを開きます。
 // placeholder: true の項目は「準備中」のグレー枠になります（場所が決まったら差し替え）。
 const MAP_SPOTS = [
   {
