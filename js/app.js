@@ -259,51 +259,7 @@
     renderProfilePerson("bride", BRIDE_PROFILE);
   }
 
-  // ---------- seating list ----------
-  function renderSeats() {
-    const list = $("#tables-list");
-    list.innerHTML = "";
-
-    TABLES.forEach((t) => {
-      const card = document.createElement("div");
-      card.className = "table-card";
-      card.id = "table-" + t.id;
-
-      const header = document.createElement("button");
-      header.type = "button";
-      header.className = "table-card-header";
-      header.innerHTML =
-        '<span class="table-card-title">' + t.id + " テーブル</span>" +
-        '<span class="table-count">' + t.guests.length + "名</span>";
-
-      const body = document.createElement("div");
-      body.className = "table-card-body";
-      body.hidden = true;
-
-      header.addEventListener("click", () => {
-        body.hidden = !body.hidden;
-      });
-
-      t.guests.forEach((g) => {
-        const row = document.createElement("button");
-        row.type = "button";
-        row.className = "guest-row";
-        row.innerHTML =
-          '<span class="guest-name">' + g.name + "</span>" +
-          '<span class="guest-relation">' + sideLabel(g.side) + "の" + g.relation + "</span>";
-        row.addEventListener("click", (e) => {
-          e.stopPropagation();
-          openGuestModal(g, t.id);
-        });
-        body.appendChild(row);
-      });
-
-      card.appendChild(header);
-      card.appendChild(body);
-      list.appendChild(card);
-    });
-  }
-
+  // ---------- seating ----------
   function openGuestModal(guest, tableId) {
     const body = $("#guest-modal-body");
     const relationText = sideLabel(guest.side) + (guest.relation ? "の" + guest.relation : "");
@@ -423,7 +379,7 @@
       row.innerHTML =
         '<p class="course-en">' + c.en + "</p>" +
         '<p class="course-jp">' + c.jp + "</p>" +
-        '<p class="course-desc">' + c.desc + "</p>";
+        (c.desc ? '<p class="course-desc">' + c.desc + "</p>" : "");
       box.appendChild(row);
     });
   }
@@ -504,7 +460,6 @@
     renderProfile();
     renderHistory();
     renderOurHistory();
-    renderSeats();
     setupGuestFinder();
     renderFullChart();
     renderFood();

@@ -216,12 +216,17 @@ const TABLES = [
   },
 ];
 
+// Menu de Mariage 2026/8/23 細川様・川島様
+// en: コース区分（小さく上に表示）／ jp: 日本語の料理名（主）／ desc: フランス語名（副）
 const MENU_FOOD = [
-  { jp: "前菜", en: "Amuse-Bouche", desc: "季節野菜のテリーヌ 生ハム添え" },
-  { jp: "スープ", en: "Potage", desc: "北海道産コーンの冷製スープ" },
-  { jp: "お魚料理", en: "Poisson", desc: "真鯛のポワレ 白ワインソース" },
-  { jp: "お肉料理", en: "Viande", desc: "国産牛フィレ肉のロースト" },
-  { jp: "デザート", en: "Dessert", desc: "ウェディングケーキ＆季節のフルーツ" },
+  { en: "Premier", jp: "本鮪　中トロのグリルと夏野菜のサラダ　生姜風味", desc: "Thon grillé salade á la japonaise" },
+  { en: "Deuxième", jp: "フォアグラソテー　コンソメで煮込んだ大根と共に", desc: "Foie gras chaud mijoté radis japon" },
+  { en: "Potage", jp: "じゃが芋とポワロー葱の冷製ポタージュ", desc: "Potage vichyssoise" },
+  { en: "Poisson", jp: "オマール海老のポワレ　アメリケーヌソース", desc: "Homard cuire à la toi et moi" },
+  { en: "Granité", jp: "お口直しの氷菓子", desc: "" },
+  { en: "Viande", jp: "黒毛和牛フィレ肉　黒トリュフソース", desc: "Filet de bœuf « WAGYU » cuir sauce aux truffe noire" },
+  { en: "Dessert", jp: "デザートブッフェ", desc: "Dessert Buffet" },
+  { en: "Café ou Thé", jp: "コーヒー又は紅茶", desc: "" },
 ];
 
 // ---------- ナビゲーションボタン（トップページ・各ページ下部・ハンバーガーメニュー共通） ----------

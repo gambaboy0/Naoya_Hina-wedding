@@ -640,15 +640,6 @@ body {
   margin-bottom: 2.2rem;
 }
 
-.finder-guide {
-  text-align: center;
-  color: var(--dark);
-  font-family: var(--font-serif);
-  font-size: 0.82rem;
-  line-height: 1.8;
-  margin: 0 0 1.2rem;
-}
-
 .category-buttons {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -780,6 +771,10 @@ body {
   margin: 2.6rem 0 1.2rem;
 }
 
+.carousel-title:first-of-type {
+  margin-top: 0;
+}
+
 .full-chart-scroll {
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
@@ -833,74 +828,6 @@ body {
 
 .chart-row:last-child {
   margin-bottom: 0;
-}
-
-.tables-list {
-  display: flex;
-  flex-direction: column;
-}
-
-.table-card {
-  border-bottom: 1px solid var(--line);
-}
-
-.table-card-header {
-  width: 100%;
-  appearance: none;
-  border: none;
-  background: none;
-  padding: 0.9rem 0.1rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  cursor: pointer;
-  font-family: Georgia, var(--font-serif);
-}
-
-.table-card-title {
-  color: var(--dark);
-  font-size: 0.98rem;
-  letter-spacing: 0.04em;
-}
-
-.table-count {
-  color: var(--gray);
-  font-size: 0.75rem;
-}
-
-.table-card-body {
-  display: flex;
-  flex-direction: column;
-  padding-bottom: 0.4rem;
-}
-
-.guest-row {
-  appearance: none;
-  border: none;
-  background: none;
-  padding: 0.55rem 0.1rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  cursor: pointer;
-  text-align: left;
-  width: 100%;
-}
-
-.guest-row:active {
-  background: var(--cream);
-}
-
-.guest-name {
-  font-size: 0.9rem;
-  color: var(--dark);
-}
-
-.guest-relation {
-  font-size: 0.72rem;
-  color: var(--gray);
-  flex-shrink: 0;
-  margin-left: 0.6rem;
 }
 
 /* ---------- menu (food) ---------- */

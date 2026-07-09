@@ -118,9 +118,15 @@
     <p class="section-eyebrow">05</p>
     <h2 class="section-title" data-title-for="seating"></h2>
 
-    <!-- 属性からお席を探す -->
+    <!-- 全体座席図（印刷席次表風レイアウト） -->
+    <h3 class="carousel-title">全体座席図</h3>
+    <div class="full-chart-scroll">
+      <div class="full-chart" id="full-chart"></div>
+    </div>
+
+    <!-- 座席検索（属性ボタン → お名前選択） -->
+    <h3 class="carousel-title">座席検索</h3>
     <div class="guest-finder">
-      <p class="finder-guide">下のボタンからご自身のお立場を選び<br>お名前を選択するとお席が表示されます</p>
       <div class="category-buttons">
         <button type="button" class="category-btn" data-side="groom" data-category="family">新郎親族</button>
         <button type="button" class="category-btn" data-side="bride" data-category="family">新婦親族</button>
@@ -132,16 +138,6 @@
       </select>
       <div id="picked-table-result" class="picked-table-result"></div>
     </div>
-
-    <!-- 全体座席図（印刷席次表風レイアウト） -->
-    <h3 class="carousel-title">全体座席図</h3>
-    <div class="full-chart-scroll">
-      <div class="full-chart" id="full-chart"></div>
-    </div>
-
-    <!-- ゲスト一覧（テーブル別） -->
-    <h3 class="carousel-title">ゲスト一覧</h3>
-    <div id="tables-list" class="tables-list"></div>
 
     <p class="section-caption">お名前をタップするとご紹介が表示されます</p>
   </section>
