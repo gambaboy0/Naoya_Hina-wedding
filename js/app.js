@@ -124,8 +124,6 @@
         if (toyamaMap) toyamaMap.invalidateSize();
       }, 60);
     }
-    // お座席ページの案内ボックス: ページを開くたびに表示（ゲスト詳細を開くと隠れ、閉じると再表示）
-    $("#seating-hint-box").hidden = page !== "seating";
   }
 
   function navigate(page) {
@@ -288,7 +286,6 @@
 
     $("#guest-modal").hidden = false;
     document.body.classList.add("modal-open");
-    $("#seating-hint-box").hidden = true;
   }
 
   // ---------- chart table block (共通描画: 属性検索の結果／全体座席図) ----------
@@ -548,8 +545,6 @@
       if (el && !el.hidden) el.hidden = true;
     });
     document.body.classList.remove("modal-open");
-    // ゲスト詳細を閉じてお座席ページに戻ったら、案内ボックスを再表示する
-    if (parseHash() === "seating") $("#seating-hint-box").hidden = false;
   }
 
   // ---------- global event delegation ----------
