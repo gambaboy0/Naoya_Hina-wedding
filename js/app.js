@@ -280,7 +280,6 @@
       '<h3 class="modal-name">' + guest.name + "</h3>" +
       (guest.kana ? '<p class="modal-kana">' + guest.kana + "</p>" : "") +
       '<p class="modal-relation">' + relationText + "</p>" +
-      '<p class="modal-table">お席：' + tableId + " テーブル</p>" +
       (guest.note
         ? '<div class="modal-note"><p class="modal-note-label">ご紹介</p><p class="modal-note-text">' + guest.note + "</p></div>"
         : "");

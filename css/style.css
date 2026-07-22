@@ -420,6 +420,20 @@ body {
   margin-top: 1.6rem;
 }
 
+/* 座席図ページ上部の案内（目立たせたい注意書き） */
+.seating-hint {
+  text-align: center;
+  color: var(--orange);
+  font-family: var(--font-serif);
+  font-weight: 700;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  background: var(--yellow-pale);
+  border-radius: 12px;
+  padding: 0.8rem 1rem;
+  margin: 0 0 2rem;
+}
+
 /* ---------- TOP (tall photo + greeting overlay + nav) ---------- */
 .section-top-compact {
   padding: 0;
