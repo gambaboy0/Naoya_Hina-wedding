@@ -493,8 +493,9 @@
       );
     }).join("");
 
-    const buildRankColHtml = (role, name, answers) =>
+    const buildRankColHtml = (role, name, answers, subtitle) =>
       '<div class="qa-rank-col qa-answer-' + role + '">' +
+      (subtitle ? '<p class="qa-q-label">' + subtitle + "</p>" : "") +
       '<p class="qa-rank-name"><span class="qa-answer-name">' + name + "</span></p>" +
       answers
         .map(
@@ -509,16 +510,19 @@
 
     $("#qa-rankings").innerHTML =
       '<h3 class="carousel-title">Ranking</h3>' +
-      QA_RANKINGS.map(
-        (r) =>
+      QA_RANKINGS.map((r) => {
+        // title: 新郎新婦共通のお題。groomTitle/brideTitleがある場合は個別のお題として列ごとに表示。
+        const hasSplitTitle = r.groomTitle || r.brideTitle;
+        return (
           '<div class="qa-card qa-rank-card">' +
-          '<p class="qa-question">' + r.title + "</p>" +
+          (hasSplitTitle ? "" : '<p class="qa-question">' + r.title + "</p>") +
           '<div class="qa-rank-cols">' +
-          buildRankColHtml("groom", COUPLE.groomName, r.groom) +
-          buildRankColHtml("bride", COUPLE.brideName, r.bride) +
+          buildRankColHtml("groom", COUPLE.groomName, r.groom, r.groomTitle) +
+          buildRankColHtml("bride", COUPLE.brideName, r.bride, r.brideTitle) +
           "</div>" +
           "</div>"
-      ).join("");
+        );
+      }).join("");
   }
 
   function closeAnyModal() {

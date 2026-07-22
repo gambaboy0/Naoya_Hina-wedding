@@ -84,10 +84,7 @@ const GROOM_HISTORY = {
   timeline: [
     { stage: "誕生時", photo: "", text: "○年○月○日、○○県にて元気な産声をあげました。" },
     { stage: "幼少期", photo: "", text: "好奇心旺盛で、いつも笑顔の絶えない子どもでした。" },
-    { stage: "小学生", photo: "", text: "外で駆け回るのが大好きで、放課後は友達と毎日遊んでいました。" },
-    { stage: "中学生", photo: "", text: "部活動に打ち込み、仲間と過ごす時間が何より楽しい時期でした。" },
-    { stage: "高校生", photo: "", text: "勉強と部活の両立に励みながら、将来の夢を思い描いていました。" },
-    { stage: "大学生", photo: "", text: "新しい出会いに恵まれ、様々なことに挑戦した4年間でした。" },
+    { stage: "学生時代", photo: "", text: "外で駆け回るのが大好きな子ども時代を経て、部活動や新しい出会いに恵まれながら、学生生活を思いきり楽しみました。" },
     { stage: "社会人", photo: "", text: "社会人として日々奮闘しながら、充実した毎日を送っています。" },
   ],
 };
@@ -97,10 +94,7 @@ const BRIDE_HISTORY = {
   timeline: [
     { stage: "誕生時", photo: "", text: "○年○月○日、○○県にて誕生しました。" },
     { stage: "幼少期", photo: "", text: "人見知りせず、誰とでもすぐ仲良くなる子どもでした。" },
-    { stage: "小学生", photo: "", text: "習い事に励みながら、家族と過ごす時間を大切にしていました。" },
-    { stage: "中学生", photo: "", text: "友人たちと笑い合いながら過ごした、かけがえのない時間でした。" },
-    { stage: "高校生", photo: "", text: "多くの経験を通して、少しずつ自分の将来を考え始めました。" },
-    { stage: "大学生", photo: "", text: "新しい環境で視野を広げ、多くの友人と出会いました。" },
+    { stage: "学生時代", photo: "", text: "習い事や友人との時間を大切にしながら、多くの出会いと経験を通して自分の将来を見つめる学生時代を過ごしました。" },
     { stage: "社会人", photo: "", text: "仕事にやりがいを感じながら、日々前向きに過ごしています。" },
   ],
 };
@@ -124,7 +118,6 @@ const TABLES = [
     guests: [
       { name: "福永 桃子", yomi: "ふくなが ももこ", kana: "", side: "groom", category: "friend", relation: "友人", note: "" },
       { name: "鈴木 脩斗", yomi: "すずき しゅうと", kana: "", side: "groom", category: "friend", relation: "友人", note: "" },
-      { name: "北出 智也", yomi: "きたで ともや", kana: "", side: "groom", category: "friend", relation: "友人", note: "" },
       { name: "根岸 昂也", yomi: "ねぎし こうや", kana: "", side: "groom", category: "friend", relation: "友人", note: "" },
       { name: "大島 一輝", yomi: "おおしま かずき", kana: "", side: "groom", category: "friend", relation: "友人", note: "" },
       { name: "布施 綾太", yomi: "ふせ りょうた", kana: "", side: "groom", category: "friend", relation: "友人", note: "" },
@@ -135,8 +128,8 @@ const TABLES = [
   {
     id: "1-2",
     guests: [
-      { name: "渡辺 修平", yomi: "わたなべ しゅうへい", kana: "", side: "groom", category: "friend", relation: "友人", note: "" },
-      { name: "大脇 盛夫", yomi: "おおわき もりお", kana: "", side: "groom", category: "friend", relation: "友人", note: "" },
+      { name: "渡辺 周平", yomi: "わたなべ しゅうへい", kana: "", side: "groom", category: "friend", relation: "友人", note: "" },
+      { name: "大脇 盛生", yomi: "おおわき もりお", kana: "", side: "groom", category: "friend", relation: "友人", note: "" },
       { name: "宮島 公志", yomi: "みやじま こうじ", kana: "", side: "groom", category: "friend", relation: "友人", note: "" },
       { name: "山腰 航", yomi: "やまこし わたる", kana: "", side: "groom", category: "friend", relation: "友人", note: "" },
       { name: "澤野 拓哉", yomi: "さわの たくや", kana: "", side: "groom", category: "friend", relation: "友人", note: "" },
@@ -146,14 +139,14 @@ const TABLES = [
   {
     id: "1-3",
     guests: [
-      { name: "舟見 卓馬", yomi: "ふなみ たくま", kana: "", side: "bride", category: "friend", relation: "同僚", note: "" },
-      { name: "田口 愛", yomi: "たぐち あい", kana: "", side: "bride", category: "friend", relation: "同僚", note: "" },
-      { name: "島崎 平", yomi: "しまざき たいら", kana: "", side: "bride", category: "friend", relation: "同僚", note: "" },
-      { name: "高橋 夕歌", yomi: "たかはし ゆうか", kana: "", side: "bride", category: "friend", relation: "同僚", note: "" },
-      { name: "窪田 小雪", yomi: "くぼた こゆき", kana: "", side: "bride", category: "friend", relation: "同僚", note: "" },
-      { name: "荒井 優里亜", yomi: "あらい ゆりあ", kana: "", side: "bride", category: "friend", relation: "同僚", note: "" },
-      { name: "幅崎 千晶", yomi: "はばさき ちあき", kana: "", side: "bride", category: "friend", relation: "同僚", note: "" },
-      { name: "山田 恵梨香", yomi: "やまだ えりか", kana: "", side: "bride", category: "friend", relation: "同僚", note: "" },
+      { name: "舟見 卓馬", yomi: "ふなみ たくま", kana: "", side: "bride", category: "friend", relation: "同僚", note: "周りの方一人ひとりを大切にする姿勢や考え方を尊敬しています。このプロフィールブックを作ってくれました！" },
+      { name: "田口 愛", yomi: "たぐち あい", kana: "", side: "bride", category: "friend", relation: "同僚", note: "仕事だけでなく、メイクやスキンケア、素敵なお店など私の知らない世界をたくさん教えてくれる憧れの先輩。" },
+      { name: "島崎 平", yomi: "しまざき たいら", kana: "", side: "bride", category: "friend", relation: "同僚", note: "細やかな気遣いとさりげないフォローで、部署が変わってもずっと気にかけてくださる心強い先輩。" },
+      { name: "高橋 夕歌", yomi: "たかはし ゆうか", kana: "", side: "bride", category: "friend", relation: "同僚", note: "どんなことも楽しめる前向きな考え方が素敵な先輩。周りを自然と笑顔にしてくれる、私が目指したい理想の奥さんです。" },
+      { name: "窪田 小雪", yomi: "くぼた こゆき", kana: "", side: "bride", category: "friend", relation: "同僚", note: "ふんわりにこにこ笑顔に癒やされる可愛い後輩。穏やかな雰囲気の中に芯があり、周りに流されない強さも魅力です。" },
+      { name: "荒井 優里亜", yomi: "あらい ゆりあ", kana: "", side: "bride", category: "friend", relation: "同僚", note: "優しくて、思いやりとAudi愛にあふれた先輩。個性的な感性が魅力的で、いつもたくさん支えてもらっています。" },
+      { name: "幅崎 千晶", yomi: "はばさき ちあき", kana: "", side: "bride", category: "friend", relation: "同僚", note: "誰に対しても忖度せず自分の考えを伝えられる方で、会うたびに綺麗になっていくかっこいい先輩。" },
+      { name: "山田 恵梨香", yomi: "やまだ えりか", kana: "", side: "bride", category: "friend", relation: "同僚", note: "周りをよく見ていて、小さな変化にも気付けるしっかり者。どんな話も笑顔で聞いてくれるので、何でも話したくなります。" },
     ],
   },
   {
@@ -161,34 +154,33 @@ const TABLES = [
     guests: [
       { name: "松田 堯之", yomi: "まつだ たかゆき", kana: "", side: "groom", category: "friend", relation: "友人", note: "" },
       { name: "植村 俊亮", yomi: "うえむら しゅんすけ", kana: "", side: "groom", category: "friend", relation: "同僚", note: "" },
-      { name: "長島 貴之", yomi: "ながしま たかゆき", kana: "", side: "groom", category: "friend", relation: "友人", note: "" },
       { name: "近田 理夫", yomi: "ちかだ みちお", kana: "", side: "groom", category: "friend", relation: "同僚", note: "" },
-      { name: "西村 光夫", yomi: "にしむら みつお", kana: "", side: "groom", category: "friend", relation: "同僚", note: "" },
+      { name: "西村 光生", yomi: "にしむら みつお", kana: "", side: "groom", category: "friend", relation: "同僚", note: "" },
       { name: "石田尾 樹", yomi: "いしだお いつき", kana: "", side: "groom", category: "friend", relation: "同僚", note: "" },
     ],
   },
   {
     id: "2-2",
     guests: [
-      { name: "黒川 恵里", yomi: "くろかわ えり", kana: "", side: "bride", category: "friend", relation: "友人", note: "" },
-      { name: "金尾 有花", yomi: "かなお ゆか", kana: "", side: "bride", category: "friend", relation: "友人", note: "" },
-      { name: "津田 奈菜子", yomi: "つだ ななこ", kana: "", side: "bride", category: "friend", relation: "友人", note: "" },
-      { name: "橋本 明日佳", yomi: "はしもと あすか", kana: "", side: "bride", category: "friend", relation: "友人", note: "" },
-      { name: "佐藤 百華", yomi: "さとう ももか", kana: "", side: "bride", category: "friend", relation: "友人", note: "" },
-      { name: "片桐 行人", yomi: "かたぎり ゆきと", kana: "", side: "bride", category: "friend", relation: "友人", note: "" },
-      { name: "明柴 聰史", yomi: "あけしば さとし", kana: "", side: "bride", category: "friend", relation: "恩師", note: "" },
-      { name: "伊井 信之助", yomi: "いい しんのすけ", kana: "", side: "bride", category: "friend", relation: "友人", note: "" },
+      { name: "黒川 恵里", yomi: "くろかわ えり", kana: "", side: "bride", category: "friend", relation: "友人", note: "高校生の頃から達観していて、どんな相談事にも的確なアドバイスをくれる。学生時代からの私をよく知る同級生。" },
+      { name: "金尾 有花", yomi: "かなお ゆか", kana: "", side: "bride", category: "friend", relation: "友人", note: "仕事も趣味も全力で楽しんでいる姿が素敵。その明るさにいつも元気をもらえるエネルギッシュな同級生。" },
+      { name: "津田 奈菜子", yomi: "つだ ななこ", kana: "", side: "bride", category: "friend", relation: "友人", note: "見た目も心も美しく、清楚で凛としていて、謙虚さと芯の強さを兼ね備えたまさに大和撫子のような同級生。" },
+      { name: "橋本 明日佳", yomi: "はしもと あすか", kana: "", side: "bride", category: "friend", relation: "友人", note: "ピュアで真面目な努力家。小動物のようなふわふわ可愛い姿と、建築士というギャップがとても魅力的な同級生。" },
+      { name: "佐藤 百華", yomi: "さとう ももか", kana: "", side: "bride", category: "friend", relation: "友人", note: "真面目で誠実、一度決めたことは最後までやり抜く頑張り屋さん。いつも可愛くてたくさん癒しをくれる自慢の友人。" },
+      { name: "片桐 行人", yomi: "かたぎり ゆきと", kana: "", side: "bride", category: "friend", relation: "友人", note: "まるで文豪のような独特な世界観で誰よりも深く物事を考える人。ギターの名手でもある、中高の同級生。" },
+      { name: "明柴 聰史", yomi: "あけしば さとし", kana: "", side: "bride", category: "friend", relation: "恩師", note: "短大の恩師で、これまで出会った中で誰よりもタフな方。一緒に子ども家庭支援の活動をしています。" },
+      { name: "伊井 信之助", yomi: "いい しんのすけ", kana: "", side: "bride", category: "friend", relation: "友人", note: "高校時代夢中でカホンを叩いていた姿は今でも忘れられない。一緒にいると自然体でいられる同級生。" },
     ],
   },
   {
     id: "3-1",
     guests: [
       { name: "竹澤 朋", yomi: "たけざわ とも", kana: "", side: "groom", category: "family", relation: "義兄", note: "" },
-      { name: "細川 和恵", yomi: "ほそかわ かずえ", kana: "", side: "groom", category: "family", relation: "伯母", note: "" },
-      { name: "竹澤 侑希", yomi: "たけざわ ゆうき", kana: "", side: "groom", category: "family", relation: "姪", note: "" },
-      { name: "細川 良清", yomi: "ほそかわ よしきよ", kana: "", side: "groom", category: "family", relation: "伯父", note: "" },
-      { name: "竹澤 眞美子", yomi: "たけざわ まみこ", kana: "", side: "groom", category: "family", relation: "姉", note: "" },
       { name: "細川 満弘", yomi: "ほそかわ みつひろ", kana: "", side: "groom", category: "family", relation: "伯父", note: "" },
+      { name: "竹澤 侑希", yomi: "たけざわ ゆうき", kana: "", side: "groom", category: "family", relation: "姪", note: "" },
+      { name: "細川 頼男", yomi: "ほそかわ よりお", kana: "", side: "groom", category: "family", relation: "伯父", note: "" },
+      { name: "竹澤 眞美子", yomi: "たけざわ まみこ", kana: "", side: "groom", category: "family", relation: "姉", note: "" },
+      { name: "細川 操", yomi: "ほそかわ みさお", kana: "", side: "groom", category: "family", relation: "伯母", note: "" },
       { name: "細川 眞紀子", yomi: "ほそかわ まきこ", kana: "", side: "groom", category: "family", relation: "母", note: "" },
       { name: "細川 優", yomi: "ほそかわ まさる", kana: "", side: "groom", category: "family", relation: "父", note: "" },
     ],
@@ -196,12 +188,12 @@ const TABLES = [
   {
     id: "3-2",
     guests: [
+      { name: "細川 博史", yomi: "", kana: "", side: "groom", category: "family", relation: "従兄", note: "" },
+      { name: "細川 良清", yomi: "ほそかわ よしきよ", kana: "", side: "groom", category: "family", relation: "伯父", note: "" },
       { name: "細川 裕美", yomi: "ほそかわ ひろみ", kana: "", side: "groom", category: "family", relation: "伯母", note: "" },
-      { name: "細川 幸芳", yomi: "ほそかわ ゆきよし", kana: "", side: "groom", category: "family", relation: "伯父", note: "" },
+      { name: "細川 幸秀", yomi: "ほそかわ ゆきひで", kana: "", side: "groom", category: "family", relation: "伯父", note: "" },
       { name: "細川 紀子", yomi: "ほそかわ のりこ", kana: "", side: "groom", category: "family", relation: "伯母", note: "" },
       { name: "細川 公也", yomi: "ほそかわ きみや", kana: "", side: "groom", category: "family", relation: "伯父", note: "" },
-      { name: "細川 操", yomi: "ほそかわ みさお", kana: "", side: "groom", category: "family", relation: "伯母", note: "" },
-      { name: "細川 頼男", yomi: "ほそかわ よりお", kana: "", side: "groom", category: "family", relation: "伯父", note: "" },
       { name: "東 真知子", yomi: "あずま まちこ", kana: "", side: "groom", category: "family", relation: "叔母", note: "" },
       { name: "東 泰希", yomi: "あずま たいき", kana: "", side: "groom", category: "family", relation: "叔父", note: "" },
     ],
@@ -210,11 +202,10 @@ const TABLES = [
     id: "3-3",
     guests: [
       { name: "川島 隆之", yomi: "かわしま たかゆき", kana: "", side: "bride", category: "family", relation: "親族", note: "" },
-      { name: "川島 敏子", yomi: "かわしま としこ", kana: "", side: "bride", category: "family", relation: "親族", note: "" },
       { name: "川島 敬子", yomi: "かわしま けいこ", kana: "", side: "bride", category: "family", relation: "叔母", note: "" },
       { name: "川島 悠呂", yomi: "かわしま ゆうろ", kana: "", side: "bride", category: "family", relation: "弟", note: "" },
       { name: "川島 茂", yomi: "かわしま しげる", kana: "", side: "bride", category: "family", relation: "叔父", note: "" },
-      { name: "銘形 寿賀子", yomi: "めいがた すがこ", kana: "", side: "bride", category: "family", relation: "大叔母", note: "" },
+      { name: "銘形 壽雅子", yomi: "めいがた すがこ", kana: "", side: "bride", category: "family", relation: "大叔母", note: "" },
       { name: "川島 満", yomi: "かわしま みつる", kana: "", side: "bride", category: "family", relation: "父", note: "" },
       { name: "川島 江里奈", yomi: "かわしま えりな", kana: "", side: "bride", category: "family", relation: "母", note: "" },
     ],
@@ -239,22 +230,27 @@ const MENU_FOOD = [
 // groom / bride にお二人からの回答テキストを貼り付けてください。
 // 空欄のあいだは「お楽しみに」のプレースホルダーが表示されます。
 const QA_ITEMS = [
-  { q: "好きなアーティストは？", groom: "", bride: "スキマスイッチ、秦基博、BUMP OF CHICKEN" },
-  { q: "好きな芸能人は？", groom: "", bride: "舘ひろし、西野七瀬" },
-  { q: "相手の第一印象は？", groom: "", bride: "笑顔が素敵なかわいい人だな" },
-  { q: "相手の今の印象は？", groom: "", bride: "おおらかで包容力があり寛大な人！" },
+  { q: "好きなアーティストは？", groom: "アジカン、サカナクション、きのこ帝国", bride: "スキマスイッチ、秦基博、BUMP OF CHICKEN" },
+  { q: "好きな芸能人は？", groom: "山田裕貴、森奈々", bride: "舘ひろし、西野七瀬" },
+  { q: "相手の第一印象は？", groom: "可愛い！スタイルいい！", bride: "笑顔が素敵なかわいい人だな" },
+  { q: "相手の今の印象は？", groom: "誠実に人や物事に向き合う素敵な人！", bride: "おおらかで包容力があり寛大な人！" },
   { q: "お互いをなんて呼んでいる？", groom: "日那ちゃん", bride: "直弥さん" },
   { q: "地球最後の日に何をする？", groom: "", bride: "" },
-  { q: "最後の晩餐は何がいい？", groom: "", bride: "うなぎ！" },
-  { q: "結婚してから見つけた相手のいいところは？", groom: "", bride: "家事炊事パーフェクト🥺✨" },
+  { q: "最後の晩餐は何がいい？", groom: "お寿司", bride: "うなぎ！" },
+  { q: "結婚してから見つけた相手のいいところは？", groom: "気づいたら掃除をしてくれている！", bride: "家事炊事パーフェクト🥺✨" },
   { q: "来世で相手を見つける方法は？", groom: "", bride: "" },
-  { q: "一番の思い出の場所は？", groom: "", bride: "宮古島の誕生日&前撮り旅行" },
+  { q: "一番の思い出の場所は？", groom: "デルタウイング", bride: "宮古島の誕生日&前撮り旅行" },
 ];
 
 // ランキング企画（お二人それぞれのTOP3。回答が届いたら差し替えてください）
 const QA_RANKINGS = [
-  { title: "ゲストの中で無人島に一緒に行くなら", groom: ["", "", ""], bride: ["父ちゃん", "明柴先生", "夕歌さん"] },
-  { title: "おすすめマニアックポテチ", groom: ["", "", ""], bride: ["The燻煙（湖池屋オンライン）", "マウイチップス ガーリックシュリンプ味（フラ印）", "じゃがボルダ 鰹と昆布のうまみだし味（Calbee×東京ばな奈）"] },
+  { title: "ゲストの中で無人島に一緒に行くなら", groom: ["盛生", "父", "りょー"], bride: ["父ちゃん", "明柴先生", "夕歌さん"] },
+  {
+    groomTitle: "おすすめ温泉ランキング",
+    groom: ["龍神温泉 元湯", "大澤温泉 野天風呂 山の家", "別府温泉 鶴の湯"],
+    brideTitle: "おすすめマニアックポテチ",
+    bride: ["The燻煙（湖池屋オンライン）", "マウイチップス ガーリックシュリンプ味（フラ印）", "じゃがボルダ 鰹と昆布のうまみだし味（Calbee×東京ばな奈）"],
+  },
 ];
 
 // ---------- ナビゲーションボタン（トップページ・各ページ下部・ハンバーガーメニュー共通） ----------
