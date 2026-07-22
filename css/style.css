@@ -747,6 +747,12 @@ body {
   min-width: 4.6em;
 }
 
+/* 空席（欠員）用のダミー枠。左右の並びを画像の座席表と揃えるためのスペーサー */
+.chart-seat-blank {
+  min-width: 4.6em;
+  min-height: 2.2em;
+}
+
 /* 左列はテーブル円側（右）に、右列はテーブル円側（左）にそろえる */
 .chart-col:first-child .chart-seat {
   align-items: flex-end;
@@ -1189,6 +1195,13 @@ body {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 0.8rem;
+  border-top: 1px dashed var(--line);
+  padding-top: 0.8rem;
+}
+
+/* 新郎新婦で別々のお題のランキング用（1人分を縦積みで表示） */
+.qa-rank-cols-single {
+  display: block;
   border-top: 1px dashed var(--line);
   padding-top: 0.8rem;
 }

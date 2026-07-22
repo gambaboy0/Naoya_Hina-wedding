@@ -294,6 +294,9 @@
   // 偶数index→左列・奇数index→右列に分けると画像と同じ並びになる。
   function buildChartSeatHtml(table, gi) {
     const g = table.guests[gi];
+    if (g.blank) {
+      return '<div class="chart-seat-blank" aria-hidden="true"></div>';
+    }
     return (
       '<button type="button" class="chart-seat" data-table="' + table.id + '" data-gi="' + gi + '">' +
       '<span class="chart-seat-rel">' + sideLabel(g.side) + g.relation + "</span>" +
@@ -493,9 +496,8 @@
       );
     }).join("");
 
-    const buildRankColHtml = (role, name, answers, subtitle) =>
+    const buildRankColHtml = (role, name, answers) =>
       '<div class="qa-rank-col qa-answer-' + role + '">' +
-      (subtitle ? '<p class="qa-q-label">' + subtitle + "</p>" : "") +
       '<p class="qa-rank-name"><span class="qa-answer-name">' + name + "</span></p>" +
       answers
         .map(
@@ -511,14 +513,27 @@
     $("#qa-rankings").innerHTML =
       '<h3 class="carousel-title">Ranking</h3>' +
       QA_RANKINGS.map((r) => {
-        // title: 新郎新婦共通のお題。groomTitle/brideTitleがある場合は個別のお題として列ごとに表示。
-        const hasSplitTitle = r.groomTitle || r.brideTitle;
+        // title: 新郎新婦共通のお題（左右2列で表示）。
+        // groomTitle/brideTitleがある場合は新郎新婦で別のお題なので、
+        // 新郎のカード→新婦のカードの順に縦積みで別々に表示する。
+        if (r.groomTitle || r.brideTitle) {
+          return (
+            '<div class="qa-card qa-rank-card">' +
+            '<p class="qa-question">' + r.groomTitle + "</p>" +
+            '<div class="qa-rank-cols qa-rank-cols-single">' + buildRankColHtml("groom", COUPLE.groomName, r.groom) + "</div>" +
+            "</div>" +
+            '<div class="qa-card qa-rank-card">' +
+            '<p class="qa-question">' + r.brideTitle + "</p>" +
+            '<div class="qa-rank-cols qa-rank-cols-single">' + buildRankColHtml("bride", COUPLE.brideName, r.bride) + "</div>" +
+            "</div>"
+          );
+        }
         return (
           '<div class="qa-card qa-rank-card">' +
-          (hasSplitTitle ? "" : '<p class="qa-question">' + r.title + "</p>") +
+          '<p class="qa-question">' + r.title + "</p>" +
           '<div class="qa-rank-cols">' +
-          buildRankColHtml("groom", COUPLE.groomName, r.groom, r.groomTitle) +
-          buildRankColHtml("bride", COUPLE.brideName, r.bride, r.brideTitle) +
+          buildRankColHtml("groom", COUPLE.groomName, r.groom) +
+          buildRankColHtml("bride", COUPLE.brideName, r.bride) +
           "</div>" +
           "</div>"
         );

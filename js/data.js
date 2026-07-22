@@ -116,24 +116,25 @@ const TABLES = [
   {
     id: "1-1",
     guests: [
-      { name: "福永 桃子", yomi: "ふくなが ももこ", kana: "", side: "groom", category: "friend", relation: "友人", note: "" },
-      { name: "鈴木 脩斗", yomi: "すずき しゅうと", kana: "", side: "groom", category: "friend", relation: "友人", note: "" },
-      { name: "根岸 昂也", yomi: "ねぎし こうや", kana: "", side: "groom", category: "friend", relation: "友人", note: "" },
-      { name: "大島 一輝", yomi: "おおしま かずき", kana: "", side: "groom", category: "friend", relation: "友人", note: "" },
-      { name: "布施 綾太", yomi: "ふせ りょうた", kana: "", side: "groom", category: "friend", relation: "友人", note: "" },
-      { name: "加藤 遼", yomi: "かとう りょう", kana: "", side: "groom", category: "friend", relation: "友人", note: "" },
-      { name: "澤井 恭助", yomi: "さわい きょうすけ", kana: "", side: "groom", category: "friend", relation: "友人", note: "" },
+      { name: "福永 桃子", yomi: "ふくなが ももこ", kana: "", side: "groom", category: "friend", relation: "友人", note: "今をときめく女社長。頭の回転が速く周りへの気配りも抜群。日本の宇宙開発を支える存在。" },
+      { name: "鈴木 脩斗", yomi: "すずき しゅうと", kana: "", side: "groom", category: "friend", relation: "友人", note: "痩せるとウッディ、太るとバズ。優しさと仲間想いで愛される、まさに一人トイ・ストーリー。" },
+      { name: "澤井 恭助", yomi: "さわい きょうすけ", kana: "", side: "groom", category: "friend", relation: "友人", note: "何事も丁寧で頭脳明晰な頼れるしっかり者。みんなから信頼される存在。唯一の欠点はイビキだけ？" },
+      { name: "根岸 昂也", yomi: "ねぎし こうや", kana: "", side: "groom", category: "friend", relation: "友人", note: "外見も中身もイケメン。歌もうまい心優しい好青年。女子に生まれていたら絶対付き合いたい。" },
+      { name: "大島 一輝", yomi: "おおしま かずき", kana: "", side: "groom", category: "friend", relation: "友人", note: "興味のあることへの熱量は人一倍。邦楽好きで落ち着いた声が魅力。朝にめっぽう弱く爆音目覚ましでも熟睡。" },
+      { name: "布施 綾太", yomi: "ふせ りょうた", kana: "", side: "groom", category: "friend", relation: "友人", note: "理論派ギャンブラーで努力家。やると決めたことは最後までやり抜く。宇宙探査で月の裏側を知る男。" },
+      { blank: true },
+      { name: "加藤 遼", yomi: "かとう りょう", kana: "", side: "groom", category: "friend", relation: "友人", note: "自由気ままでマイペース。洋楽好きでレコードがよく似合う。詰めの甘さが愛嬌。一緒にいて楽しい存在。" },
     ],
   },
   {
     id: "1-2",
     guests: [
-      { name: "渡辺 周平", yomi: "わたなべ しゅうへい", kana: "", side: "groom", category: "friend", relation: "友人", note: "" },
-      { name: "大脇 盛生", yomi: "おおわき もりお", kana: "", side: "groom", category: "friend", relation: "友人", note: "" },
-      { name: "宮島 公志", yomi: "みやじま こうじ", kana: "", side: "groom", category: "friend", relation: "友人", note: "" },
-      { name: "山腰 航", yomi: "やまこし わたる", kana: "", side: "groom", category: "friend", relation: "友人", note: "" },
-      { name: "澤野 拓哉", yomi: "さわの たくや", kana: "", side: "groom", category: "friend", relation: "友人", note: "" },
-      { name: "猿渡 蒼周", yomi: "さわたり そうしゅう", kana: "", side: "groom", category: "friend", relation: "友人", note: "" },
+      { name: "渡辺 周平", yomi: "わたなべ しゅうへい", kana: "", side: "groom", category: "friend", relation: "友人", note: "自由人なのに、不思議と社会に馴染む要領の良さがある。ジャンベと太陽と原付が似合う男。" },
+      { name: "大脇 盛生", yomi: "おおわき もりお", kana: "", side: "groom", category: "friend", relation: "友人", note: "一緒にいると笑わない日がない。予想外の天然さと抜群の行動力で、いつも場を盛り上げてくれる。" },
+      { name: "宮島 公志", yomi: "みやじま こうじ", kana: "", side: "groom", category: "friend", relation: "友人", note: "鋭い眼光なのに心はとても穏やかで、優しい平和主義者。一時期会うたびに髪色が変わっていた。" },
+      { name: "山腰 航", yomi: "やまこし わたる", kana: "", side: "groom", category: "friend", relation: "友人", note: "一番長い付き合いの親友。物知りで植物にも詳しい。なぜか昔から僕のことを腹黒いと言い続ける" },
+      { name: "澤野 拓哉", yomi: "さわの たくや", kana: "", side: "groom", category: "friend", relation: "友人", note: "段取り上手で準備は完璧。テキパキ動く姿が頼もしく、縁の下の力持ち。ローストビーフの腕前はプロ級。" },
+      { name: "猿渡 蒼周", yomi: "さわたり そうしゅう", kana: "", side: "groom", category: "friend", relation: "友人", note: "広い視野で周りをよく見渡し、幅広い知識が売り。タワマン暮らしで、文字通り視野も広い男です。" },
     ],
   },
   {
@@ -152,11 +153,12 @@ const TABLES = [
   {
     id: "2-1",
     guests: [
-      { name: "松田 堯之", yomi: "まつだ たかゆき", kana: "", side: "groom", category: "friend", relation: "友人", note: "" },
-      { name: "植村 俊亮", yomi: "うえむら しゅんすけ", kana: "", side: "groom", category: "friend", relation: "同僚", note: "" },
-      { name: "近田 理夫", yomi: "ちかだ みちお", kana: "", side: "groom", category: "friend", relation: "同僚", note: "" },
-      { name: "西村 光生", yomi: "にしむら みつお", kana: "", side: "groom", category: "friend", relation: "同僚", note: "" },
-      { name: "石田尾 樹", yomi: "いしだお いつき", kana: "", side: "groom", category: "friend", relation: "同僚", note: "" },
+      { name: "松田 堯之", yomi: "まつだ たかゆき", kana: "", side: "groom", category: "friend", relation: "友人", note: "誰からも愛される人気者。人の意見を尊重しながらも、時折り見せるワガママさが愛されポイント。" },
+      { name: "植村 俊亮", yomi: "うえむら しゅんすけ", kana: "", side: "groom", category: "friend", relation: "同僚", note: "穏やかで居心地のいい存在。実は男気もある。奥さんのために長年のタバコをやめた愛妻家。" },
+      { name: "近田 理夫", yomi: "ちかだ みちお", kana: "", side: "groom", category: "friend", relation: "同僚", note: "人見知りとは無縁の慶應ボーイ。誰とでも仲良くなれるクラスに1人は欲しい存在。欲望にはとても素直。" },
+      { name: "西村 光生", yomi: "にしむら みつお", kana: "", side: "groom", category: "friend", relation: "同僚", note: "優しさにあふれた唯一無二の雰囲気。純粋な人柄で、自然と周りを笑顔にしてくれる存在。" },
+      { blank: true },
+      { name: "石田尾 樹", yomi: "いしだお いつき", kana: "", side: "groom", category: "friend", relation: "同僚", note: "独自の視点とブレない価値観が魅力。映画とゲームを愛する。本人の「普通」は、だいたい普通じゃない。" },
     ],
   },
   {
@@ -201,6 +203,7 @@ const TABLES = [
   {
     id: "3-3",
     guests: [
+      { blank: true },
       { name: "川島 隆之", yomi: "かわしま たかゆき", kana: "", side: "bride", category: "family", relation: "親族", note: "" },
       { name: "川島 敬子", yomi: "かわしま けいこ", kana: "", side: "bride", category: "family", relation: "叔母", note: "" },
       { name: "川島 悠呂", yomi: "かわしま ゆうろ", kana: "", side: "bride", category: "family", relation: "弟", note: "" },
@@ -226,20 +229,21 @@ const MENU_FOOD = [
 ];
 
 // ---------- Q&A ページ（お互いへの質問と回答） ----------
-// 2026/7/9ミーティングで挙がった質問候補10個です（質問の追加・削除OK）。
+// 新郎新婦が決めた質問11個です（2026-07-22最終版に差し替え済み。質問の追加・削除OK）。
 // groom / bride にお二人からの回答テキストを貼り付けてください。
 // 空欄のあいだは「お楽しみに」のプレースホルダーが表示されます。
 const QA_ITEMS = [
   { q: "好きなアーティストは？", groom: "アジカン、サカナクション、きのこ帝国", bride: "スキマスイッチ、秦基博、BUMP OF CHICKEN" },
   { q: "好きな芸能人は？", groom: "山田裕貴、森奈々", bride: "舘ひろし、西野七瀬" },
-  { q: "相手の第一印象は？", groom: "可愛い！スタイルいい！", bride: "笑顔が素敵なかわいい人だな" },
-  { q: "相手の今の印象は？", groom: "誠実に人や物事に向き合う素敵な人！", bride: "おおらかで包容力があり寛大な人！" },
-  { q: "お互いをなんて呼んでいる？", groom: "日那ちゃん", bride: "直弥さん" },
-  { q: "地球最後の日に何をする？", groom: "", bride: "" },
-  { q: "最後の晩餐は何がいい？", groom: "お寿司", bride: "うなぎ！" },
-  { q: "結婚してから見つけた相手のいいところは？", groom: "気づいたら掃除をしてくれている！", bride: "家事炊事パーフェクト🥺✨" },
-  { q: "来世で相手を見つける方法は？", groom: "", bride: "" },
+  { q: "第一印象は？", groom: "可愛い！スタイルいい！", bride: "笑顔が素敵なかわいい人だな" },
+  { q: "現在の印象は？", groom: "誠実に人や物事に向き合う素敵な人！", bride: "おおらかで包容力があり寛大な人！" },
+  { q: "お互いのことをなんて呼んでる？", groom: "日那ちゃん", bride: "直弥さん" },
+  { q: "どんな夫婦になりたい？", groom: "年をとっても仲良しな夫婦", bride: "ほっこりほのぼのとした夫婦🌱" },
+  { q: "最後の晩餐は何を食べたい？", groom: "お寿司", bride: "うなぎ！" },
+  { q: "お互いの尊敬できるところは？", groom: "理路整然と考えて気持ちを言葉にするのが上手なところ", bride: "どんなトラブルも笑顔で対応できる度量の大きさ。頼りになる🫶🏻" },
   { q: "一番の思い出の場所は？", groom: "デルタウイング", bride: "宮古島の誕生日&前撮り旅行" },
+  { q: "結婚してから見つけた良いところは？", groom: "気づいたら掃除をしてくれている！", bride: "家事炊事パーフェクト🥺✨" },
+  { q: "プロポーズの思い出は？", groom: "ドタバタ！待ちきれず大の字で寝そべる日那ちゃんの姿", bride: "10ヶ月記念日のクリスマスデート！スキマスイッチのライブ当日で幸せ倍増😳🫶🏻🎄" },
 ];
 
 // ランキング企画（お二人それぞれのTOP3。回答が届いたら差し替えてください）
@@ -248,7 +252,7 @@ const QA_RANKINGS = [
   {
     groomTitle: "おすすめ温泉ランキング",
     groom: ["龍神温泉 元湯", "大澤温泉 野天風呂 山の家", "別府温泉 鶴の湯"],
-    brideTitle: "おすすめマニアックポテチ",
+    brideTitle: "おすすめマニアックポテチランキング",
     bride: ["The燻煙（湖池屋オンライン）", "マウイチップス ガーリックシュリンプ味（フラ印）", "じゃがボルダ 鰹と昆布のうまみだし味（Calbee×東京ばな奈）"],
   },
 ];
