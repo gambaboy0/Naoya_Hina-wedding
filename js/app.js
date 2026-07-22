@@ -124,9 +124,8 @@
         if (toyamaMap) toyamaMap.invalidateSize();
       }, 60);
     }
-    if (page === "seating") {
-      maybeShowSeatingHint();
-    }
+    // お座席ページの案内ボックス: ページを開くたびに表示（ゲスト詳細を開くと隠れ、閉じると再表示）
+    $("#seating-hint-box").hidden = page !== "seating";
   }
 
   function navigate(page) {
@@ -289,6 +288,7 @@
 
     $("#guest-modal").hidden = false;
     document.body.classList.add("modal-open");
+    $("#seating-hint-box").hidden = true;
   }
 
   // ---------- chart table block (共通描画: 属性検索の結果／全体座席図) ----------
@@ -543,20 +543,13 @@
   }
 
   function closeAnyModal() {
-    ["#guest-modal", "#photo-modal", "#seating-hint-modal"].forEach((sel) => {
+    ["#guest-modal", "#photo-modal"].forEach((sel) => {
       const el = $(sel);
       if (el && !el.hidden) el.hidden = true;
     });
     document.body.classList.remove("modal-open");
-  }
-
-  // ---------- seating hint popup（お座席ページを開いた時、最初の1回だけ表示） ----------
-  const SEATING_HINT_SEEN_KEY = "seatingHintSeen";
-  function maybeShowSeatingHint() {
-    if (sessionStorage.getItem(SEATING_HINT_SEEN_KEY)) return;
-    sessionStorage.setItem(SEATING_HINT_SEEN_KEY, "1");
-    $("#seating-hint-modal").hidden = false;
-    document.body.classList.add("modal-open");
+    // ゲスト詳細を閉じてお座席ページに戻ったら、案内ボックスを再表示する
+    if (parseHash() === "seating") $("#seating-hint-box").hidden = false;
   }
 
   // ---------- global event delegation ----------

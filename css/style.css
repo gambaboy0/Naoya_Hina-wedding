@@ -420,15 +420,33 @@ body {
   margin-top: 1.6rem;
 }
 
-/* 座席図ページを開いた時のポップアップ内の案内文 */
+/* 座席図ページの案内ライトボックス（座席図には被らないよう上部に浮かせて表示） */
+.seating-hint-box {
+  position: fixed;
+  top: 4.6rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 45;
+  width: min(86%, 400px);
+  background: var(--white);
+  border: 2px solid var(--dark);
+  border-radius: 14px;
+  box-shadow: 3px 3px 0 rgba(51, 64, 74, 0.25);
+  padding: 0.85rem 1rem;
+}
+
+.seating-hint-box:not([hidden]) {
+  display: block;
+}
+
 .seating-hint-text {
   text-align: center;
   color: var(--orange);
   font-family: var(--font-serif);
   font-weight: 700;
-  font-size: 1.05rem;
-  line-height: 1.7;
-  margin: 0.6rem 0 0.4rem;
+  font-size: 0.88rem;
+  line-height: 1.6;
+  margin: 0;
 }
 
 /* ---------- TOP (tall photo + greeting overlay + nav) ---------- */

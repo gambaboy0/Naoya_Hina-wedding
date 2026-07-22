@@ -192,13 +192,9 @@
   </div>
 </div>
 
-<!-- ============ SEATING HINT POPUP (お座席ページを開いた時の案内) ============ -->
-<div id="seating-hint-modal" class="modal" hidden>
-  <div class="modal-backdrop" data-close></div>
-  <div class="modal-sheet" role="dialog" aria-modal="true">
-    <button type="button" class="modal-close" data-close aria-label="閉じる">×</button>
-    <p class="seating-hint-text">👆<br>お名前をタップすると<br>ご紹介が表示されます</p>
-  </div>
+<!-- ============ SEATING HINT LIGHTBOX (お座席ページを開くたびに上部に表示。ゲスト詳細を開くと隠れ、閉じると再表示) ============ -->
+<div id="seating-hint-box" class="seating-hint-box" hidden>
+  <p class="seating-hint-text">👆 お名前をタップするとご紹介が表示されます</p>
 </div>
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
