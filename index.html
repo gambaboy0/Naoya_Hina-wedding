@@ -120,8 +120,6 @@
     <p class="section-eyebrow">05</p>
     <h2 class="section-title" data-title-for="seating"></h2>
 
-    <p class="seating-hint">👆 お名前をタップするとご紹介が表示されます</p>
-
     <!-- 全体座席図（印刷席次表風レイアウト） -->
     <h3 class="carousel-title">全体座席図</h3>
     <div class="full-chart-scroll">
@@ -191,6 +189,15 @@
   <div class="modal-sheet" role="dialog" aria-modal="true">
     <button type="button" class="modal-close" data-close aria-label="閉じる">×</button>
     <div id="photo-modal-body"></div>
+  </div>
+</div>
+
+<!-- ============ SEATING HINT POPUP (お座席ページを開いた時の案内) ============ -->
+<div id="seating-hint-modal" class="modal" hidden>
+  <div class="modal-backdrop" data-close></div>
+  <div class="modal-sheet" role="dialog" aria-modal="true">
+    <button type="button" class="modal-close" data-close aria-label="閉じる">×</button>
+    <p class="seating-hint-text">👆<br>お名前をタップすると<br>ご紹介が表示されます</p>
   </div>
 </div>
 

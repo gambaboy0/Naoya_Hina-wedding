@@ -124,6 +124,9 @@
         if (toyamaMap) toyamaMap.invalidateSize();
       }, 60);
     }
+    if (page === "seating") {
+      maybeShowSeatingHint();
+    }
   }
 
   function navigate(page) {
@@ -540,11 +543,20 @@
   }
 
   function closeAnyModal() {
-    ["#guest-modal", "#photo-modal"].forEach((sel) => {
+    ["#guest-modal", "#photo-modal", "#seating-hint-modal"].forEach((sel) => {
       const el = $(sel);
       if (el && !el.hidden) el.hidden = true;
     });
     document.body.classList.remove("modal-open");
+  }
+
+  // ---------- seating hint popup（お座席ページを開いた時、最初の1回だけ表示） ----------
+  const SEATING_HINT_SEEN_KEY = "seatingHintSeen";
+  function maybeShowSeatingHint() {
+    if (sessionStorage.getItem(SEATING_HINT_SEEN_KEY)) return;
+    sessionStorage.setItem(SEATING_HINT_SEEN_KEY, "1");
+    $("#seating-hint-modal").hidden = false;
+    document.body.classList.add("modal-open");
   }
 
   // ---------- global event delegation ----------
