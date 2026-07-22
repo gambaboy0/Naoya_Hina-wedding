@@ -1,18 +1,20 @@
 :root {
-  /* Favori「Journal E_Pop」参考のポップ配色（雑誌風） */
-  --orange: #d8500e;      /* メインアクセント（WEDDINGロゴのオレンジレッド） */
-  --yellow: #f5c831;      /* マスタードイエロー */
-  --yellow-pale: #fbeab0;
-  --lime: #c9d67c;        /* ピスタチオグリーン */
-  --lime-pale: #ecf0d3;
-  --navy: #2b3a5c;        /* 差し色ネイビー（リンク・新郎カラー） */
-  --rose: #e5735f;        /* コーラル（新婦カラー） */
-  --border-soft: #eee2c4;
-  --white: #fffdf6;       /* 温かみのある紙色 */
-  --dark: #322a1e;
-  --gray: #9a9077;
-  --line: #e7ddc3;
-  --cream: #faf5e6;
+  /* クライアント指定「地中海リゾート風・水色×オレンジ」配色（2026-07-22 LINEで受領） */
+  --orange: #df860e;      /* メインアクセント（クライアント指定 Mediterranean Sunsetパレット） */
+  --yellow: #ead65b;       /* サンフラワーイエロー（マーカー・ボタン） */
+  --yellow-pale: #faf3d2;
+  --lime: #7c8f5e;         /* オリーブグリーン（差し色） */
+  --lime-pale: #fbe7cc;    /* 淡いピーチ（ボタン塗り分け用） */
+  --navy: #3a5c82;        /* 差し色ネイビーブルー（リンク・新郎カラー） */
+  --rose: #cd672f;        /* テラコッタ（新婦カラー） */
+  --border-soft: #dceaf5;
+  --white: #fbfcfe;       /* 涼しげな白 */
+  --dark: #33404a;        /* ブルーグレーの濃色インク */
+  --gray: #7c8a96;
+  --line: #e1e8ee;
+  --cream: #eef4f9;
+  --sky: #aac3e1;         /* クライアント指定メインの水色 */
+  --sky-pale: #dceefc;
 
   --font-pop: "Shrikhand", "Zen Maru Gothic", serif;               /* 英字ポップ見出し */
   --font-hand: "Yusei Magic", "Zen Maru Gothic", sans-serif;        /* 手書きマーカー風 */
@@ -50,7 +52,7 @@ body {
   position: fixed;
   inset: 0;
   z-index: 100;
-  background: #1c1815;
+  background: #14202b;
   overflow: hidden;
 }
 
@@ -94,7 +96,7 @@ body {
 .splash-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, rgba(28, 24, 21, 0.55), rgba(28, 24, 21, 0.2) 42%, rgba(28, 24, 21, 0.62));
+  background: linear-gradient(180deg, rgba(20, 32, 43, 0.55), rgba(20, 32, 43, 0.2) 42%, rgba(20, 32, 43, 0.62));
 }
 
 .splash-content {
@@ -289,7 +291,7 @@ body {
 .index-panel-backdrop {
   position: absolute;
   inset: 0;
-  background: rgba(51, 48, 44, 0.4);
+  background: rgba(51, 64, 74, 0.4);
 }
 
 .index-panel-sheet {
@@ -442,7 +444,7 @@ body {
   left: 0;
   right: 0;
   padding: 1.3rem 1.5rem 3rem;
-  background: linear-gradient(180deg, rgba(28, 24, 21, 0.62), rgba(28, 24, 21, 0.35) 62%, rgba(28, 24, 21, 0));
+  background: linear-gradient(180deg, rgba(20, 32, 43, 0.62), rgba(20, 32, 43, 0.35) 62%, rgba(20, 32, 43, 0));
   color: var(--white);
   text-align: left;
 }
@@ -478,7 +480,7 @@ body {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 0.55rem;
-  background: var(--yellow);
+  background: var(--sky);
   padding: 1.4rem 1rem 1.6rem;
 }
 
@@ -496,7 +498,7 @@ body {
   background: var(--white);
   border: 2px solid var(--dark);
   border-radius: 12px;
-  box-shadow: 3px 3px 0 rgba(50, 42, 30, 0.25);
+  box-shadow: 3px 3px 0 rgba(51, 64, 74, 0.25);
   text-decoration: none;
   font: inherit;
   padding: 0.3rem;
@@ -506,7 +508,7 @@ body {
 
 .nav-square:active {
   transform: translate(2px, 2px);
-  box-shadow: 1px 1px 0 rgba(50, 42, 30, 0.25);
+  box-shadow: 1px 1px 0 rgba(51, 64, 74, 0.25);
 }
 
 /* 3色ローテの塗り分け（薄黄 → 白 → 薄黄緑） */
@@ -690,7 +692,7 @@ body {
   font-size: 0.85rem;
   padding: 0.7rem 2.2rem;
   border-radius: 999px;
-  box-shadow: 3px 3px 0 rgba(50, 42, 30, 0.25);
+  box-shadow: 3px 3px 0 rgba(51, 64, 74, 0.25);
   cursor: pointer;
   text-decoration: none;
   transition: background 0.15s ease, color 0.15s ease;
@@ -867,7 +869,7 @@ body {
   background: var(--white);
   border: 2px solid var(--dark);
   border-radius: 12px;
-  box-shadow: 3px 3px 0 rgba(50, 42, 30, 0.25);
+  box-shadow: 3px 3px 0 rgba(51, 64, 74, 0.25);
   font: inherit;
   padding: 0.4rem;
   cursor: pointer;
@@ -945,7 +947,7 @@ body {
   background: var(--cream);
   border: 2px solid var(--dark);
   border-radius: 12px;
-  box-shadow: 3px 3px 0 rgba(50, 42, 30, 0.25);
+  box-shadow: 3px 3px 0 rgba(51, 64, 74, 0.25);
   padding: 1.1rem 1.2rem 1.2rem;
   margin-bottom: 0.4rem;
 }
@@ -1062,13 +1064,13 @@ body {
   letter-spacing: 0.08em;
   padding: 0.6rem 1.8rem;
   border-radius: 999px;
-  box-shadow: 3px 3px 0 rgba(50, 42, 30, 0.25);
+  box-shadow: 3px 3px 0 rgba(51, 64, 74, 0.25);
   cursor: pointer;
 }
 
 .to-top-btn:active {
   transform: translate(2px, 2px);
-  box-shadow: 1px 1px 0 rgba(50, 42, 30, 0.25);
+  box-shadow: 1px 1px 0 rgba(51, 64, 74, 0.25);
 }
 
 /* ---------- menu (food) ---------- */
@@ -1127,7 +1129,7 @@ body {
   border: 2px solid var(--dark);
   border-radius: 12px;
   padding: 1.1rem 1.2rem 1.2rem;
-  box-shadow: 3px 3px 0 rgba(50, 42, 30, 0.25);
+  box-shadow: 3px 3px 0 rgba(51, 64, 74, 0.25);
 }
 
 .qa-q-label {
@@ -1247,7 +1249,7 @@ body.modal-open {
 .modal-backdrop {
   position: absolute;
   inset: 0;
-  background: rgba(51, 48, 44, 0.45);
+  background: rgba(51, 64, 74, 0.45);
 }
 
 .modal-sheet {
@@ -1260,7 +1262,7 @@ body.modal-open {
   border-radius: 20px 20px 0 0;
   padding: 1.8rem 1.5rem 2.4rem;
   animation: slideUp 0.22s ease;
-  box-shadow: 0 -6px 24px rgba(51, 48, 44, 0.2);
+  box-shadow: 0 -6px 24px rgba(51, 64, 74, 0.2);
 }
 
 @keyframes slideUp {
