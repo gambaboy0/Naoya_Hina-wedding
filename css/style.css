@@ -596,9 +596,9 @@ body {
   background: rgba(255, 255, 255, 0.34);
   color: var(--white);
   font-family: var(--font-pop);
-  font-size: 1.15rem;
+  font-size: 0.805rem; /* 1.15rem × 0.7 */
   letter-spacing: 0.08em;
-  padding: 0.5rem 2.4rem;
+  padding: 0.35rem 1.68rem; /* 0.5rem/2.4rem × 0.7 */
   border-radius: 999px;
   box-shadow: 0 2px 12px rgba(20, 32, 43, 0.28);
   backdrop-filter: blur(3px);
