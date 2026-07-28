@@ -18,7 +18,13 @@ const COUPLE = {
 // 空欄の場合は photos の写真をクロスフェードで順番に表示します（後で差し替えOK）。
 const OPENING = {
   video: "",
-  photos: ["assets/img/top.jpg", "assets/img/kimono.jpg", "assets/img/menu-bg.jpg"],
+  photos: [
+    "assets/img/opening1.jpg",
+    "assets/img/opening2.jpg",
+    "assets/img/opening3.jpg",
+    "assets/img/opening4.jpg",
+    "assets/img/opening5.jpg",
+  ],
   slideDurationMs: 3000,
   // 手書き風の一言（空欄""にすると非表示になります）
   tagline: "今日という素晴らしい日に カンパイ!!",
@@ -35,10 +41,10 @@ const SEATING_ROWS = [
 // 配列の1要素が1段落、段落内の各文字列は改行して表示されます。
 const TOP_MESSAGE = {
   paragraphs: [
-    ["本日はご多用中にもかかわらず", "おあつまりいただきありがとうございます"],
-    ["皆様にあたたかく見守られ", "今日の日を迎えられることを嬉しく思います"],
-    ["日頃お世話になっております皆さまと", "楽しく過ごさせて頂ければ幸いに存じます"],
-    ["心ばかりの披露パーティーですが", "皆さまと良い時間が過ごせることを楽しみにしております"],
+    ["本日はご多用中にもかかわらずおあつまりいただきありがとうございます"],
+    ["皆様にあたたかく見守られ今日の日を迎えられることを嬉しく思います"],
+    ["日頃お世話になっております皆さまと楽しく過ごさせて頂ければ幸いに存じます"],
+    ["心ばかりの披露パーティーですが皆さまと良い時間が過ごせることを楽しみにしております"],
   ],
 };
 
@@ -263,9 +269,9 @@ const QA_RANKINGS = [
 const NAV_ITEMS = [
   { id: "groom", en: "Groom", jp: "新郎プロフィール" },
   { id: "bride", en: "Bride", jp: "新婦プロフィール" },
-  { id: "our-history", en: "Our History", jp: "二人の道" },
-  { id: "seating", en: "Seating", jp: "お座席" },
   { id: "menu", en: "Menu", jp: "お食事" },
+  { id: "seating", en: "Seating", jp: "お座席" },
+  { id: "our-history", en: "Our History", jp: "ふたりの思い出" },
   { id: "qa", en: "Q&amp;A", jp: "ふたりに質問" },
   { id: "map", en: "Map", jp: "おすすめマップ" },
   { id: "top", en: "Top", jp: "トップページ", replay: true },

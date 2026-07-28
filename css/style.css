@@ -38,6 +38,7 @@ body {
   color: var(--dark);
   font-family: var(--font-sans);
   -webkit-text-size-adjust: 100%;
+  overflow-x: hidden;
 }
 
 #app {
@@ -134,6 +135,15 @@ body {
   animation: splashFadeIn 1.2s ease 0.5s forwards;
 }
 
+/* Welcome to は1.5倍、our Wedding Reception は1.3倍 */
+.splash-welcome .sw-1 {
+  font-size: 1.5em;
+}
+
+.splash-welcome .sw-2 {
+  font-size: 1.3em;
+}
+
 .splash-names {
   position: absolute;
   top: 42%;
@@ -141,7 +151,7 @@ body {
   right: 1.2rem;
   margin: 0;
   font-family: var(--font-pop);
-  font-size: 2.1rem;
+  font-size: 2.73rem; /* 2.1rem × 1.3 */
   line-height: 1.3;
   text-shadow: 0 2px 16px rgba(0, 0, 0, 0.7);
   opacity: 0;
@@ -156,7 +166,7 @@ body {
   right: 1.2rem;
   margin: 0;
   font-family: var(--font-hand);
-  font-size: 1.05rem;
+  font-size: 1.365rem; /* 1.05rem × 1.3 */
   line-height: 1.6;
   text-shadow: 0 2px 10px rgba(0, 0, 0, 0.65);
   opacity: 0;
@@ -455,50 +465,145 @@ body {
   position: relative;
 }
 
-.top-photo-full {
+/* フルスクリーンの写真ヒーロー（写真を画面いっぱいに） */
+.top-hero-full {
+  height: 100vh;
+  height: 100dvh;
+  overflow: hidden;
+}
+
+.top-hero-full .top-photo-full {
   width: 100%;
-  height: 68vh;
+  height: 100vh;
+  height: 100dvh;
   object-fit: cover;
-  object-position: center bottom;
+  object-position: center 32%;
   display: block;
 }
 
-/* あいさつ文は写真の上部に重ねる（顔は中央〜下部にある想定の構図） */
-.top-hero-overlay {
+/* ヒーロー上のコンテンツを縦に並べる（ヘッダー→挨拶文→Menuボタンの順・重ならない） */
+.top-hero-content {
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  padding: 1.3rem 1.5rem 3rem;
-  background: linear-gradient(180deg, rgba(20, 32, 43, 0.62), rgba(20, 32, 43, 0.35) 62%, rgba(20, 32, 43, 0));
-  color: var(--white);
-  text-align: left;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0.6rem 1rem 0;
+  gap: 1.1rem;
+  overflow: hidden;
 }
 
+/* 上部ヘッダー：Greeting ＋ サブタイトル */
+.top-hero-header {
+  width: 100%;
+  text-align: center;
+}
+
+/* Greeting：画面横幅いっぱいの大きな見出し（黄色ポップ体） */
 .top-greeting-label {
+  margin: 0;
   font-family: var(--font-pop);
   color: var(--yellow);
-  font-size: 1.1rem;
-  margin: 0 0 0.5rem;
-  text-align: left;
-  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.5);
+  font-size: 15vw;
+  letter-spacing: -0.01em;
+  line-height: 1.05;
+  text-align: center;
+  text-shadow: 0 2px 10px rgba(20, 32, 43, 0.55);
+}
+
+@media (min-width: 480px) {
+  .top-greeting-label {
+    font-size: 72px; /* #app 最大幅480px想定で横いっぱい */
+  }
+}
+
+/* サブタイトル（既存の日本語見出しフォントに合わせる） */
+.top-greeting-sub2 {
+  margin: 0.1rem 0 0;
+  font-family: var(--font-serif);
+  font-weight: 700;
+  color: var(--white);
+  font-size: 1rem;
+  letter-spacing: 0.12em;
+  text-shadow: 0 1px 8px rgba(20, 32, 43, 0.7);
+}
+
+/* 挨拶文とナビが重なる切替パネル（サブタイトルの直下に配置） */
+.top-panel {
+  width: 100%;
+  max-width: 27rem;
+  display: grid;
+}
+
+.top-panel > .top-greeting-box,
+.top-panel > .top-nav-overlay {
+  grid-area: 1 / 1; /* 同じ位置に重ねてトグル */
+  min-width: 0; /* グリッドアイテムが内容で広がりはみ出すのを防ぐ */
+  transition: opacity 0.4s ease;
+}
+
+/* 挨拶文：横長の半透明ボックス（最初から表示・フェードインなし） */
+.top-greeting-box {
+  background: rgba(255, 255, 255, 0.74);
+  border-radius: 12px;
+  padding: 1rem 1.2rem;
+  box-shadow: 0 4px 16px rgba(20, 32, 43, 0.18);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+}
+
+/* トグルで隠す側（フェードアウト） */
+.top-panel > .is-faded {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.top-panel > [hidden] {
+  display: none;
 }
 
 .top-message {
   text-align: left;
-  color: var(--white);
+  color: var(--dark);
   font-family: var(--font-serif);
   font-size: 0.78rem;
-  line-height: 1.65;
-  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.55);
+  line-height: 1.85;
+  overflow-wrap: anywhere;
 }
 
 .top-message p {
-  margin: 0 0 0.6rem;
+  margin: 0 0 0.55rem;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 .top-message p:last-child {
   margin-bottom: 0;
+}
+
+/* ナビ（8つの正方形・背景なしで挨拶文と同じ位置に） */
+.top-nav-overlay {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.5rem;
+}
+
+/* Menu表示ボタン（半透明ボックス風・挨拶文の下に配置） */
+.top-menu-toggle {
+  appearance: none;
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  background: rgba(255, 255, 255, 0.34);
+  color: var(--white);
+  font-family: var(--font-pop);
+  font-size: 1.15rem;
+  letter-spacing: 0.08em;
+  padding: 0.5rem 2.4rem;
+  border-radius: 999px;
+  box-shadow: 0 2px 12px rgba(20, 32, 43, 0.28);
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+  cursor: pointer;
 }
 
 /* ---------- top nav grid (square buttons / 2段×4列) ---------- */
@@ -577,10 +682,14 @@ body {
   color: var(--gray);
 }
 
-/* ---------- profile family (GROOM / BRIDE / OUR HISTORY) ---------- */
+/* ---------- 各ページ共通の水色背景（新婦希望: プロフィールと同じ雰囲気に） ---------- */
 #groom,
 #bride,
-#our-history {
+#our-history,
+#seating,
+#menu,
+#qa,
+#map {
   background: var(--cream);
 }
 
@@ -651,7 +760,7 @@ body {
 }
 
 .timeline-entry {
-  text-align: center;
+  text-align: left;
 }
 
 .timeline-photo,

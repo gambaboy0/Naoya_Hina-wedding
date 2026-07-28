@@ -124,6 +124,8 @@
         if (toyamaMap) toyamaMap.invalidateSize();
       }, 60);
     }
+    // トップに来たらメニュートグルは初期状態（挨拶文表示）に戻す
+    if (page === "top") resetTopMenu();
   }
 
   function navigate(page) {
@@ -547,8 +549,47 @@
     document.body.classList.remove("modal-open");
   }
 
+  // ---------- top page: Menu toggle (挨拶文 ⇔ ナビ を同じ位置でフェード切替) ----------
+  function setTopMenuOpen(open) {
+    const box = $("#top-greeting-box");
+    const nav = $("#nav-grid-top");
+    const btn = $("#top-menu-toggle");
+    if (!box || !nav || !btn) return;
+    if (open) {
+      // 挨拶文をフェードアウト → 完了後ナビをフェードイン
+      box.classList.add("is-faded");
+      nav.hidden = false;
+      nav.classList.add("is-faded");
+      window.requestAnimationFrame(() => nav.classList.remove("is-faded"));
+      btn.textContent = "とじる";
+    } else {
+      nav.classList.add("is-faded");
+      box.classList.remove("is-faded");
+      window.setTimeout(() => { nav.hidden = true; }, 400);
+      btn.textContent = "Menu";
+    }
+    btn.dataset.open = open ? "1" : "";
+  }
+
+  function resetTopMenu() {
+    const box = $("#top-greeting-box");
+    const nav = $("#nav-grid-top");
+    const btn = $("#top-menu-toggle");
+    if (!box || !nav || !btn) return;
+    box.classList.remove("is-faded");
+    nav.classList.add("is-faded");
+    nav.hidden = true;
+    btn.textContent = "Menu";
+    btn.dataset.open = "";
+  }
+
   // ---------- global event delegation ----------
   document.addEventListener("click", (e) => {
+    const menuToggle = e.target.closest("#top-menu-toggle");
+    if (menuToggle) {
+      setTopMenuOpen(menuToggle.dataset.open !== "1");
+      return;
+    }
     const skipBtn = e.target.closest("#splash-skip");
     if (skipBtn) {
       revealMain();

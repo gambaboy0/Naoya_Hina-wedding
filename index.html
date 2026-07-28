@@ -17,7 +17,7 @@
   <div id="splash-media" class="splash-media"></div>
   <div class="splash-overlay"></div>
   <div class="splash-content">
-    <p class="splash-welcome">Welcome to<br>our Wedding Reception</p>
+    <p class="splash-welcome"><span class="sw-1">Welcome to</span><br><span class="sw-2">our Wedding Reception</span></p>
     <p class="splash-names" id="splash-names"></p>
     <p class="splash-tagline" id="splash-tagline"></p>
     <p class="splash-date" id="splash-date"></p>
@@ -51,14 +51,22 @@
 
   <!-- TOP -->
   <section class="page section-top-compact" id="top" data-page="top">
-    <div class="top-hero">
-      <img class="top-photo-full" src="assets/img/kimono.jpg" alt="">
-      <div class="top-hero-overlay">
-        <p class="top-greeting-label">Greeting</p>
-        <div id="top-message" class="top-message"></div>
+    <div class="top-hero top-hero-full">
+      <img class="top-photo-full" src="assets/img/top-couple.jpg" alt="">
+      <div class="top-hero-content">
+        <div class="top-hero-header">
+          <p class="top-greeting-label">Greeting</p>
+          <p class="top-greeting-sub2">〜親愛なるゲストの皆様へ〜</p>
+        </div>
+        <div class="top-panel">
+          <div class="top-greeting-box" id="top-greeting-box">
+            <div id="top-message" class="top-message"></div>
+          </div>
+          <nav class="top-nav-overlay" id="nav-grid-top" hidden></nav>
+        </div>
+        <button type="button" class="top-menu-toggle" id="top-menu-toggle">Menu</button>
       </div>
     </div>
-    <nav class="top-nav-grid" id="nav-grid-top"></nav>
   </section>
 
   <!-- GROOM (profile + personal history) -->
