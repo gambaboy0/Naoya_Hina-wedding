@@ -12,6 +12,7 @@
   let splashTimerId = null;
   let splashStopped = false;
   let slideTimerId = null;
+  let openMenuOnTop = false; // 戻るボタンでトップに来たときメニュー選択画面を開くためのフラグ
 
   // スライド1巡分（3枚×3.5秒）＋余韻で自動遷移する
   const SPLASH_DURATION_MS = OPENING.video
@@ -124,8 +125,15 @@
         if (toyamaMap) toyamaMap.invalidateSize();
       }, 60);
     }
-    // トップに来たらメニュートグルは初期状態（挨拶文表示）に戻す
-    if (page === "top") resetTopMenu();
+    // トップに来たとき: 戻るボタン経由ならメニュー選択画面を、それ以外は挨拶文を表示
+    if (page === "top") {
+      if (openMenuOnTop) {
+        openMenuOnTop = false;
+        setTopMenuOpen(true);
+      } else {
+        resetTopMenu();
+      }
+    }
   }
 
   function navigate(page) {
@@ -145,7 +153,7 @@
     const names = COUPLE.groomNameRomaji + " & " + COUPLE.brideNameRomaji;
     document.getElementById("page-title").textContent = names + " ご結婚式 | デジタル席次表";
     $("#splash-names").textContent = names;
-    $("#splash-date").textContent = COUPLE.dateLabel;
+    $("#splash-date").textContent = COUPLE.dateDisplay || COUPLE.dateLabel;
     const tagline = $("#splash-tagline");
     if (tagline) {
       tagline.textContent = OPENING.tagline || "";
@@ -174,6 +182,9 @@
       if (item.replay) {
         return '<button type="button" class="nav-square" data-replay-splash>' + inner + "</button>";
       }
+      if (item.topGreeting) {
+        return '<button type="button" class="nav-square" data-top-greeting>' + inner + "</button>";
+      }
       return '<a href="#' + item.id + '" class="nav-square">' + inner + "</a>";
     }).join("");
   }
@@ -188,14 +199,16 @@
 
   // ---------- index (hamburger panel; トップページのボタンと同一表記) ----------
   function renderIndexLists() {
-    const items = NAV_ITEMS.map((item, i) => {
-      const num = String(i + 1).padStart(2, "0");
+    const items = NAV_ITEMS.map((item) => {
+      const b = item.btn || { en1: item.en, jp: item.jp };
       const inner =
-        '<span class="idx-num">' + num + "</span>" +
-        '<span class="idx-en">' + item.en + "</span>" +
-        '<span class="idx-jp">' + item.jp + "</span>";
+        '<span class="idx-en">' + b.en1 + "</span>" +
+        '<span class="idx-jp">' + b.jp + "</span>";
       if (item.disabled) {
         return '<li class="is-disabled"><span class="idx-row">' + inner + "</span></li>";
+      }
+      if (item.topGreeting) {
+        return '<li><button type="button" class="idx-row" data-index-link data-top-greeting>' + inner + "</button></li>";
       }
       return '<li><a href="#' + item.id + '" data-index-link>' + inner + "</a></li>";
     }).join("");
@@ -550,37 +563,39 @@
     document.body.classList.remove("modal-open");
   }
 
-  // ---------- top page: Menu toggle (挨拶文 ⇔ ナビ を同じ位置でフェード切替) ----------
+  // ---------- top page: Menu toggle (挨拶文 ⇔ メニュー選択画面 を切替) ----------
+  // メニュー選択画面ではヘッダー(Greeting・サブタイトル)とMENUボタンを隠す
   function setTopMenuOpen(open) {
+    const hero = $(".top-hero-full");
     const box = $("#top-greeting-box");
     const nav = $("#nav-grid-top");
     const btn = $("#top-menu-toggle");
-    if (!box || !nav || !btn) return;
+    if (!hero || !box || !nav || !btn) return;
     if (open) {
-      // 挨拶文をフェードアウト → 完了後ナビをフェードイン
+      hero.classList.add("is-menu-open");
       box.classList.add("is-faded");
       nav.hidden = false;
       nav.classList.add("is-faded");
       window.requestAnimationFrame(() => nav.classList.remove("is-faded"));
-      btn.textContent = "CLOSE";
     } else {
+      hero.classList.remove("is-menu-open");
       nav.classList.add("is-faded");
       box.classList.remove("is-faded");
       window.setTimeout(() => { nav.hidden = true; }, 400);
-      btn.textContent = "MENU";
     }
     btn.dataset.open = open ? "1" : "";
   }
 
   function resetTopMenu() {
+    const hero = $(".top-hero-full");
     const box = $("#top-greeting-box");
     const nav = $("#nav-grid-top");
     const btn = $("#top-menu-toggle");
-    if (!box || !nav || !btn) return;
+    if (!hero || !box || !nav || !btn) return;
+    hero.classList.remove("is-menu-open");
     box.classList.remove("is-faded");
     nav.classList.add("is-faded");
     nav.hidden = true;
-    btn.textContent = "MENU";
     btn.dataset.open = "";
   }
 
@@ -589,6 +604,25 @@
     const menuToggle = e.target.closest("#top-menu-toggle");
     if (menuToggle) {
       setTopMenuOpen(menuToggle.dataset.open !== "1");
+      return;
+    }
+    // TopPageボタン/INDEX: トップページの挨拶文画面へ
+    const topGreetingEl = e.target.closest("[data-top-greeting]");
+    if (topGreetingEl) {
+      closeIndexPanel();
+      if (parseHash() === "top") {
+        setTopMenuOpen(false);
+      } else {
+        openMenuOnTop = false;
+        navigate("top");
+      }
+      return;
+    }
+    // 各ページ左上の戻るボタン: トップページのメニュー選択画面へ
+    const backEl = e.target.closest("#back-toggle");
+    if (backEl) {
+      openMenuOnTop = true;
+      navigate("top");
       return;
     }
     const skipBtn = e.target.closest("#splash-skip");

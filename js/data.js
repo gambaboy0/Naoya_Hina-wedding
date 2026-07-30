@@ -10,7 +10,8 @@ const COUPLE = {
   brideName: "日那",
   brideNameRomaji: "Hina",
   brideFullName: "川島 日那",
-  dateLabel: "2026.8.23 SUN",
+  dateLabel: "2026.8.23 SUN",       // フッター・年表示用（先頭4文字を年に使用）
+  dateDisplay: "Sunday, 23 August 2026", // オープニング画面の日付表示用
 };
 
 // ---------- オープニングページ（スプラッシュ）の背景 ----------
@@ -27,7 +28,7 @@ const OPENING = {
   ],
   slideDurationMs: 3000,
   // 手書き風の一言（空欄""にすると非表示になります）
-  tagline: "今日という素晴らしい日に カンパイ!!",
+  tagline: "",
 };
 
 // 全体座席図の行構成（上から前列・中列・後列。各行は左から右の順）
@@ -266,16 +267,16 @@ const QA_RANKINGS = [
 // ---------- ナビゲーションボタン（トップページ・各ページ下部・ハンバーガーメニュー共通） ----------
 // replay: true のボタンはページ遷移ではなく、オープニング画面を再生する特別な動作をします。
 // disabled: true のボタンは「準備中」のグレー表示になります（ラベルが決まったら差し替え）。
-// en/jp はセクション見出し・ハンバーガーメニュー用。btn はメニュー選択ボタン用（英語2行＋日本語）。
+// en/jp はセクション見出し用。btn はメニュー選択ボタン＆ハンバーガーINDEX用（英語1行＋日本語）。
 const NAV_ITEMS = [
-  { id: "groom", en: "Groom", jp: "新郎プロフィール", btn: { en1: "Groom", en2: "Profile", jp: "新郎プロフィール" } },
-  { id: "bride", en: "Bride", jp: "新婦プロフィール", btn: { en1: "Bride", en2: "Profile", jp: "新婦プロフィール" } },
-  { id: "menu", en: "Menu", jp: "お食事", btn: { en1: "Course", en2: "Meal", jp: "お食事" } },
-  { id: "seating", en: "Seating", jp: "お座席", btn: { en1: "Seating", en2: "Chart", jp: "席次表" } },
-  { id: "our-history", en: "Our History", jp: "ふたりの思い出", btn: { en1: "Naoya&Hina", en2: "Memory", jp: "ふたりの思い出" } },
-  { id: "qa", en: "Q&amp;A", jp: "ふたりに質問", btn: { en1: "Question", en2: "Answer", jp: "ふたりに質問" } },
-  { id: "map", en: "Map", jp: "おすすめマップ", btn: { en1: "Recommend", en2: "Map", jp: "おすすめマップ" } },
-  { id: "top", en: "Top", jp: "トップページ", replay: true, btn: { en1: "Top", en2: "Page", jp: "トップページ" } },
+  { id: "groom", en: "Groom", jp: "新郎プロフィール", btn: { en1: "Groom", jp: "新郎プロフィール" } },
+  { id: "bride", en: "Bride", jp: "新婦プロフィール", btn: { en1: "Bride", jp: "新婦プロフィール" } },
+  { id: "menu", en: "Menu", jp: "お食事", btn: { en1: "Menu", jp: "お食事" } },
+  { id: "seating", en: "Seating", jp: "お座席", btn: { en1: "Seating", jp: "席次表" } },
+  { id: "our-history", en: "Our History", jp: "ふたりの思い出", btn: { en1: "Memory", jp: "ふたりの思い出" } },
+  { id: "qa", en: "Q&amp;A", jp: "ふたりに質問", btn: { en1: "Q&amp;A", jp: "ふたりに質問" } },
+  { id: "map", en: "Map", jp: "おすすめマップ", btn: { en1: "Map", jp: "おすすめマップ" } },
+  { id: "top", en: "Top", jp: "トップページ", topGreeting: true, btn: { en1: "TopPage", jp: "トップページ" } },
 ];
 
 // ---------- おすすめマップ（新郎新婦の思い出の場所） ----------
