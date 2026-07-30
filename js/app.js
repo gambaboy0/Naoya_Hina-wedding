@@ -164,9 +164,10 @@
   // ---------- nav grids (TOP / PROFILE / PERSONAL HISTORY / OUR HISTORY 共通) ----------
   function buildNavGridHtml() {
     return NAV_ITEMS.map((item) => {
+      const b = item.btn || { en1: item.en, en2: "", jp: item.jp };
       const inner =
-        '<span class="nav-square-en">' + item.en + "</span>" +
-        '<span class="nav-square-jp">' + item.jp + "</span>";
+        '<span class="nav-square-en">' + b.en1 + (b.en2 ? "<br>" + b.en2 : "") + "</span>" +
+        '<span class="nav-square-jp">' + b.jp + "</span>";
       if (item.disabled) {
         return '<div class="nav-square is-disabled">' + inner + "</div>";
       }
@@ -561,12 +562,12 @@
       nav.hidden = false;
       nav.classList.add("is-faded");
       window.requestAnimationFrame(() => nav.classList.remove("is-faded"));
-      btn.textContent = "とじる";
+      btn.textContent = "CLOSE";
     } else {
       nav.classList.add("is-faded");
       box.classList.remove("is-faded");
       window.setTimeout(() => { nav.hidden = true; }, 400);
-      btn.textContent = "Menu";
+      btn.textContent = "MENU";
     }
     btn.dataset.open = open ? "1" : "";
   }
@@ -579,7 +580,7 @@
     box.classList.remove("is-faded");
     nav.classList.add("is-faded");
     nav.hidden = true;
-    btn.textContent = "Menu";
+    btn.textContent = "MENU";
     btn.dataset.open = "";
   }
 

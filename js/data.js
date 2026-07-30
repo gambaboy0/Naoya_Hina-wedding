@@ -41,10 +41,10 @@ const SEATING_ROWS = [
 // 配列の1要素が1段落、段落内の各文字列は改行して表示されます。
 const TOP_MESSAGE = {
   paragraphs: [
-    ["本日はご多用中にもかかわらずおあつまりいただきありがとうございます"],
-    ["皆様にあたたかく見守られ今日の日を迎えられることを嬉しく思います"],
-    ["日頃お世話になっております皆さまと楽しく過ごさせて頂ければ幸いに存じます"],
-    ["心ばかりの披露パーティーですが皆さまと良い時間が過ごせることを楽しみにしております"],
+    ["本日はご多用にもかかわらず", "お集まりいただきありがとうございます"],
+    ["皆様にあたたかく見守られ", "今日の日を迎えられることを嬉しく思います"],
+    ["日頃お世話になっております皆様と", "楽しく過ごさせていただければ幸いに存じます"],
+    ["心ばかりの披露パーティーですが　皆様と素敵な時間が", "過ごせることを楽しみにしております"],
   ],
 };
 
@@ -266,15 +266,16 @@ const QA_RANKINGS = [
 // ---------- ナビゲーションボタン（トップページ・各ページ下部・ハンバーガーメニュー共通） ----------
 // replay: true のボタンはページ遷移ではなく、オープニング画面を再生する特別な動作をします。
 // disabled: true のボタンは「準備中」のグレー表示になります（ラベルが決まったら差し替え）。
+// en/jp はセクション見出し・ハンバーガーメニュー用。btn はメニュー選択ボタン用（英語2行＋日本語）。
 const NAV_ITEMS = [
-  { id: "groom", en: "Groom", jp: "新郎プロフィール" },
-  { id: "bride", en: "Bride", jp: "新婦プロフィール" },
-  { id: "menu", en: "Menu", jp: "お食事" },
-  { id: "seating", en: "Seating", jp: "お座席" },
-  { id: "our-history", en: "Our History", jp: "ふたりの思い出" },
-  { id: "qa", en: "Q&amp;A", jp: "ふたりに質問" },
-  { id: "map", en: "Map", jp: "おすすめマップ" },
-  { id: "top", en: "Top", jp: "トップページ", replay: true },
+  { id: "groom", en: "Groom", jp: "新郎プロフィール", btn: { en1: "Groom", en2: "Profile", jp: "新郎プロフィール" } },
+  { id: "bride", en: "Bride", jp: "新婦プロフィール", btn: { en1: "Bride", en2: "Profile", jp: "新婦プロフィール" } },
+  { id: "menu", en: "Menu", jp: "お食事", btn: { en1: "Course", en2: "Meal", jp: "お食事" } },
+  { id: "seating", en: "Seating", jp: "お座席", btn: { en1: "Seating", en2: "Chart", jp: "席次表" } },
+  { id: "our-history", en: "Our History", jp: "ふたりの思い出", btn: { en1: "Naoya&Hina", en2: "Memory", jp: "ふたりの思い出" } },
+  { id: "qa", en: "Q&amp;A", jp: "ふたりに質問", btn: { en1: "Question", en2: "Answer", jp: "ふたりに質問" } },
+  { id: "map", en: "Map", jp: "おすすめマップ", btn: { en1: "Recommend", en2: "Map", jp: "おすすめマップ" } },
+  { id: "top", en: "Top", jp: "トップページ", replay: true, btn: { en1: "Top", en2: "Page", jp: "トップページ" } },
 ];
 
 // ---------- おすすめマップ（新郎新婦の思い出の場所） ----------
