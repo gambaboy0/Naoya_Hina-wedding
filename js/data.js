@@ -84,25 +84,96 @@ const BRIDE_PROFILE = {
 };
 
 // ---------- PERSONAL HISTORY ページ（生い立ちの時系列） ----------
-// timelineの各itemは { stage, photo, text } の形です。
-// photo は実際の写真を用意したら差し替えてください（空欄はプレースホルダー表示）。
+// timelineの各itemは { stage, photo, text } または { stage, photos: [...], text } の形です。
+// photos に複数枚入れると、左右の矢印とドットで順に見られるスライドになります。
+// photo（1枚だけ）の書き方もそのまま使えます。空欄はプレースホルダー表示。
 const GROOM_HISTORY = {
   role: "GROOM",
   timeline: [
-    { stage: "誕生時", photo: "", text: "○年○月○日、○○県にて元気な産声をあげました。" },
-    { stage: "幼少期", photo: "", text: "好奇心旺盛で、いつも笑顔の絶えない子どもでした。" },
-    { stage: "学生時代", photo: "", text: "外で駆け回るのが大好きな子ども時代を経て、部活動や新しい出会いに恵まれながら、学生生活を思いきり楽しみました。" },
-    { stage: "社会人", photo: "", text: "社会人として日々奮闘しながら、充実した毎日を送っています。" },
+    {
+      stage: "誕生時",
+      photos: [
+        "assets/img/history/groom/birth-1.jpg",
+        "assets/img/history/groom/birth-2.jpg",
+        "assets/img/history/groom/birth-3.jpg",
+      ],
+      text: "1994年3月27日、愛知県にて3,350gで誕生。沐浴中、小さな足を見た祖母に「この子は大きくならないね」と言われたそうです。…その予想、当たりました。",
+    },
+    {
+      stage: "幼少期",
+      photos: [
+        "assets/img/history/groom/child-1.jpg",
+        "assets/img/history/groom/child-2.jpg",
+        "assets/img/history/groom/child-3.jpg",
+        "assets/img/history/groom/child-4.jpg",
+      ],
+      text: "この頃はまだ姉にも可愛がられ、いつも姉の後ろをついて回っていました。七五三では千歳飴がもらえず、泣いて拗ねるキュートな一面も。",
+    },
+    {
+      stage: "学生時代",
+      photos: [
+        "assets/img/history/groom/student-1.jpg",
+        "assets/img/history/groom/student-2.jpg",
+        "assets/img/history/groom/student-3.jpg",
+      ],
+      text: "高校では学年でただ一人のアーチェリー部員。向かいの賑やかな弓道部を羨みながら練習する日々でした。大学では航空宇宙工学を学ぶために上京。高校、大学ともに一生の友人たちと出会えました。",
+    },
+    {
+      stage: "社会人",
+      photos: [
+        "assets/img/history/groom/work-1.jpg",
+        "assets/img/history/groom/work-2.jpg",
+        "assets/img/history/groom/work-3.jpg",
+        "assets/img/history/groom/work-4.jpg",
+        "assets/img/history/groom/work-5.jpg",
+      ],
+      text: "就職を機に富山へ。熱処理設備の設計や修理対応に携わり、国内外を飛び回る中で、多くの経験と出会いに恵まれました。8月からは全く異なる部署へ異動し、新たな仕事にイチから挑戦中です。",
+    },
   ],
 };
 
 const BRIDE_HISTORY = {
   role: "BRIDE",
   timeline: [
-    { stage: "誕生時", photo: "", text: "1997年6月15日、沖縄県那覇市にて誕生しました。" },
-    { stage: "幼少期", photo: "", text: "近所のビーチで毎日のように遊んでいました。人見知りがひどかったにも関わらず、イケおじだけには抱っこされていたそうです🤣" },
-    { stage: "学生時代", photo: "", text: "小学生の頃から福祉に携わりたいという志を持っていました。高校時代、音楽室でみんなと過ごした時間が私の青春です。短大では、障害福祉で活躍できる保育士を目指して学び、恩師や大切な友人との出会いがありました。" },
-    { stage: "社会人", photo: "", text: "小学生の頃から志していた福祉の道へ！セーナー苑の仕事、NPOでの保育士としての仕事、手話通訳者を目指しての学習、友人や同僚との旅行やおでかけなど、仕事もプライベートも充実しています🌱" },
+    {
+      stage: "誕生時",
+      photos: [
+        "assets/img/history/bride/birth-1.jpg",
+        "assets/img/history/bride/birth-2.jpg",
+      ],
+      text: "1997年6月15日、沖縄県那覇市にて誕生しました。",
+    },
+    {
+      stage: "幼少期",
+      photos: [
+        "assets/img/history/bride/child-1.jpg",
+        "assets/img/history/bride/child-2.jpg",
+        "assets/img/history/bride/child-3.jpg",
+        "assets/img/history/bride/child-4.jpg",
+        "assets/img/history/bride/child-5.jpg",
+      ],
+      text: "近所のビーチで毎日のように遊んでいました。人見知りがひどかったにも関わらず、イケおじだけには抱っこされていたそうです🤣",
+    },
+    {
+      stage: "学生時代",
+      photos: [
+        "assets/img/history/bride/student-1.jpg",
+        "assets/img/history/bride/student-2.jpg",
+        "assets/img/history/bride/student-3.jpg",
+        "assets/img/history/bride/student-4.jpg",
+      ],
+      text: "小学生の頃から福祉に携わりたいという志を持っていました。高校時代、音楽室でみんなと過ごした時間が私の青春です。短大では、障害福祉で活躍できる保育士を目指して学び、恩師や大切な友人との出会いがありました。",
+    },
+    {
+      stage: "社会人",
+      photos: [
+        "assets/img/history/bride/work-1.jpg",
+        "assets/img/history/bride/work-2.jpg",
+        "assets/img/history/bride/work-3.jpg",
+        "assets/img/history/bride/work-4.jpg",
+      ],
+      text: "小学生の頃から志していた福祉の道へ！セーナー苑の仕事、NPOでの保育士としての仕事、手話通訳者を目指しての学習、友人や同僚との旅行やおでかけなど、仕事もプライベートも充実しています🌱",
+    },
   ],
 };
 
@@ -122,6 +193,7 @@ const OUR_HISTORY = [
 const TABLES = [
   {
     id: "1-1",
+    sushi: { img: "assets/img/sushi/shiroebi.png", name: "白エビ" },
     guests: [
       { name: "福永 桃子", yomi: "ふくなが ももこ", kana: "", side: "groom", category: "friend", relation: "友人", note: "今をときめく女社長。頭の回転が速く周りへの気配りも抜群。日本の宇宙開発を支える存在。" },
       { name: "鈴木 脩斗", yomi: "すずき しゅうと", kana: "", side: "groom", category: "friend", relation: "友人", note: "痩せるとウッディ、太るとバズ。優しさと仲間想いで愛される、まさに一人トイ・ストーリー。" },
@@ -135,6 +207,7 @@ const TABLES = [
   },
   {
     id: "1-2",
+    sushi: { img: "assets/img/sushi/nodoguro.png", name: "のどぐろ炙り" },
     guests: [
       { name: "渡辺 周平", yomi: "わたなべ しゅうへい", kana: "", side: "groom", category: "friend", relation: "友人", note: "自由人なのに、不思議と社会に馴染む要領の良さがある。ジャンベと太陽と原付が似合う男。" },
       { name: "大脇 盛生", yomi: "おおわき もりお", kana: "", side: "groom", category: "friend", relation: "友人", note: "一緒にいると笑わない日がない。予想外の天然さと抜群の行動力で、いつも場を盛り上げてくれる。" },
@@ -146,6 +219,7 @@ const TABLES = [
   },
   {
     id: "1-3",
+    sushi: { img: "assets/img/sushi/amaebi.png", name: "甘エビ" },
     guests: [
       { name: "舟見 卓馬", yomi: "ふなみ たくま", kana: "", side: "bride", category: "friend", relation: "同僚", note: "周りの方一人ひとりを大切にする姿勢や考え方を尊敬しています。このプロフィールブックを作ってくれました！" },
       { name: "田口 愛", yomi: "たぐち あい", kana: "", side: "bride", category: "friend", relation: "同僚", note: "仕事だけでなく、メイクやスキンケア、素敵なお店など私の知らない世界をたくさん教えてくれる憧れの先輩。" },
@@ -159,6 +233,7 @@ const TABLES = [
   },
   {
     id: "2-1",
+    sushi: { img: "assets/img/sushi/ikura.png", name: "いくら" },
     guests: [
       { name: "松田 堯之", yomi: "まつだ たかゆき", kana: "", side: "groom", category: "friend", relation: "友人", note: "誰からも愛される人気者。人の意見を尊重しながらも、時折り見せるワガママさが愛されポイント。" },
       { name: "植村 俊亮", yomi: "うえむら しゅんすけ", kana: "", side: "groom", category: "friend", relation: "同僚", note: "穏やかで居心地のいい存在。実は男気もある。奥さんのために長年のタバコをやめた愛妻家。" },
@@ -170,6 +245,7 @@ const TABLES = [
   },
   {
     id: "2-2",
+    sushi: { img: "assets/img/sushi/buri.png", name: "ブリ" },
     guests: [
       { name: "黒川 恵里", yomi: "くろかわ えり", kana: "", side: "bride", category: "friend", relation: "友人", note: "高校生の頃から達観していて、どんな相談事にも的確なアドバイスをくれる。学生時代からの私をよく知る同級生。" },
       { name: "金尾 有花", yomi: "かなお ゆか", kana: "", side: "bride", category: "friend", relation: "友人", note: "仕事も趣味も全力で楽しんでいる姿が素敵。その明るさにいつも元気をもらえるエネルギッシュな同級生。" },
@@ -183,6 +259,7 @@ const TABLES = [
   },
   {
     id: "3-1",
+    sushi: { img: "assets/img/sushi/baigai.png", name: "バイ貝" },
     guests: [
       { name: "竹澤 朋", yomi: "たけざわ とも", kana: "", side: "groom", category: "family", relation: "義兄", note: "" },
       { name: "細川 満弘", yomi: "ほそかわ みつひろ", kana: "", side: "groom", category: "family", relation: "伯父", note: "" },
@@ -196,6 +273,7 @@ const TABLES = [
   },
   {
     id: "3-2",
+    sushi: { img: "assets/img/sushi/masuzushi.png", name: "ますの寿司" },
     guests: [
       { name: "細川 博史", yomi: "", kana: "", side: "groom", category: "family", relation: "従兄", note: "" },
       { name: "細川 良清", yomi: "ほそかわ よしきよ", kana: "", side: "groom", category: "family", relation: "伯父", note: "" },
@@ -209,6 +287,7 @@ const TABLES = [
   },
   {
     id: "3-3",
+    sushi: { img: "assets/img/sushi/hotaruika.png", name: "ホタルイカ" },
     guests: [
       { blank: true },
       { name: "川島 隆之", yomi: "かわしま たかゆき", kana: "", side: "bride", category: "family", relation: "親族", note: "" },
@@ -273,7 +352,7 @@ const NAV_ITEMS = [
   { id: "bride", en: "Bride", jp: "新婦プロフィール", btn: { en1: "Bride", jp: "新婦プロフィール" } },
   { id: "menu", en: "Menu", jp: "お食事", btn: { en1: "Menu", jp: "お食事" } },
   { id: "seating", en: "Seating", jp: "お座席", btn: { en1: "Seating", jp: "席次表" } },
-  { id: "our-history", en: "Our History", jp: "ふたりの思い出", btn: { en1: "Memory", jp: "ふたりの思い出" } },
+  { id: "our-history", en: "Memory", jp: "ふたりの思い出", btn: { en1: "Memory", jp: "ふたりの思い出" } },
   { id: "qa", en: "Q&amp;A", jp: "ふたりに質問", btn: { en1: "Q&amp;A", jp: "ふたりに質問" } },
   { id: "map", en: "Map", jp: "おすすめマップ", btn: { en1: "Map", jp: "おすすめマップ" } },
   { id: "top", en: "Top", jp: "トップページ", topGreeting: true, btn: { en1: "TopPage", jp: "トップページ" } },

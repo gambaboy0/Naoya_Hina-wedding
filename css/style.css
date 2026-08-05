@@ -777,7 +777,7 @@ body {
 }
 
 .timeline-entry {
-  text-align: left;
+  text-align: center;
 }
 
 .timeline-photo,
@@ -804,6 +804,99 @@ body {
   font-size: 0.78rem;
 }
 
+/* ---------- 写真スライド（1つの時期に複数枚あるとき） ---------- */
+.photo-slider {
+  position: relative;
+  margin: 0 0 0.8rem;
+}
+
+.photo-slider .ph-track {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+  border-radius: 8px;
+}
+.photo-slider .ph-track::-webkit-scrollbar { display: none; }
+
+.photo-slider .ph-slide {
+  flex: 0 0 100%;
+  scroll-snap-align: start;
+}
+
+.photo-slider .ph-slide img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 1px solid var(--border-soft);
+  display: block;
+}
+
+/* 左右の矢印 */
+.photo-slider .ph-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 34px;
+  height: 34px;
+  border: none;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.88);
+  color: #333;
+  font-size: 1.35rem;
+  line-height: 1;
+  cursor: pointer;
+  box-shadow: 0 2px 7px rgba(0, 0, 0, 0.22);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 3px;
+  transition: opacity 0.15s;
+}
+.photo-slider .ph-prev { left: 8px; }
+.photo-slider .ph-next { right: 8px; }
+.photo-slider .ph-arrow:disabled { opacity: 0.28; cursor: default; }
+
+/* 枚数カウンタ */
+.photo-slider .ph-count {
+  position: absolute;
+  top: 8px;
+  right: 10px;
+  background: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  padding: 2px 9px;
+  border-radius: 999px;
+}
+
+/* ドット */
+.photo-slider .ph-dots {
+  display: flex;
+  justify-content: center;
+  gap: 7px;
+  margin-top: 8px;
+}
+
+.photo-slider .ph-dot {
+  width: 8px;
+  height: 8px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: var(--line, #d8d2c6);
+  cursor: pointer;
+  transition: background 0.15s, transform 0.15s;
+}
+
+.photo-slider .ph-dot.is-on {
+  background: var(--adopt-cream, #e8a020);
+  transform: scale(1.35);
+}
+
 /* 時代ラベル：上下に同じ幅の点線ライン（黄色アンダーラインは廃止） */
 .timeline-stage {
   font-family: var(--font-sans);
@@ -815,6 +908,7 @@ body {
   max-width: 80%;
   margin: 0 auto 0.6rem;
   padding: 0.3rem 0;
+  text-align: center;        /* ボックス内の文字を中央揃えに（親のtext-align:leftを上書き） */
   border-top: 1px dotted var(--adopt-cream);
   border-bottom: 1px dotted var(--adopt-cream);
 }
@@ -875,11 +969,11 @@ body {
 
 .chart-table-circle {
   flex-shrink: 0;
-  width: 2rem;
-  height: 2rem;
+  width: 2.6rem;
+  height: 2.6rem;
   border-radius: 50%;
-  background: var(--yellow);
-  border: 2px solid var(--dark);
+  background: transparent;
+  border: none;
   color: var(--dark);
   font-family: var(--font-sans);
   font-weight: 700;
@@ -1481,6 +1575,45 @@ body.modal-open {
   color: var(--orange);
   font-size: 0.85rem;
   margin: 0 0 0.9rem;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+/* ---------- 卓の目印（お寿司） ---------- */
+/* 全体座席図：卓の中央に置くアイコン */
+.chart-sushi {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+/* ゲスト紹介：お名前・続柄の横に「アイコン＋ネタ名」 */
+.modal-seat {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.15rem 0.55rem 0.15rem 0.2rem;
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+}
+
+.modal-seat-icon {
+  width: 1.5rem;
+  height: 1.5rem;
+  object-fit: contain;
+  display: block;
+}
+
+.modal-seat-name {
+  font-family: var(--font-sans);
+  font-weight: 700;
+  font-size: 0.78rem;
+  color: var(--dark);
+  white-space: nowrap;
 }
 
 .modal-table {

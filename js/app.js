@@ -239,21 +239,111 @@
   }
 
   // ---------- shared timeline renderer (PERSONAL HISTORY / OUR HISTORY) ----------
+  // 写真は photos（複数枚）または photo（1枚）のどちらでも書けます。
+  // 複数枚のときは、左右の矢印とドットで順に見られるスライドになります。
+  // 写真1枚は "パス" でも { src: "パス", pos: "bottom" } でも書けます。
+  // pos は、写真が枠に収まりきらないときにどこを残すかの指定です。
+  //   "top" = 上を残す ／ "bottom" = 下を残す ／ 未指定 = 中央
+  // 例）集合写真で全員の顔が下寄りにあるときは pos: "bottom"
+  function photoSrc(p) {
+    return typeof p === "string" ? p : p.src;
+  }
+
+  function photoStyle(p) {
+    if (typeof p === "string" || !p.pos) return "";
+    return ' style="object-position: center ' + p.pos + ';"';
+  }
+
+  function buildPhotoBlock(entry, uid) {
+    const list = entry.photos && entry.photos.length ? entry.photos : entry.photo ? [entry.photo] : [];
+
+    if (!list.length) {
+      return '<div class="timeline-photo-placeholder">' + entry.stage + "のお写真</div>";
+    }
+    if (list.length === 1) {
+      return (
+        '<img class="timeline-photo" src="' + photoSrc(list[0]) + '"' +
+        photoStyle(list[0]) + ' alt="' + entry.stage + '">'
+      );
+    }
+
+    const slides = list
+      .map(
+        (p, i) =>
+          '<div class="ph-slide"><img src="' + photoSrc(p) + '"' + photoStyle(p) +
+          ' alt="' + entry.stage + " " + (i + 1) + '枚目" loading="lazy"></div>'
+      )
+      .join("");
+
+    const dots = list
+      .map((_, i) => '<button class="ph-dot" type="button" data-go="' + i + '" aria-label="' + (i + 1) + '枚目"></button>')
+      .join("");
+
+    return (
+      '<div class="photo-slider" data-slider="' + uid + '">' +
+      '<div class="ph-track">' + slides + "</div>" +
+      '<button class="ph-arrow ph-prev" type="button" aria-label="前の写真">‹</button>' +
+      '<button class="ph-arrow ph-next" type="button" aria-label="次の写真">›</button>' +
+      '<div class="ph-count"><span class="ph-cur">1</span> / ' + list.length + "</div>" +
+      '<div class="ph-dots">' + dots + "</div>" +
+      "</div>"
+    );
+  }
+
+  function activateSliders(container) {
+    container.querySelectorAll(".photo-slider").forEach((slider) => {
+      const track = slider.querySelector(".ph-track");
+      const dots = Array.from(slider.querySelectorAll(".ph-dot"));
+      const cur = slider.querySelector(".ph-cur");
+      const total = dots.length;
+
+      // 各ページは最初 hidden の状態で組み立てられる。
+      // その間は clientWidth が 0 になり、0で割ると NaN（「NaN / 2」表示）になるので保険をかける。
+      const indexNow = () => {
+        const w = track.clientWidth;
+        if (!w) return 0;
+        const i = Math.round(track.scrollLeft / w);
+        return Number.isFinite(i) ? i : 0;
+      };
+
+      function sync() {
+        const i = Math.min(Math.max(indexNow(), 0), total - 1);
+        dots.forEach((d, n) => d.classList.toggle("is-on", n === i));
+        cur.textContent = String(i + 1);
+        slider.querySelector(".ph-prev").disabled = i === 0;
+        slider.querySelector(".ph-next").disabled = i === total - 1;
+      }
+
+      function goTo(i) {
+        const target = Math.min(Math.max(i, 0), total - 1);
+        track.scrollTo({ left: target * track.clientWidth, behavior: "smooth" });
+      }
+
+      track.addEventListener("scroll", () => {
+        window.clearTimeout(track._t);
+        track._t = window.setTimeout(sync, 80);
+      });
+      slider.querySelector(".ph-prev").addEventListener("click", () => goTo(indexNow() - 1));
+      slider.querySelector(".ph-next").addEventListener("click", () => goTo(indexNow() + 1));
+      dots.forEach((d) => d.addEventListener("click", () => goTo(Number(d.dataset.go))));
+
+      sync();
+    });
+  }
+
   function renderTimelineList(container, entries) {
     container.innerHTML = entries
-      .map((entry) => {
-        const photoHtml = entry.photo
-          ? '<img class="timeline-photo" src="' + entry.photo + '" alt="' + entry.stage + '">'
-          : '<div class="timeline-photo-placeholder">' + entry.stage + "のお写真</div>";
+      .map((entry, i) => {
         return (
           '<div class="timeline-entry">' +
-          photoHtml +
+          buildPhotoBlock(entry, i) +
           '<p class="timeline-stage">' + entry.stage + "</p>" +
           '<p class="timeline-text">' + entry.text + "</p>" +
           "</div>"
         );
       })
       .join("");
+    activateSliders(container);
   }
 
   function renderHistory() {
@@ -288,14 +378,31 @@
   }
 
   // ---------- seating ----------
+  // 卓の目印（お寿司のアイコン）。sushi が未設定の卓は今までどおり卓番号を表示します。
+  function tableMarkHtml(table) {
+    return table && table.sushi
+      ? '<img class="chart-sushi" src="' + table.sushi.img + '" alt="' + table.sushi.name + '">'
+      : table
+      ? table.id
+      : "";
+  }
+
   function openGuestModal(guest, tableId) {
     const body = $("#guest-modal-body");
     const relationText = sideLabel(guest.side) + (guest.relation ? "の" + guest.relation : "");
+    const table = TABLES.find((t) => t.id === tableId);
+    const seatHtml =
+      table && table.sushi
+        ? '<span class="modal-seat">' +
+          '<img class="modal-seat-icon" src="' + table.sushi.img + '" alt="' + table.sushi.name + '">' +
+          '<span class="modal-seat-name">' + table.sushi.name + "</span>" +
+          "</span>"
+        : "";
     body.innerHTML =
       '<p class="modal-eyebrow">GUEST</p>' +
       '<h3 class="modal-name">' + guest.name + "</h3>" +
       (guest.kana ? '<p class="modal-kana">' + guest.kana + "</p>" : "") +
-      '<p class="modal-relation">' + relationText + "</p>" +
+      '<p class="modal-relation">' + relationText + seatHtml + "</p>" +
       (guest.note
         ? '<div class="modal-note"><p class="modal-note-label">ご紹介</p><p class="modal-note-text">' + guest.note + "</p></div>"
         : "");
@@ -329,7 +436,7 @@
     return (
       '<div class="chart-table">' +
       '<div class="chart-col">' + left.join("") + "</div>" +
-      '<div class="chart-table-circle">' + table.id + "</div>" +
+      '<div class="chart-table-circle">' + tableMarkHtml(table) + "</div>" +
       '<div class="chart-col">' + right.join("") + "</div>" +
       "</div>"
     );
