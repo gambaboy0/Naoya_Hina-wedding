@@ -56,7 +56,7 @@ const TOP_MESSAGE = {
 const GROOM_PROFILE = {
   role: "GROOM",
   name: "直弥",
-  photo: "",
+  photo: "assets/img/profile/groom.jpg",
   stats: [
     { label: "BIRTHDAY", value: "1994.3.27" },
     { label: "BIRTHPLACE", value: "岐阜県" },
@@ -64,22 +64,22 @@ const GROOM_PROFILE = {
     { label: "MBTI", value: "INFP-A（仲介者）" }, // ※要再確認
     { label: "WORK", value: "株式会社不二越" },
     { label: "HOBBY", value: "ゴルフ キャンプ 旅行" },
-    { label: "FAVORITE FOOD", value: "お寿司" },
+    { label: "FAVORITE FOOD", value: "お寿司 うなぎ 梅 トマト" },
   ],
 };
 
 const BRIDE_PROFILE = {
   role: "BRIDE",
   name: "日那",
-  photo: "",
+  photo: "assets/img/profile/bride.jpg",
   stats: [
     { label: "BIRTHDAY", value: "1997.6.15" },
     { label: "BIRTHPLACE", value: "沖縄県" },
     { label: "BLOOD TYPE", value: "B" },
     { label: "MBTI", value: "ENTP-T（討論者）" },
     { label: "WORK", value: "社会福祉法人セーナー苑" },
-    { label: "HOBBY", value: "旅行" },
-    { label: "FAVORITE FOOD", value: "チーズ お肉 お魚 じゃがいも うなぎ お寿司" },
+    { label: "HOBBY", value: "旅行 手話 ウミガメ" },
+    { label: "FAVORITE FOOD", value: "うなぎ お寿司 ポテチ チーズ" },
   ],
 };
 
@@ -193,7 +193,7 @@ const OUR_HISTORY = [
 const TABLES = [
   {
     id: "1-1",
-    sushi: { img: "assets/img/sushi/shiroebi.png", name: "白エビ" },
+    sushi: { img: "assets/img/sushi/nodoguro.png", name: "ノドグロ炙り" },
     guests: [
       { name: "福永 桃子", yomi: "ふくなが ももこ", kana: "", side: "groom", category: "friend", relation: "友人", note: "今をときめく女社長。頭の回転が速く周りへの気配りも抜群。日本の宇宙開発を支える存在。" },
       { name: "鈴木 脩斗", yomi: "すずき しゅうと", kana: "", side: "groom", category: "friend", relation: "友人", note: "痩せるとウッディ、太るとバズ。優しさと仲間想いで愛される、まさに一人トイ・ストーリー。" },
@@ -207,7 +207,7 @@ const TABLES = [
   },
   {
     id: "1-2",
-    sushi: { img: "assets/img/sushi/nodoguro.png", name: "のどぐろ炙り" },
+    sushi: { img: "assets/img/sushi/hotaruika.png", name: "ホタルイカ" },
     guests: [
       { name: "渡辺 周平", yomi: "わたなべ しゅうへい", kana: "", side: "groom", category: "friend", relation: "友人", note: "自由人なのに、不思議と社会に馴染む要領の良さがある。ジャンベと太陽と原付が似合う男。" },
       { name: "大脇 盛生", yomi: "おおわき もりお", kana: "", side: "groom", category: "friend", relation: "友人", note: "一緒にいると笑わない日がない。予想外の天然さと抜群の行動力で、いつも場を盛り上げてくれる。" },
@@ -227,7 +227,7 @@ const TABLES = [
       { name: "高橋 夕歌", yomi: "たかはし ゆうか", kana: "", side: "bride", category: "friend", relation: "同僚", note: "どんなことも楽しめる前向きな考え方が素敵な先輩。周りを自然と笑顔にしてくれる、私が目指したい理想の奥さんです。" },
       { name: "窪田 小雪", yomi: "くぼた こゆき", kana: "", side: "bride", category: "friend", relation: "同僚", note: "ふんわりにこにこ笑顔に癒やされる可愛い後輩。穏やかな雰囲気の中に芯があり、周りに流されない強さも魅力です。" },
       { name: "荒井 優里亜", yomi: "あらい ゆりあ", kana: "", side: "bride", category: "friend", relation: "同僚", note: "優しくて、思いやりとAudi愛にあふれた先輩。個性的な感性が魅力的で、いつもたくさん支えてもらっています。" },
-      { name: "幅崎 千晶", yomi: "はばさき ちあき", kana: "", side: "bride", category: "friend", relation: "同僚", note: "誰に対しても忖度せず自分の考えを伝えられる方で、会うたびに綺麗になっていくかっこいい先輩。" },
+      { name: "幅﨑 千晶", yomi: "はばさき ちあき", kana: "", side: "bride", category: "friend", relation: "同僚", note: "誰に対しても忖度せず自分の考えを伝えられる方で、会うたびに綺麗になっていくかっこいい先輩。" },
       { name: "山田 恵梨香", yomi: "やまだ えりか", kana: "", side: "bride", category: "friend", relation: "同僚", note: "周りをよく見ていて、小さな変化にも気付けるしっかり者。どんな話も笑顔で聞いてくれるので、何でも話したくなります。" },
     ],
   },
@@ -235,7 +235,7 @@ const TABLES = [
     id: "2-1",
     sushi: { img: "assets/img/sushi/ikura.png", name: "いくら" },
     guests: [
-      { name: "松田 堯之", yomi: "まつだ たかゆき", kana: "", side: "groom", category: "friend", relation: "友人", note: "誰からも愛される人気者。人の意見を尊重しながらも、時折り見せるワガママさが愛されポイント。" },
+      { name: "松田 尭之", yomi: "まつだ たかゆき", kana: "", side: "groom", category: "friend", relation: "友人", note: "誰からも愛される人気者。人の意見を尊重しながらも、時折り見せるワガママさが愛されポイント。" },
       { name: "植村 俊亮", yomi: "うえむら しゅんすけ", kana: "", side: "groom", category: "friend", relation: "同僚", note: "穏やかで居心地のいい存在。実は男気もある。奥さんのために長年のタバコをやめた愛妻家。" },
       { name: "近田 理夫", yomi: "ちかだ みちお", kana: "", side: "groom", category: "friend", relation: "同僚", note: "人見知りとは無縁の慶應ボーイ。誰とでも仲良くなれるクラスに1人は欲しい存在。欲望にはとても素直。" },
       { name: "西村 光生", yomi: "にしむら みつお", kana: "", side: "groom", category: "friend", relation: "同僚", note: "優しさにあふれた唯一無二の雰囲気。純粋な人柄で、自然と周りを笑顔にしてくれる存在。" },
@@ -259,7 +259,7 @@ const TABLES = [
   },
   {
     id: "3-1",
-    sushi: { img: "assets/img/sushi/baigai.png", name: "バイ貝" },
+    sushi: { img: "assets/img/sushi/shiroebi.png", name: "白えび" },
     guests: [
       { name: "竹澤 朋", yomi: "たけざわ とも", kana: "", side: "groom", category: "family", relation: "義兄", note: "" },
       { name: "細川 満弘", yomi: "ほそかわ みつひろ", kana: "", side: "groom", category: "family", relation: "伯父", note: "" },
@@ -287,7 +287,7 @@ const TABLES = [
   },
   {
     id: "3-3",
-    sushi: { img: "assets/img/sushi/hotaruika.png", name: "ホタルイカ" },
+    sushi: { img: "assets/img/sushi/baigai.png", name: "バイ貝" },
     guests: [
       { blank: true },
       { name: "川島 隆之", yomi: "かわしま たかゆき", kana: "", side: "bride", category: "family", relation: "親族", note: "" },
@@ -355,7 +355,89 @@ const NAV_ITEMS = [
   { id: "our-history", en: "Memory", jp: "ふたりの思い出", btn: { en1: "Memory", jp: "ふたりの思い出" } },
   { id: "qa", en: "Q&amp;A", jp: "ふたりに質問", btn: { en1: "Q&amp;A", jp: "ふたりに質問" } },
   { id: "map", en: "Map", jp: "おすすめマップ", btn: { en1: "Map", jp: "おすすめマップ" } },
-  { id: "top", en: "Top", jp: "トップページ", topGreeting: true, btn: { en1: "TopPage", jp: "トップページ" } },
+  { id: "album", en: "Photo", jp: "アルバム", btn: { en1: "Photo", jp: "アルバム" } },
+];
+
+// ---------- アルバム（ふたりの思い出の写真をずらりと並べるページ） ----------
+// 1枚 = { src: "画像のパス", caption: "写真の下に小さく出る一言" }
+// caption は省略できます（省略すると何も表示されません）。
+// 写真が届いたら、この配列に足していくだけで並びます。並び順＝表示順です。
+const ALBUM = [
+  { src: "assets/img/album/01.jpg", caption: "海遊館 大阪" },
+  { src: "assets/img/album/02.jpg", caption: "ミモザ 愛知" },
+  { src: "assets/img/album/03.jpg", caption: "チューリップ 砺波" },
+  { src: "assets/img/album/04.jpg", caption: "スキマ聖地巡礼 愛知" },
+  { src: "assets/img/album/05.jpg", caption: "温泉 長野" },
+  { src: "assets/img/album/06.jpg", caption: "ひまわり 石川" },
+  { src: "assets/img/album/07.jpg", caption: "大曲花火大会 秋田" },
+  { src: "assets/img/album/08.jpg", caption: "大阪関西万博 大阪" },
+  { src: "assets/img/album/09.jpg", caption: "新郎父の会社の技術を使ったアクアポニックス 大阪" },
+  { src: "assets/img/album/10.jpg", caption: "札幌の夜景 北海道" },
+  { src: "assets/img/album/11.jpg", caption: "なばなの里 三重" },
+  { src: "assets/img/album/12.jpg", caption: "りんご狩り 長野" },
+  { src: "assets/img/album/13.jpg", caption: "星降る森のクリスマス 軽井沢" },
+  { src: "assets/img/album/14.jpg", caption: "東尋坊の梅 福井" },
+  { src: "assets/img/album/15.jpg", caption: "河津桜 富山" },
+];
+
+// ---------- アルバム：同じ日の写真をまとめた「重ねて置く」グループ ----------
+// アルバムページの一番下に、写真が重なったタイルとして並びます。
+// タップするとその日の写真・動画だけを順に見られます。
+// items は "画像のパス" か { src: "動画のパス", type: "video" } で書きます。
+const ALBUM_GROUPS = [
+  {
+    title: "前撮り　兼六園",
+    items: [
+      "assets/img/album/g16/01.jpg",
+      "assets/img/album/g16/02.jpg",
+      "assets/img/album/g16/03.jpg",
+      "assets/img/album/g16/04.jpg",
+      "assets/img/album/g16/05.jpg",
+      "assets/img/album/g16/06.jpg",
+      "assets/img/album/g16/07.jpg",
+      "assets/img/album/g16/08.jpg",
+      "assets/img/album/g16/09.jpg",
+      "assets/img/album/g16/10.jpg",
+      "assets/img/album/g16/11.jpg",
+      "assets/img/album/g16/12.jpg",
+      "assets/img/album/g16/13.jpg",
+      "assets/img/album/g16/14.jpg",
+    ],
+  },
+  {
+    title: "前撮り　宮古島",
+    items: [
+      "assets/img/album/g17/01.jpg",
+      "assets/img/album/g17/02.jpg",
+      "assets/img/album/g17/03.jpg",
+      "assets/img/album/g17/04.jpg",
+      "assets/img/album/g17/05.jpg",
+      "assets/img/album/g17/06.jpg",
+      "assets/img/album/g17/07.jpg",
+      "assets/img/album/g17/08.jpg",
+      "assets/img/album/g17/09.jpg",
+      "assets/img/album/g17/10.jpg",
+      "assets/img/album/g17/11.jpg",
+      "assets/img/album/g17/12.jpg",
+      "assets/img/album/g17/13.jpg",
+      "assets/img/album/g17/14.jpg",
+    ],
+  },
+  {
+    title: "思い出　宮古島",
+    items: [
+      "assets/img/album/g18/01.jpg",
+      "assets/img/album/g18/02.jpg",
+      "assets/img/album/g18/03.jpg",
+      "assets/img/album/g18/04.jpg",
+      "assets/img/album/g18/05.jpg",
+      "assets/img/album/g18/06.jpg",
+      "assets/img/album/g18/07.jpg",
+      "assets/img/album/g18/08.jpg",
+      { src: "assets/img/album/g18/09.mp4", type: "video" },
+      { src: "assets/img/album/g18/10.mp4", type: "video" },
+    ],
+  },
 ];
 
 // ---------- おすすめマップ（新郎新婦の思い出の場所） ----------

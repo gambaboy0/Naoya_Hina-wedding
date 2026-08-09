@@ -9,7 +9,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Shrikhand&family=Zen+Maru+Gothic:wght@400;500;700&family=Yusei+Magic&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
 <!-- ?v= の数字は、更新したときにブラウザが古い表示を出さないための目印です（日付＋連番） -->
-<link rel="stylesheet" href="css/style.css?v=20260805f">
+<link rel="stylesheet" href="css/style.css?v=20260810b">
 </head>
 <body>
 
@@ -182,6 +182,18 @@
     <nav class="profile-nav-grid" id="nav-grid-map"></nav>
   </section>
 
+  <!-- ALBUM (ふたりの思い出の写真一覧) -->
+  <section class="page section" id="album" data-page="album" hidden>
+    <p class="section-eyebrow">09</p>
+    <h2 class="section-title" data-title-for="album"></h2>
+
+    <p class="seating-hint-text"><img class="seating-hint-icon" src="assets/img/tap-icon.jpg" alt="">お写真をタップすると大きく表示されます</p>
+
+    <div id="album-grid" class="album-grid"></div>
+
+    <nav class="profile-nav-grid" id="nav-grid-album"></nav>
+  </section>
+
   <footer class="footer">
     <p id="footer-text"></p>
   </footer>
@@ -207,7 +219,7 @@
 </div>
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-<script src="js/data.js?v=20260805f"></script>
-<script src="js/app.js?v=20260805f"></script>
+<script src="js/data.js?v=20260810b"></script>
+<script src="js/app.js?v=20260810b"></script>
 </body>
 </html>

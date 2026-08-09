@@ -191,7 +191,7 @@
 
   function renderNavGrids() {
     const html = buildNavGridHtml();
-    ["#nav-grid-top", "#nav-grid-groom", "#nav-grid-bride", "#nav-grid-our-history", "#nav-grid-seating", "#nav-grid-menu", "#nav-grid-qa", "#nav-grid-map"].forEach((sel) => {
+    ["#nav-grid-top", "#nav-grid-groom", "#nav-grid-bride", "#nav-grid-our-history", "#nav-grid-seating", "#nav-grid-menu", "#nav-grid-qa", "#nav-grid-map", "#nav-grid-album"].forEach((sel) => {
       const el = $(sel);
       if (el) el.innerHTML = html;
     });
@@ -530,15 +530,112 @@
     );
   }
 
-  function openPhotoModal(spotIndex, photoIndex) {
-    const spot = MAP_SPOTS[spotIndex];
-    const photo = spot && spot.photos ? spot.photos[photoIndex] : null;
-    if (!photo) return;
+  // ---------- album (ふたりの思い出の写真一覧) ----------
+  // サムネイルを並べ、タップすると拡大表示（写真の下に小さくキャプション）。
+  // 拡大表示はおすすめマップと同じ #photo-modal を使い回している。
+  // 単独の写真15枚のあとに、グループごとの「タイトルタイル＋その日の写真」を続ける。
+  // タイトルタイルを1枚はさむことで、どのグループも3の倍数になり3列できれいに揃う。
+  // 動画はタイルにせず、拡大表示の中で ◁ ▷ を送ると出てくる。
+  function renderAlbum() {
+    const el = $("#album-grid");
+    if (!el) return;
+    const tiles = [];
+
+    ALBUM.forEach((p, i) => {
+      tiles.push(
+        '<button type="button" class="album-thumb" data-album-photo="' + i + '">' +
+          '<img src="' + p.src + '" alt="' + (p.caption || "") + '" loading="lazy">' +
+          "</button>"
+      );
+    });
+
+    if (typeof ALBUM_GROUPS !== "undefined") {
+      ALBUM_GROUPS.forEach((g, gi) => {
+        const lines = g.title.split(/[\s　]+/).filter(Boolean).join("<br>");
+        tiles.push(
+          '<button type="button" class="album-title-tile" data-album-group="' + gi + '">' +
+            "<span>" + lines + "</span>" +
+            "</button>"
+        );
+        g.items.forEach((it, pi) => {
+          const p = normalizePhoto(it, g.title);
+          if (p.type === "video") return;
+          tiles.push(
+            '<button type="button" class="album-thumb" data-album-group-photo="' + gi + "::" + pi + '">' +
+              '<img src="' + p.src + '" alt="" loading="lazy">' +
+              "</button>"
+          );
+        });
+      });
+    }
+
+    el.innerHTML = tiles.length ? tiles.join("") : '<p class="album-empty">お写真を準備中です</p>';
+  }
+
+  function openAlbumGroupModal(groupIndex, photoIndex) {
+    const g = ALBUM_GROUPS[groupIndex];
+    if (!g) return;
+    openPhotoList(g.items, photoIndex || 0, g.title);
+  }
+
+  // 拡大表示は「いま開いている写真の一覧」と「何枚目か」を覚えておき、
+  // ◁ ▷ で同じ一覧の中を行き来する。アルバムとおすすめマップで共用。
+  let modalPhotos = [];
+  let modalIndex = 0;
+
+  // 写真は "パス" でも { src, caption, type } でも書ける。type: "video" なら動画。
+  function normalizePhoto(p, fallbackCaption) {
+    if (typeof p === "string") return { src: p, caption: fallbackCaption || "", type: "image" };
+    return { src: p.src, caption: p.caption || fallbackCaption || "", type: p.type || "image" };
+  }
+
+  function renderPhotoModalBody() {
+    const p = modalPhotos[modalIndex];
+    if (!p) return;
+    const atFirst = modalIndex === 0;
+    const atLast = modalIndex === modalPhotos.length - 1;
+    const media =
+      p.type === "video"
+        ? '<video class="photo-modal-img" src="' + p.src + '" controls playsinline preload="metadata"></video>'
+        : '<img class="photo-modal-img" src="' + p.src + '" alt="">';
     $("#photo-modal-body").innerHTML =
-      '<img class="photo-modal-img" src="' + photo.src + '" alt="">' +
-      '<p class="photo-modal-caption">' + (photo.caption || spot.name) + "</p>";
+      media +
+      (p.caption ? '<p class="photo-modal-caption">' + p.caption + "</p>" : "") +
+      '<div class="photo-modal-nav">' +
+      '<button type="button" class="pm-btn" data-photo-prev aria-label="前の写真"' +
+      (atFirst ? " disabled" : "") + ">◁</button>" +
+      '<button type="button" class="pm-btn pm-close" data-close aria-label="閉じる">×</button>' +
+      '<button type="button" class="pm-btn" data-photo-next aria-label="次の写真"' +
+      (atLast ? " disabled" : "") + ">▷</button>" +
+      "</div>";
+  }
+
+  function openPhotoList(list, index, fallbackCaption) {
+    if (!list || !list.length) return;
+    modalPhotos = list.map((p) => normalizePhoto(p, fallbackCaption));
+    modalIndex = Math.min(Math.max(index, 0), list.length - 1);
+    renderPhotoModalBody();
     $("#photo-modal").hidden = false;
     document.body.classList.add("modal-open");
+  }
+
+  function stepPhoto(delta) {
+    const next = modalIndex + delta;
+    if (next < 0 || next >= modalPhotos.length) return;
+    modalIndex = next;
+    renderPhotoModalBody();
+  }
+
+  function openAlbumModal(index) {
+    openPhotoList(ALBUM, index);
+  }
+
+  function openPhotoModal(spotIndex, photoIndex) {
+    const spot = MAP_SPOTS[spotIndex];
+    if (!spot || !spot.photos) return;
+    // マップの写真はキャプション未設定のことがあるので、場所の名前で補う
+    const list = spot.photos.map((ph) => ({ src: ph.src, caption: ph.caption || spot.name }));
+    openPhotoList(list, photoIndex);
   }
 
   function selectMapSpot(index) {
@@ -772,6 +869,30 @@
       closeAnyModal();
       return;
     }
+    if (e.target.closest("[data-photo-prev]")) {
+      stepPhoto(-1);
+      return;
+    }
+    if (e.target.closest("[data-photo-next]")) {
+      stepPhoto(1);
+      return;
+    }
+    const groupPhoto = e.target.closest("[data-album-group-photo]");
+    if (groupPhoto) {
+      const parts = groupPhoto.dataset.albumGroupPhoto.split("::");
+      openAlbumGroupModal(Number(parts[0]), Number(parts[1]));
+      return;
+    }
+    const albumGroup = e.target.closest("[data-album-group]");
+    if (albumGroup) {
+      openAlbumGroupModal(Number(albumGroup.dataset.albumGroup), 0);
+      return;
+    }
+    const albumThumb = e.target.closest("[data-album-photo]");
+    if (albumThumb) {
+      openAlbumModal(Number(albumThumb.dataset.albumPhoto));
+      return;
+    }
     const photoThumb = e.target.closest("[data-spot-photo]");
     if (photoThumb) {
       const parts = photoThumb.dataset.spotPhoto.split("::");
@@ -818,6 +939,7 @@
     renderOurHistory();
     renderFullChart();
     renderMapSpots();
+    renderAlbum();
     renderFood();
     renderQa();
     render();
