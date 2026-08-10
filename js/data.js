@@ -178,12 +178,42 @@ const BRIDE_HISTORY = {
 };
 
 // ---------- OUR HISTORY ページ（お二人のストーリー） ----------
+// 2026-08-11 クライアントより本文と写真を受領。5段階（出会い／交際スタート／プロポーズ／ご入籍／結婚式）
+// から 4段階（出会い／お付き合い／プロポーズ／結婚）へ構成変更。
 const OUR_HISTORY = [
-  { stage: "出会い", photo: "", text: "共通の友人の紹介で出会いました。" },
-  { stage: "交際スタート", photo: "", text: "自然と惹かれ合い、お付き合いが始まりました。" },
-  { stage: "プロポーズ", photo: "", text: "忘れられない特別な一日に、プロポーズを受けました。" },
-  { stage: "ご入籍", photo: "", text: "2026年4月22日、入籍しました。" },
-  { stage: "結婚式", photo: "", text: "2026年8月23日、皆さまに見守られ結婚式を迎えます。" },
+  {
+    stage: "出会い",
+    photo: "assets/img/our-history/meeting.jpg",
+    text:
+      "きっかけはマッチングアプリ。メッセージを重ね、初めての出会いはコメダ珈琲店のモーニング。" +
+      "お互い第一印象は◎！気づけばあっという間に3時間が過ぎていました。",
+  },
+  {
+    stage: "お付き合い",
+    photo: "assets/img/our-history/dating.jpg",
+    text:
+      "デートを重ね、🇮🇩出張前日に新郎から告白！1週間の出張を終え、帰国後にデート。" +
+      "その帰り道、なぜかトンネルの中でOKの返事🫶🏻 まさかのタイミングに「ここで！？」となりつつ、" +
+      "2月22日、晴れて交際スタート！",
+  },
+  {
+    stage: "プロポーズ",
+    photo: "assets/img/our-history/proposal.jpg",
+    text:
+      "12月22日は毎年恒例、スキマスイッチ武道館ライブの日。" +
+      "「これから毎年、記念日にこのライブへ行けたら素敵だな」と思い、この日にプロポーズ。" +
+      "日付が変わった瞬間に「結婚してください🌹」",
+  },
+  {
+    stage: "結婚",
+    photos: [
+      "assets/img/our-history/marriage-1.jpg",
+      "assets/img/our-history/marriage-2.jpg",
+    ],
+    text:
+      "4月22日、晴れて夫婦に！「よい夫婦」の語呂合わせに加えて、" +
+      "交際開始もプロポーズも22日だったことから、これからの記念日も“22日”に統一しました。覚えやすいです。笑",
+  },
 ];
 
 // 実際の座席表（会場管理ツールの画像）から書き起こしたデータです。
@@ -358,35 +388,39 @@ const NAV_ITEMS = [
   { id: "album", en: "Photo", jp: "アルバム", btn: { en1: "Photo", jp: "アルバム" } },
 ];
 
-// ---------- アルバム（ふたりの思い出の写真をずらりと並べるページ） ----------
-// 1枚 = { src: "画像のパス", caption: "写真の下に小さく出る一言" }
-// caption は省略できます（省略すると何も表示されません）。
-// 写真が届いたら、この配列に足していくだけで並びます。並び順＝表示順です。
-const ALBUM = [
-  { src: "assets/img/album/01.jpg", caption: "海遊館 大阪" },
-  { src: "assets/img/album/02.jpg", caption: "ミモザ 愛知" },
-  { src: "assets/img/album/03.jpg", caption: "チューリップ 砺波" },
-  { src: "assets/img/album/04.jpg", caption: "スキマ聖地巡礼 愛知" },
-  { src: "assets/img/album/05.jpg", caption: "温泉 長野" },
-  { src: "assets/img/album/06.jpg", caption: "ひまわり 石川" },
-  { src: "assets/img/album/07.jpg", caption: "大曲花火大会 秋田" },
-  { src: "assets/img/album/08.jpg", caption: "大阪関西万博 大阪" },
-  { src: "assets/img/album/09.jpg", caption: "新郎父の会社の技術を使ったアクアポニックス 大阪" },
-  { src: "assets/img/album/10.jpg", caption: "札幌の夜景 北海道" },
-  { src: "assets/img/album/11.jpg", caption: "なばなの里 三重" },
-  { src: "assets/img/album/12.jpg", caption: "りんご狩り 長野" },
-  { src: "assets/img/album/13.jpg", caption: "星降る森のクリスマス 軽井沢" },
-  { src: "assets/img/album/14.jpg", caption: "東尋坊の梅 福井" },
-  { src: "assets/img/album/15.jpg", caption: "河津桜 富山" },
-];
-
-// ---------- アルバム：同じ日の写真をまとめた「重ねて置く」グループ ----------
-// アルバムページの一番下に、写真が重なったタイルとして並びます。
-// タップするとその日の写真・動画だけを順に見られます。
-// items は "画像のパス" か { src: "動画のパス", type: "video" } で書きます。
+// ---------- アルバム（ジャンルごとに横へ送れる4つのまとまり） ----------
+// 2026-08-11 構成変更: 「1枚ずつ並べる一覧＋グループのタイル」→
+//   新郎プロフィール／ふたりの思い出と同じ「まとまりごとに横スライド」方式へ統一。
+//
+// 1つのまとまり = { title: "見出し", items: [ 写真… ] }
+// items の1件は次のどちらでも書けます。
+//   "assets/img/album/01.jpg"                              … 画像だけ（説明文なし）
+//   { src: "…jpg", caption: "写真の下に出る一言" }          … 説明文つき
+//   { src: "…mp4", type: "video" }                         … 動画
+// 並び順＝表示順です。写真が増えたら配列に足すだけで反映されます。
 const ALBUM_GROUPS = [
   {
-    title: "前撮り　兼六園",
+    title: "色々な思い出",
+    items: [
+      { src: "assets/img/album/01.jpg", caption: "海遊館 大阪" },
+      { src: "assets/img/album/02.jpg", caption: "ミモザ 愛知" },
+      { src: "assets/img/album/03.jpg", caption: "チューリップ 砺波" },
+      { src: "assets/img/album/04.jpg", caption: "スキマ聖地巡礼 愛知" },
+      { src: "assets/img/album/05.jpg", caption: "温泉 長野" },
+      { src: "assets/img/album/06.jpg", caption: "ひまわり 石川" },
+      { src: "assets/img/album/07.jpg", caption: "大曲花火大会 秋田" },
+      { src: "assets/img/album/08.jpg", caption: "大阪関西万博 大阪" },
+      { src: "assets/img/album/09.jpg", caption: "新郎父の会社の技術を使ったアクアポニックス 大阪" },
+      { src: "assets/img/album/10.jpg", caption: "札幌の夜景 北海道" },
+      { src: "assets/img/album/11.jpg", caption: "なばなの里 三重" },
+      { src: "assets/img/album/12.jpg", caption: "りんご狩り 長野" },
+      { src: "assets/img/album/13.jpg", caption: "星降る森のクリスマス 軽井沢" },
+      { src: "assets/img/album/14.jpg", caption: "東尋坊の梅 福井" },
+      { src: "assets/img/album/15.jpg", caption: "河津桜 富山" },
+    ],
+  },
+  {
+    title: "兼六園前撮り",
     items: [
       "assets/img/album/g16/01.jpg",
       "assets/img/album/g16/02.jpg",
@@ -405,7 +439,7 @@ const ALBUM_GROUPS = [
     ],
   },
   {
-    title: "前撮り　宮古島",
+    title: "宮古島前撮り",
     items: [
       "assets/img/album/g17/01.jpg",
       "assets/img/album/g17/02.jpg",
@@ -424,7 +458,7 @@ const ALBUM_GROUPS = [
     ],
   },
   {
-    title: "思い出　宮古島",
+    title: "宮古島思い出",
     items: [
       "assets/img/album/g18/01.jpg",
       "assets/img/album/g18/02.jpg",

@@ -296,6 +296,10 @@
       const dots = Array.from(slider.querySelectorAll(".ph-dot"));
       const cur = slider.querySelector(".ph-cur");
       const total = dots.length;
+      // アルバムのように1枚ごとの説明文がある場合だけ、下の1行を差し替える
+      const cap = slider.querySelector(".ph-caption");
+      // アルバムの「小さい写真を1列に並べたもの」（ない場合は空配列）
+      const thumbs = Array.from(slider.querySelectorAll(".ph-thumb"));
 
       // 各ページは最初 hidden の状態で組み立てられる。
       // その間は clientWidth が 0 になり、0で割ると NaN（「NaN / 2」表示）になるので保険をかける。
@@ -312,6 +316,11 @@
         cur.textContent = String(i + 1);
         slider.querySelector(".ph-prev").disabled = i === 0;
         slider.querySelector(".ph-next").disabled = i === total - 1;
+        if (cap) {
+          const slide = track.children[i];
+          cap.textContent = slide ? slide.dataset.caption || "" : "";
+        }
+        thumbs.forEach((t, n) => t.classList.toggle("is-on", n === i));
       }
 
       function goTo(i) {
@@ -326,6 +335,7 @@
       slider.querySelector(".ph-prev").addEventListener("click", () => goTo(indexNow() - 1));
       slider.querySelector(".ph-next").addEventListener("click", () => goTo(indexNow() + 1));
       dots.forEach((d) => d.addEventListener("click", () => goTo(Number(d.dataset.go))));
+      thumbs.forEach((t) => t.addEventListener("click", () => goTo(Number(t.dataset.go))));
 
       sync();
     });
@@ -530,46 +540,75 @@
     );
   }
 
-  // ---------- album (ふたりの思い出の写真一覧) ----------
-  // サムネイルを並べ、タップすると拡大表示（写真の下に小さくキャプション）。
-  // 拡大表示はおすすめマップと同じ #photo-modal を使い回している。
-  // 単独の写真15枚のあとに、グループごとの「タイトルタイル＋その日の写真」を続ける。
-  // タイトルタイルを1枚はさむことで、どのグループも3の倍数になり3列できれいに揃う。
-  // 動画はタイルにせず、拡大表示の中で ◁ ▷ を送ると出てくる。
-  function renderAlbum() {
-    const el = $("#album-grid");
-    if (!el) return;
-    const tiles = [];
+  // ---------- album (ジャンルごとに横へ送るアルバム) ----------
+  // 新郎プロフィール／ふたりの思い出と同じスライダーを使い、まとまりごとに1つ置く。
+  // 写真をタップすると拡大表示（おすすめマップと同じ #photo-modal を使い回し）。
+  // 動画はスライダーの中でそのまま再生できるので、拡大表示にはしない。
+  function buildAlbumSlider(group, gi) {
+    const list = group.items.map((it) => normalizePhoto(it, ""));
+    // 1枚でも説明文があるまとまりだけ、写真の下に説明文の行を作る
+    const hasCaption = list.some((p) => p.caption);
 
-    ALBUM.forEach((p, i) => {
-      tiles.push(
-        '<button type="button" class="album-thumb" data-album-photo="' + i + '">' +
-          '<img src="' + p.src + '" alt="' + (p.caption || "") + '" loading="lazy">' +
-          "</button>"
-      );
-    });
-
-    if (typeof ALBUM_GROUPS !== "undefined") {
-      ALBUM_GROUPS.forEach((g, gi) => {
-        const lines = g.title.split(/[\s　]+/).filter(Boolean).join("<br>");
-        tiles.push(
-          '<button type="button" class="album-title-tile" data-album-group="' + gi + '">' +
-            "<span>" + lines + "</span>" +
-            "</button>"
+    const slides = list
+      .map((p, i) => {
+        const media =
+          p.type === "video"
+            ? '<video src="' + p.src + '" controls playsinline preload="metadata"></video>'
+            : '<img src="' + p.src + '" alt="' + (p.caption || group.title) + '" loading="lazy">';
+        // 画像だけタップで拡大（動画は再生ボタンを優先する）
+        const tap = p.type === "video" ? "" : ' data-album-group-photo="' + gi + "::" + i + '"';
+        return (
+          '<div class="ph-slide" data-caption="' + (p.caption || "") + '"' + tap + ">" + media + "</div>"
         );
-        g.items.forEach((it, pi) => {
-          const p = normalizePhoto(it, g.title);
-          if (p.type === "video") return;
-          tiles.push(
-            '<button type="button" class="album-thumb" data-album-group-photo="' + gi + "::" + pi + '">' +
-              '<img src="' + p.src + '" alt="" loading="lazy">' +
-              "</button>"
-          );
-        });
-      });
-    }
+      })
+      .join("");
 
-    el.innerHTML = tiles.length ? tiles.join("") : '<p class="album-empty">お写真を準備中です</p>';
+    const dots = list
+      .map((_, i) => '<button class="ph-dot" type="button" data-go="' + i + '" aria-label="' + (i + 1) + '枚目"></button>')
+      .join("");
+
+    // 全部の写真を小さく1列に並べたもの。タップするとその写真へ飛ぶ
+    const thumbs = list
+      .map((p, i) => {
+        const inner =
+          p.type === "video"
+            ? '<span class="ph-thumb-video">▶</span>'
+            : '<img src="' + p.src + '" alt="" loading="lazy">';
+        return (
+          '<button type="button" class="ph-thumb" data-go="' + i + '" aria-label="' + (i + 1) + '枚目へ">' +
+          inner + "</button>"
+        );
+      })
+      .join("");
+
+    return (
+      '<div class="photo-slider" data-slider="album' + gi + '">' +
+      '<div class="ph-track">' + slides + "</div>" +
+      '<button class="ph-arrow ph-prev" type="button" aria-label="前の写真">‹</button>' +
+      '<button class="ph-arrow ph-next" type="button" aria-label="次の写真">›</button>' +
+      '<div class="ph-count"><span class="ph-cur">1</span> / ' + list.length + "</div>" +
+      // 小さい写真の列がドットの代わりになるので、ドットは隠す（枚数の計算には使う）
+      '<div class="ph-dots is-off">' + dots + "</div>" +
+      (hasCaption ? '<p class="ph-caption timeline-text"></p>' : "") +
+      '<div class="ph-thumbs">' + thumbs + "</div>" +
+      "</div>"
+    );
+  }
+
+  function renderAlbum() {
+    const el = $("#album-list");
+    if (!el) return;
+    if (typeof ALBUM_GROUPS === "undefined" || !ALBUM_GROUPS.length) {
+      el.innerHTML = '<p class="album-empty">お写真を準備中です</p>';
+      return;
+    }
+    el.innerHTML = ALBUM_GROUPS.map((g, gi) =>
+      '<div class="timeline-entry">' +
+      buildAlbumSlider(g, gi) +
+      '<p class="timeline-stage">' + g.title + "</p>" +
+      "</div>"
+    ).join("");
+    activateSliders(el);
   }
 
   function openAlbumGroupModal(groupIndex, photoIndex) {
@@ -624,10 +663,6 @@
     if (next < 0 || next >= modalPhotos.length) return;
     modalIndex = next;
     renderPhotoModalBody();
-  }
-
-  function openAlbumModal(index) {
-    openPhotoList(ALBUM, index);
   }
 
   function openPhotoModal(spotIndex, photoIndex) {
@@ -810,6 +845,12 @@
       setTopMenuOpen(menuToggle.dataset.open !== "1");
       return;
     }
+    // メニュー選択画面 右下のBACKボタン: 挨拶文の画面に戻す
+    const topBackBtn = e.target.closest("#top-menu-back");
+    if (topBackBtn) {
+      setTopMenuOpen(false);
+      return;
+    }
     // TopPageボタン/INDEX: トップページの挨拶文画面へ
     const topGreetingEl = e.target.closest("[data-top-greeting]");
     if (topGreetingEl) {
@@ -881,16 +922,6 @@
     if (groupPhoto) {
       const parts = groupPhoto.dataset.albumGroupPhoto.split("::");
       openAlbumGroupModal(Number(parts[0]), Number(parts[1]));
-      return;
-    }
-    const albumGroup = e.target.closest("[data-album-group]");
-    if (albumGroup) {
-      openAlbumGroupModal(Number(albumGroup.dataset.albumGroup), 0);
-      return;
-    }
-    const albumThumb = e.target.closest("[data-album-photo]");
-    if (albumThumb) {
-      openAlbumModal(Number(albumThumb.dataset.albumPhoto));
       return;
     }
     const photoThumb = e.target.closest("[data-spot-photo]");
