@@ -96,11 +96,8 @@ body {
   }
 }
 
-.splash-overlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(180deg, rgba(20, 32, 43, 0.55), rgba(20, 32, 43, 0.2) 42%, rgba(20, 32, 43, 0.62));
-}
+/* 写真の上に重ねていた黒い半透明は廃止（2026-08-12）。
+   文字は各要素の text-shadow だけで見せる。 */
 
 .splash-content {
   position: relative;
@@ -821,48 +818,75 @@ body {
 }
 
 /* ---------- 拡大表示の操作ボタン（◁ 戻る／× 閉じる／▷ 次へ） ---------- */
-.photo-modal-nav {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 0.6rem;
-  margin-top: 0.9rem;
+/* ---------- 写真の拡大表示（指でなぞって切り替え・写真の外をタップで閉じる） ---------- */
+/* 写真のまわりの余白は上下左右そろえる（下だけ広く空かないように） */
+#photo-modal .modal-sheet {
+  padding: 0.7rem 1.5rem 1.5rem;
 }
 
-.photo-modal-nav .pm-btn {
-  flex: 1 1 0;
-  padding: 0.55rem 0;
-  border: 1px solid var(--line);
-  border-radius: 10px;
-  background: var(--white);
+/* 上部の ▽ ボタン（押すと下へ滑って閉じる） */
+.pm-close-down {
+  display: block;
+  margin: 0 auto 0.4rem;
+  width: 4rem;
+  height: 1.9rem;
+  padding: 0;
+  border: none;
+  background: transparent;
   color: var(--dark);
   font-size: 1.15rem;
   line-height: 1;
   cursor: pointer;
-  transition: opacity 0.12s, transform 0.12s;
+  opacity: 0.65;
 }
 
-.photo-modal-nav .pm-btn:active {
-  transform: scale(0.96);
+.pm-close-down:active {
+  opacity: 1;
 }
 
-.photo-modal-nav .pm-btn:disabled {
-  opacity: 0.25;
-  cursor: default;
+.pm-media {
+  position: relative;
 }
 
-/* 中央の閉じるボタンだけ少し目立たせる */
-.photo-modal-nav .pm-close {
-  flex: 0 0 32%;
-  background: var(--adopt-navy, #2c3e50);
-  color: #fff;
-  border-color: transparent;
-  font-size: 1.25rem;
+/* 写真そのものの余白は枠側で持つ（スライドの中では余白なし） */
+.pm-slide .photo-modal-img {
+  margin: 0;
 }
 
-/* 拡大表示では右上の×を出さない（下の中央ボタンと重複するため） */
-#photo-modal .modal-sheet > .modal-close {
+.pm-track {
+  display: flex;
+  align-items: flex-start;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+  border-radius: 10px;
+  transition: height 0.2s ease;
+}
+
+.pm-track::-webkit-scrollbar {
   display: none;
+}
+
+.pm-slide {
+  flex: 0 0 100%;
+  scroll-snap-align: start;
+}
+
+/* 何枚目かの目印。矢印を置かない代わりに、続きがあることを示す */
+.pm-count {
+  position: absolute;
+  top: 8px;
+  right: 10px;
+  background: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  padding: 2px 9px;
+  border-radius: 999px;
+  pointer-events: none;
 }
 
 /* 動画も写真と同じ枠で表示する */
@@ -1463,6 +1487,15 @@ video.photo-modal-img {
   margin: 0;
 }
 
+/* 拡大表示では説明文が写真の上に来る */
+#photo-modal .photo-modal-caption {
+  margin: 0 0 0.55rem;
+}
+
+#photo-modal .photo-modal-caption[hidden] {
+  display: none;
+}
+
 /* ページ上部へ戻るボタン */
 .to-top-btn {
   display: block;
@@ -1683,6 +1716,14 @@ body.modal-open {
   padding: 1.8rem 1.5rem 2.4rem;
   animation: slideUp 0.22s ease;
   box-shadow: 0 -6px 24px rgba(51, 64, 74, 0.2);
+}
+
+/* 閉じるとき: 下へ滑りながら消える */
+.modal-sheet.is-closing {
+  animation: none;
+  transform: translateY(100%);
+  opacity: 0;
+  transition: transform 0.26s ease, opacity 0.26s ease;
 }
 
 @keyframes slideUp {

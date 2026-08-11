@@ -628,25 +628,85 @@
     return { src: p.src, caption: p.caption || fallbackCaption || "", type: p.type || "image" };
   }
 
+  // 拡大表示は全部の写真を横に並べ、指でなぞって切り替える。
+  // 進む・戻るボタンと閉じるボタンは置かず、写真の外をタップすると閉じる。
   function renderPhotoModalBody() {
-    const p = modalPhotos[modalIndex];
-    if (!p) return;
-    const atFirst = modalIndex === 0;
-    const atLast = modalIndex === modalPhotos.length - 1;
-    const media =
-      p.type === "video"
-        ? '<video class="photo-modal-img" src="' + p.src + '" controls playsinline preload="metadata"></video>'
-        : '<img class="photo-modal-img" src="' + p.src + '" alt="">';
+    const slides = modalPhotos
+      .map((p) => {
+        const media =
+          p.type === "video"
+            ? '<video class="photo-modal-img" src="' + p.src + '" controls playsinline preload="metadata"></video>'
+            : '<img class="photo-modal-img" src="' + p.src + '" alt="">';
+        return '<div class="pm-slide" data-caption="' + (p.caption || "") + '">' + media + "</div>";
+      })
+      .join("");
+
+    // 並び順: ▽ボタン → 説明文 → 写真
     $("#photo-modal-body").innerHTML =
-      media +
-      (p.caption ? '<p class="photo-modal-caption">' + p.caption + "</p>" : "") +
-      '<div class="photo-modal-nav">' +
-      '<button type="button" class="pm-btn" data-photo-prev aria-label="前の写真"' +
-      (atFirst ? " disabled" : "") + ">◁</button>" +
-      '<button type="button" class="pm-btn pm-close" data-close aria-label="閉じる">×</button>' +
-      '<button type="button" class="pm-btn" data-photo-next aria-label="次の写真"' +
-      (atLast ? " disabled" : "") + ">▷</button>" +
+      '<button type="button" class="pm-close-down" aria-label="閉じる">▽</button>' +
+      '<p class="photo-modal-caption"></p>' +
+      '<div class="pm-media">' +
+      '<div class="pm-track">' + slides + "</div>" +
+      (modalPhotos.length > 1
+        ? '<div class="pm-count"><span class="pm-cur">1</span> / ' + modalPhotos.length + "</div>"
+        : "") +
       "</div>";
+
+    const track = $("#photo-modal-body .pm-track");
+    if (track) {
+      track.addEventListener("scroll", () => {
+        window.clearTimeout(track._t);
+        track._t = window.setTimeout(syncPhotoModal, 80);
+      });
+      // 写真が読み込まれた時点で高さを測り直す（読み込み前は高さが0のため）
+      track.querySelectorAll("img, video").forEach((m) => {
+        m.addEventListener("load", fitPhotoModalHeight);
+        m.addEventListener("loadedmetadata", fitPhotoModalHeight);
+      });
+    }
+  }
+
+  // 枠の高さを「いま見えている写真」の高さに合わせる。
+  // 縦長と横長が混ざっていても、写真の下に余白が余らないようにするため。
+  function fitPhotoModalHeight() {
+    const track = $("#photo-modal-body .pm-track");
+    if (!track) return;
+    const slide = track.children[modalIndex];
+    const media = slide ? slide.querySelector("img, video") : null;
+    const h = media ? media.offsetHeight : 0;
+    if (h) track.style.height = h + "px";
+  }
+
+  // いま何枚目を見ているかを読み取り、枚数表示・説明文・高さを合わせる
+  function syncPhotoModal() {
+    const track = $("#photo-modal-body .pm-track");
+    if (!track) return;
+    const w = track.clientWidth;
+    const i = w ? Math.round(track.scrollLeft / w) : 0;
+    modalIndex = Math.min(Math.max(i, 0), modalPhotos.length - 1);
+    const cap = $("#photo-modal-body .photo-modal-caption");
+    const cur = $("#photo-modal-body .pm-cur");
+    const slide = track.children[modalIndex];
+    if (cap) {
+      const text = slide ? slide.dataset.caption || "" : "";
+      cap.textContent = text;
+      cap.hidden = !text;          // 説明文がない写真では行そのものを出さない
+    }
+    if (cur) cur.textContent = String(modalIndex + 1);
+    fitPhotoModalHeight();
+  }
+
+  // 下方向へ滑らせながら閉じる
+  function closePhotoModal() {
+    const modal = $("#photo-modal");
+    if (!modal || modal.hidden) return;
+    const sheet = modal.querySelector(".modal-sheet");
+    if (!sheet) { closeAnyModal(); return; }
+    sheet.classList.add("is-closing");
+    window.setTimeout(() => {
+      sheet.classList.remove("is-closing");
+      closeAnyModal();
+    }, 260);
   }
 
   function openPhotoList(list, index, fallbackCaption) {
@@ -656,13 +716,10 @@
     renderPhotoModalBody();
     $("#photo-modal").hidden = false;
     document.body.classList.add("modal-open");
-  }
-
-  function stepPhoto(delta) {
-    const next = modalIndex + delta;
-    if (next < 0 || next >= modalPhotos.length) return;
-    modalIndex = next;
-    renderPhotoModalBody();
+    // 隠れている間は幅が0で計算できないので、表示してから位置を合わせる
+    const track = $("#photo-modal-body .pm-track");
+    if (track) track.scrollLeft = modalIndex * track.clientWidth;
+    syncPhotoModal();
   }
 
   function openPhotoModal(spotIndex, photoIndex) {
@@ -905,17 +962,15 @@
       closeIndexPanel();
       return;
     }
+    // 写真の拡大表示: 写真そのもの以外（▽ボタン・まわりの余白・背景）をタップしたら閉じる
+    const photoModalEl = e.target.closest("#photo-modal");
+    if (photoModalEl) {
+      if (!e.target.closest(".pm-media")) closePhotoModal();
+      return;
+    }
     const closeEl = e.target.closest("[data-close]");
     if (closeEl) {
       closeAnyModal();
-      return;
-    }
-    if (e.target.closest("[data-photo-prev]")) {
-      stepPhoto(-1);
-      return;
-    }
-    if (e.target.closest("[data-photo-next]")) {
-      stepPhoto(1);
       return;
     }
     const groupPhoto = e.target.closest("[data-album-group-photo]");
