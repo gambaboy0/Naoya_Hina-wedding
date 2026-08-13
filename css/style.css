@@ -18,6 +18,13 @@
   --adopt-navy: #6c97b6;  /* 採用配色の紺色（採用配色.jpg） */
   --adopt-cream: #f6f2d7; /* 採用配色のクリーム色（採用配色.jpg） */
 
+  --page-bg: #a4c5da;     /* 各ページの背景（2026-08-13 クライアント指定 #A4C5DA） */
+
+  /* 各ページ上部の「戻る」「メニュー」ボタン（2026-08-13 クライアント支給のデザイン画像より採色）
+     見本: クライアント納入写真\戻るボタン.jpg ／ ハンバーガーボタン（メニューボタン）.jpg */
+  --btn-ring: #e8b36b;    /* 円の輪郭（やわらかいオレンジ） */
+  --btn-icon: #2a5090;    /* 矢印と三本線（青） */
+
   --font-pop: "Shrikhand", "Zen Maru Gothic", serif;               /* 英字ポップ見出し */
   --font-hand: "Yusei Magic", "Zen Maru Gothic", sans-serif;        /* 手書きマーカー風 */
   --font-serif: "Zen Maru Gothic", "Hiragino Maru Gothic ProN", "YuGothic", "Yu Gothic", sans-serif;
@@ -237,8 +244,8 @@ body {
   width: 2.6rem;
   height: 2.6rem;
   border-radius: 50%;
-  background: rgba(255, 253, 246, 0.92);
-  border: 2px solid var(--dark);
+  background: rgba(255, 255, 255, 0.95);
+  border: 3px solid var(--btn-ring);
   flex-direction: column;
   align-items: center;
   justify-content: center;
@@ -251,9 +258,10 @@ body {
 }
 
 .index-toggle span {
-  width: 1.1rem;
-  height: 1px;
-  background: var(--dark);
+  width: 1.15rem;
+  height: 2px;
+  border-radius: 1px;
+  background: var(--btn-icon);
 }
 
 /* ---------- fixed back button ---------- */
@@ -265,12 +273,13 @@ body {
   width: 2.6rem;
   height: 2.6rem;
   border-radius: 50%;
-  background: rgba(255, 253, 246, 0.92);
-  border: 2px solid var(--dark);
+  background: rgba(255, 255, 255, 0.95);
+  border: 3px solid var(--btn-ring);
   align-items: center;
   justify-content: center;
-  color: var(--dark);
-  font-size: 1.2rem;
+  color: var(--btn-icon);
+  font-size: 1.35rem;
+  font-weight: 700;
   line-height: 1;
   cursor: pointer;
 }
@@ -602,12 +611,9 @@ body {
   -webkit-backdrop-filter: blur(3px);
 }
 
-/* BACKボタン: メニュー選択画面のときだけ右下に出す(押すと挨拶文に戻る) */
+/* BACKボタン: メニュー選択画面のときだけ、8つのボタンの真下に出す。
+   挨拶文のときのMENUボタンとちょうど入れ替わる位置になる(押すと挨拶文に戻る) */
 .top-back-toggle {
-  position: absolute;
-  right: 1rem;
-  bottom: 0.9rem;
-  z-index: 3;
   display: none;
 }
 
@@ -619,6 +625,13 @@ body {
 .top-hero-full.is-menu-open .top-hero-header,
 .top-hero-full.is-menu-open .top-menu-toggle {
   display: none;
+}
+
+/* 挨拶文とメニューは同じ位置に重ねてあるため、挨拶文の高さがそのまま枠の高さになる。
+   メニュー選択画面ではその高さを詰めて、BACKボタンが8つのボタンの真下に来るようにする */
+.top-hero-full.is-menu-open .top-greeting-box {
+  height: 0;
+  overflow: hidden;
 }
 
 /* メニュー選択画面はナビを上寄せしすぎないよう余白を確保 */
@@ -705,7 +718,7 @@ body {
   color: var(--gray);
 }
 
-/* ---------- 各ページ共通の紺色背景（採用配色）。地の文字はクリーム色 ---------- */
+/* ---------- 各ページ共通の背景色。地の文字はクリーム色 ---------- */
 #groom,
 #bride,
 #our-history,
@@ -714,7 +727,7 @@ body {
 #qa,
 #map,
 #album {
-  background: var(--adopt-navy);
+  background: var(--page-bg);
   color: var(--adopt-cream);
 }
 
