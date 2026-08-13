@@ -312,7 +312,7 @@ body {
   bottom: 0;
   width: 78%;
   max-width: 320px;
-  background: var(--adopt-navy);
+  background: var(--page-bg);
   padding: 4.4rem 1.7rem 2rem;
   overflow-y: auto;
   animation: slideInRight 0.22s ease;
