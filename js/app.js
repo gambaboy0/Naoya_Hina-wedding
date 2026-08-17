@@ -514,18 +514,12 @@
     }).join("");
   }
 
-  // ふたりの写真サムネイル（写真が未登録の間はプレースホルダーを表示）
+  // ふたりの写真サムネイル
+  // 2026-08-18: マップに写真を載せる案は取りやめになったため、写真が未登録のときは
+  // 「お写真1〜3」のグレー枠を出さず、何も表示しない（photos を設定すれば従来どおり出ます）。
   function buildSpotPhotosHtml(spot, spotIndex) {
     const photos = spot.photos || [];
-    if (photos.length === 0) {
-      return (
-        '<div class="map-desc-photos">' +
-        [1, 2, 3]
-          .map((n) => '<div class="map-photo-thumb map-photo-placeholder">お写真' + n + "</div>")
-          .join("") +
-        "</div>"
-      );
-    }
+    if (photos.length === 0) return "";
     return (
       '<div class="map-desc-photos">' +
       photos

@@ -496,36 +496,35 @@ const MAP_INTRO = [
   "富山にお越しの際は ぜひ立ち寄ってみてください",
 ];
 
-// address は 2026-08-18 に各店舗の公開情報で確認済み。
+// address・gmap・web・instagram は 2026-08-18 に新郎新婦からいただいた情報。
 // lat / lng は住所からの概算値です（ピンの位置は実機で1件ずつ確認してください）。
-// desc は新郎新婦からいただいた紹介文（2026-08-18 受領）。zoom はボタンを押したときの拡大率（数字が大きいほど拡大）。
-// photos: ふたりの写真を { src: "assets/img/map/xxx.jpg", caption: "写真の説明" } の形で
-//         複数枚追加できます（小さく並び、タップで拡大表示されます）。
-// web / instagram: お店の公式サイトやInstagramのURLを設定すると説明カードにリンクが表示されます。
-//         例: web: "https://example.com", instagram: "https://www.instagram.com/xxx/"
-// gmap: GoogleマップのリンクURLを直接設定できます（新郎新婦から共有されたリンクをそのまま貼り付け）。
-//       未設定の場合は gquery の検索クエリでGoogleマップを開きます。
-// placeholder: true の項目は「準備中」のグレー枠になります（場所が決まったら差し替え）。
+// gmap を設定してあるので、「Googleマップで開く →」は新郎新婦からいただいたリンクを開きます。
+// desc は新郎新婦からいただいた紹介文。zoom はボタンを押したときの拡大率（数字が大きいほど拡大）。
+// photos: 写真の掲載は 2026-08-18 に取りやめ。載せる方針に戻った場合は
+//         { src: "assets/img/map/xxx.jpg", caption: "写真の説明" } の形で追加すれば表示されます。
+// placeholder: true の項目は「準備中」のグレー枠になります（現在は使用していません）。
 const MAP_SPOTS = [
   {
     no: 1,
     name: "だんらんや",
     lat: 36.657, lng: 137.23, zoom: 16,
-    address: "富山県富山市太田81-1",
+    address: "富山県富山市太田北区81-1（富山山室本店）",
     desc:
       "直弥さんのお気に入りが、今ではふたりの定番に🍴<br>" +
       "ふたりが出会う前から、毎月給料日に通っていたほど直弥さんが大好きなお店！イチオシは網焼きハンバーグ。今ではふたりでいちばんよく行く洋食屋さんです。",
-    gquery: "洋食だんらんや 富山市太田",
+    gmap: "https://www.google.com/maps/search/?api=1&query=洋食だんらんや+富山山室本店",
+    web: "https://www.danranya.co.jp/",
   },
   {
     no: 2,
     name: "ノマ",
     lat: 36.665, lng: 137.209, zoom: 16,
-    address: "富山県富山市上堀町60-4",
+    address: "富山県富山市堀60-4",
     desc:
       "何を選んでも大満足のランチ🍚<br>" +
       "メインから小鉢まで、どれもおいしくボリューム満点。おしゃれで居心地のいいお店です🌱 白ご飯を納豆そぼろ丼に変更するのがおすすめ！",
-    gquery: "ノマ 富山市上堀町",
+    gmap: "https://www.google.com/maps/search/?api=1&query=ノマ+富山市堀60-4",
+    instagram: "https://www.instagram.com/noma_toyama_cafe/",
   },
   {
     no: 3,
@@ -535,17 +534,19 @@ const MAP_SPOTS = [
     desc:
       "行列のできる人気ラーメン店🍜<br>" +
       "おすすめは濃厚な鶏白湯！店主さんの細やかな気遣いも魅力です。味も接客も大満足で、並んででも食べたい、リピート間違いなしのお店！",
-    gquery: "中華そば つぼみ 富山市新庄北町",
+    gmap: "https://www.google.com/maps/search/?api=1&query=中華そば+つぼみ+富山市新庄北町18-24",
+    instagram: "https://www.instagram.com/tsubomi20180720/",
   },
   {
     no: 4,
     name: "Cafe MicT",
     lat: 36.693, lng: 137.2325, zoom: 16,
-    address: "富山県富山市荒川2丁目24-15",
+    address: "富山県富山市荒川2-24-15",
     desc:
       "こだわりの一杯を楽しめるカフェ☕️<br>" +
       "木の温もりを感じる落ち着いた店内で、実力派バリスタが淹れるこだわりのコーヒーと、相性ぴったりのスイーツが楽しめます🌿",
-    gquery: "Coffee Beans + Cafe MicT 富山市荒川",
+    gmap: "https://www.google.com/maps/search/?api=1&query=MicT+富山市荒川2-24-15",
+    instagram: "https://www.instagram.com/mict_info/",
   },
   {
     no: 5,
@@ -555,7 +556,8 @@ const MAP_SPOTS = [
     desc:
       "海を眺めながら食べる贅沢かき氷🍧<br>" +
       "自家製ソースと焼き菓子を組み合わせたかき氷が特徴！アサイーボウルや焼き菓子の販売もありますよ🍪 海沿いをお散歩するのもおすすめです🌱",
-    gquery: "氷と焼き菓子 ミチツムギ 射水市本江",
+    gmap: "https://www.google.com/maps/search/?api=1&query=氷と焼き菓子+ミチツムギ+射水市本江1426",
+    instagram: "https://www.instagram.com/michitsumugi/",
   },
   {
     no: 6,
@@ -565,7 +567,8 @@ const MAP_SPOTS = [
     desc:
       "3回目のデートで訪れたお寿司屋さん🍣<br>" +
       "回転寿司ながら、ひと手間かけた本格的なお寿司が魅力。富山のおいしいお寿司を気軽に楽しみたい方におすすめです！",
-    gquery: "廻転鮨処すしだるま 富山市二俣",
+    gmap: "https://www.google.com/maps/search/?api=1&query=すしだるま+富山市二俣448-1",
+    web: "https://sushidaruma.biz/",
   },
   {
     no: 7,
@@ -575,26 +578,27 @@ const MAP_SPOTS = [
     desc:
       "ふたりが初めて出会った場所☕️<br>" +
       "初対面でモーニングをしながら3時間おしゃべり！初めましてとは思えないくらい、時間が経つのもあっという間でした🌱",
-    gquery: "コメダ珈琲店 富山掛尾店",
+    gmap: "https://www.google.com/maps/search/?api=1&query=コメダ珈琲店+富山掛尾店",
   },
   {
     no: 8,
-    name: "カーブドキキ",
-    lat: 36.692, lng: 137.214, zoom: 17,
-    address: "富山県富山市（新富町駅周辺）※番地は未確認",
+    name: "カーブ・ド・キキ",
+    lat: 36.6985, lng: 137.2128, zoom: 17,
+    address: "富山県富山市桜町2-1-10 山本ビル2F",
     desc:
       "ひなの“推しおじ”がいる、隠れ家的なワインバー🍷<br>" +
       "ちょっと珍しいワインや日本酒が楽しめます。マイペースで飾らないマスターの人柄も素敵！手作りのおいしいプレートも毎回のお楽しみです。",
-    gquery: "CAVE DE KIKI カーブドキキ 富山",
+    gmap: "https://www.google.com/maps/search/?api=1&query=カーブ・ド・キキ+富山市桜町2-1-10",
   },
   {
     no: 9,
     name: "吟魚系列",
-    lat: 36.6905, lng: 137.2113, zoom: 15,
-    address: "富山県富山市内に5店舗",
+    lat: 36.6982, lng: 137.2108, zoom: 16,
+    address: "富山県富山市新富町2-1-3（吟魚 本店）ほか市内に5店舗",
     desc:
       "富山で居酒屋に迷ったら、まずおすすめしたいお店🍶<br>" +
       "富山らしい料理や地酒が豊富で、刺身盛りも絶品！何を頼んでもおいしく、系列店が5店舗あるので予定に合わせて選びやすいのも魅力です。",
-    gquery: "吟魚 富山",
+    gmap: "https://www.google.com/maps/search/?api=1&query=吟魚+富山市新富町2-1-3",
+    instagram: "https://www.instagram.com/forza.gingyo/",
   },
 ];
