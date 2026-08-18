@@ -322,7 +322,16 @@
         slider.querySelector(".ph-next").disabled = i === total - 1;
         if (cap) {
           const slide = track.children[i];
-          cap.textContent = slide ? slide.dataset.caption || "" : "";
+          const capText = slide ? slide.dataset.caption || "" : "";
+          // アルバムは「点線 ── 📍 テキスト ── 点線」の形なので、中の文字だけ差し替える
+          const capSlot = cap.querySelector(".ph-cap-text");
+          if (capSlot) {
+            capSlot.textContent = capText;
+            // 説明文が無い写真では、点線とピンごと隠す（高さは保つ）
+            cap.classList.toggle("is-empty", !capText);
+          } else {
+            cap.textContent = capText;
+          }
         }
         thumbs.forEach((t, n) => t.classList.toggle("is-on", n === i));
       }
@@ -601,7 +610,19 @@
       "</div>" +
       // 小さい写真の列がドットの代わりになるので、ドットは隠す（枚数の計算には使う）
       '<div class="ph-dots is-off">' + dots + "</div>" +
-      (hasCaption ? '<p class="ph-caption timeline-text"></p>' : "") +
+      // 2026-08-18: 説明文を「点線 ── 📍 テキスト ── 点線」の形に変更（修正イメージ③）
+      (hasCaption
+        ? '<p class="ph-caption timeline-text">' +
+          '<span class="ph-cap-rule"></span>' +
+          '<span class="ph-cap-main">' +
+          '<svg class="ph-cap-pin" viewBox="0 0 24 24" aria-hidden="true">' +
+          '<path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/>' +
+          "</svg>" +
+          '<span class="ph-cap-text"></span>' +
+          "</span>" +
+          '<span class="ph-cap-rule"></span>' +
+          "</p>"
+        : "") +
       "</div>"
     );
   }

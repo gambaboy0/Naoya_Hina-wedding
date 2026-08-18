@@ -1101,8 +1101,46 @@ video.photo-modal-img {
   margin-bottom: 0;
 }
 
+/* アルバムの説明文（2026-08-18 修正イメージ③）
+   「点線 ──── 📍 海遊館 大阪 ──── 点線」の形。
+   点線は文字と同じクリーム色を薄くしたもの、ピンはオレンジ。 */
 #album-list .ph-caption {
   min-height: 1.35em; /* 1行分 */
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+#album-list .ph-cap-rule {
+  flex: 1 1 0;
+  min-width: 0;
+  height: 6px;
+  background-image: radial-gradient(currentColor 1.1px, transparent 1.2px);
+  background-size: 7px 6px;
+  background-repeat: repeat-x;
+  background-position: center;
+  opacity: 0.5;
+}
+
+#album-list .ph-cap-main {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.3rem;
+  flex: 0 1 auto;
+  min-width: 0;
+}
+
+#album-list .ph-cap-pin {
+  width: 1.05em;
+  height: 1.05em;
+  flex-shrink: 0;
+  fill: var(--orange);
+}
+
+/* 説明文が無い写真では、点線とピンごと隠す（高さは保つのでガタつかない） */
+#album-list .ph-caption.is-empty {
+  visibility: hidden;
 }
 
 #album-list .timeline-stage {
