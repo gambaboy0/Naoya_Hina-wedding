@@ -1092,6 +1092,23 @@ video.photo-modal-img {
   position: relative;
 }
 
+/* アルバムだけ、説明文とタイトルの間を「写真と説明文の間」と同じ 0.55rem にそろえる。
+   （2026-08-18 調整。#album-list を付けてアルバム限定にしてあるので、
+     新郎プロフィール・ふたりの思い出のスライダーには影響しない）
+   もとは説明文の枠が2行分（min-height 2.7em）確保されていたため、
+   1行の説明文だと下に1行分の空白が残り、間が広く見えていた。 */
+#album-list .photo-slider {
+  margin-bottom: 0;
+}
+
+#album-list .ph-caption {
+  min-height: 1.35em; /* 1行分 */
+}
+
+#album-list .timeline-stage {
+  margin-top: 0.55rem;
+}
+
 /* ---------- アルバム用：全部の写真を小さく1列に並べたもの ---------- */
 /* 2026-08-18 並び替え: 拡大写真の【下】→【上】へ移動 */
 .photo-slider .ph-thumbs {
