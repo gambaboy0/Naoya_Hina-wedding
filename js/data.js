@@ -59,9 +59,9 @@ const GROOM_PROFILE = {
   photo: "assets/img/profile/groom.jpg",
   stats: [
     { label: "BIRTHDAY", value: "1994.3.27" },
-    { label: "BIRTHPLACE", value: "岐阜県" },
+    { label: "BIRTHPLACE", value: "岐阜県" }, // 2026-08-18 確定（生い立ち文の「愛知県にて誕生」とは別。生まれ＝愛知／出身＝岐阜）
     { label: "BLOOD TYPE", value: "B" }, // 二人とも同じ血液型とのこと
-    { label: "MBTI", value: "INFP-A（仲介者）" }, // ※要再確認
+    { label: "MBTI", value: "INFP-A（仲介者）" }, // 2026-08-18 確定
     { label: "WORK", value: "株式会社不二越" },
     { label: "HOBBY", value: "ゴルフ キャンプ 旅行" },
     { label: "FAVORITE FOOD", value: "お寿司 うなぎ 梅 トマト" },
@@ -401,7 +401,7 @@ const NAV_ITEMS = [
   { id: "seating", en: "Seating", jp: "お座席", icon: "assets/img/nav/nav-seating.jpg?v=20260818a", btn: { en1: "Seating", jp: "席次表" } },
   { id: "our-history", en: "Memory", jp: "ふたりの思い出", icon: "assets/img/nav/nav-our-history.jpg?v=20260818a", btn: { en1: "Memory", jp: "ふたりの思い出" } },
   { id: "qa", en: "Q&amp;A", jp: "ふたりに質問", icon: "assets/img/nav/nav-qa.jpg?v=20260818a", btn: { en1: "Q&amp;A", jp: "ふたりに質問" } },
-  { id: "map", en: "Map", jp: "おすすめマップ", icon: "assets/img/nav/nav-map.jpg?v=20260818a", btn: { en1: "Map", jp: "おすすめマップ" } },
+  { id: "map", en: "Map", jp: "グルメマップ", icon: "assets/img/nav/nav-map.jpg?v=20260818e", btn: { en1: "Map", jp: "グルメマップ" } },
   { id: "album", en: "Photo", jp: "アルバム", icon: "assets/img/nav/nav-album.jpg?v=20260818a", btn: { en1: "Photo", jp: "アルバム" } },
 ];
 
@@ -494,8 +494,8 @@ const ALBUM_GROUPS = [
 // ---------- おすすめマップ（新郎新婦の思い出の場所） ----------
 // タイトル下に表示する説明文（1要素＝1行）
 const MAP_INTRO = [
-  "ふたりが実際に訪れた 思い出のおすすめスポットをご紹介します",
-  "富山にお越しの際は ぜひ立ち寄ってみてください",
+  "新郎新婦がおすすめする富山のグルメマップです",
+  "富山にお越しの際はぜひ行ってみてください！",
 ];
 
 // address・gmap・web・instagram は 2026-08-18 に新郎新婦からいただいた情報。

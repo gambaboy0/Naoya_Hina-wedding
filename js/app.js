@@ -530,25 +530,27 @@
   // お店の写真
   // 写真が未登録のときは何も表示しない（「お写真1〜3」のグレー枠は 2026-08-18 に撤去）。
   // 1枚だけのときは地図のすぐ下に大きく1枚、2枚以上のときは従来どおり横に並べる。
+  // 2026-08-18: グルメマップの写真は「タップしても何も起こらない」仕様に変更。
+  //   ボタンではなく div で出し、data-spot-photo も付けない（拡大表示を呼ばない）。
   function buildSpotPhotosHtml(spot, spotIndex) {
     const photos = spot.photos || [];
     if (photos.length === 0) return "";
     if (photos.length === 1) {
       const p = photos[0];
       return (
-        '<button type="button" class="map-photo-single" data-spot-photo="' + spotIndex + '::0">' +
+        '<div class="map-photo-single">' +
         '<img src="' + p.src + '" alt="' + (p.caption || spot.name) + '">' +
-        "</button>"
+        "</div>"
       );
     }
     return (
       '<div class="map-desc-photos">' +
       photos
         .map(
-          (p, pi) =>
-            '<button type="button" class="map-photo-thumb" data-spot-photo="' + spotIndex + "::" + pi + '">' +
+          (p) =>
+            '<div class="map-photo-thumb">' +
             '<img src="' + p.src + '" alt="' + (p.caption || spot.name) + '">' +
-            "</button>"
+            "</div>"
         )
         .join("") +
       "</div>"
@@ -1012,12 +1014,8 @@
       openAlbumGroupModal(Number(parts[0]), Number(parts[1]));
       return;
     }
-    const photoThumb = e.target.closest("[data-spot-photo]");
-    if (photoThumb) {
-      const parts = photoThumb.dataset.spotPhoto.split("::");
-      openPhotoModal(Number(parts[0]), Number(parts[1]));
-      return;
-    }
+    // 2026-08-18: グルメマップの写真は拡大しない仕様になったため、この処理は無効化。
+    // （写真側に data-spot-photo を付けていないので、そもそもここには入らない）
     const spotBtn = e.target.closest(".map-spot-btn[data-spot]");
     if (spotBtn) {
       selectMapSpot(Number(spotBtn.dataset.spot));

@@ -701,11 +701,12 @@ body {
    2026-08-18 追加調整:
      ・画像は白フチを切り落とした版に差し替え済み。残る四隅の白は角丸で切り抜く
      ・object-fit: cover にして、枠の中に地の色が覗かないようにする
-     ・縁取りは BACK ボタンと同じ rgba(255,255,255,0.55) */
+     ・縁取りは BACK ボタンと同じ色 rgba(255,255,255,0.55)。
+       2026-08-18 太さを 1px → 3px に変更（もう少し太く、というご要望） */
 .nav-square.has-icon {
   aspect-ratio: 400 / 478; /* いただいた画像の縦横比に合わせる（元は正方形） */
   background: none;
-  border: 1px solid rgba(255, 255, 255, 0.55);
+  border: 3px solid rgba(255, 255, 255, 0.55);
   box-shadow: none;
   padding: 0;
   border-radius: 12%;
@@ -1569,7 +1570,10 @@ video.photo-modal-img {
   border-radius: 10px;
   overflow: hidden;
   background: var(--white);
-  cursor: pointer;
+  /* 2026-08-18: タップしても何も起こらない仕様にしたので、指カーソルとタップ反応を消す */
+  cursor: default;
+  pointer-events: none;
+  -webkit-tap-highlight-color: transparent;
   aspect-ratio: 4 / 3;
 }
 
@@ -1596,7 +1600,10 @@ video.photo-modal-img {
   aspect-ratio: 1;
   border-radius: 8px;
   overflow: hidden;
-  cursor: pointer;
+  /* 2026-08-18: タップしても何も起こらない仕様にしたので、指カーソルとタップ反応を消す */
+  cursor: default;
+  pointer-events: none;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .map-photo-thumb img {
