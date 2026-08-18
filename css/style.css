@@ -458,12 +458,17 @@ body {
   flex-shrink: 0;
 }
 
-/* お座席ページの案内（新郎新婦からいただいた画像・2026-08-18） */
+/* お座席・アルバムページの案内（新郎新婦からいただいた画像・2026-08-18）
+   いただいた画像は元のスクリーンショットの水色が周囲に数px残っていたため、
+   画像側で切り落とし済み。四隅に残る水色は下の角丸で切り抜く。
+   角丸16px … 表示幅が最大(429px)のとき角の水色が約13px分になるため、それを上回る値。
+   縁取りは BACK ボタン・メニューボタンと同じ rgba(255,255,255,0.55)。 */
 .seating-hint-img {
   display: block;
   width: 100%;
   height: auto;
-  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  border-radius: 16px;
   margin: 0 0 2rem;
 }
 
@@ -692,14 +697,19 @@ body {
 }
 
 /* ---------- 画像のボタン（2026-08-18 新郎新婦からいただいたアイコンに差し替え） ----------
-   画像そのものが角丸・塗り・文字を含んでいるので、CSS側の背景・枠・影は消す。 */
+   画像そのものが塗り・アイコン・文字を含んでいるので、CSS側の背景・影は消す。
+   2026-08-18 追加調整:
+     ・画像は白フチを切り落とした版に差し替え済み。残る四隅の白は角丸で切り抜く
+     ・object-fit: cover にして、枠の中に地の色が覗かないようにする
+     ・縁取りは BACK ボタンと同じ rgba(255,255,255,0.55) */
 .nav-square.has-icon {
-  aspect-ratio: 400 / 476; /* いただいた画像の縦横比に合わせる（元は正方形） */
+  aspect-ratio: 400 / 478; /* いただいた画像の縦横比に合わせる（元は正方形） */
   background: none;
-  border: none;
+  border: 1px solid rgba(255, 255, 255, 0.55);
   box-shadow: none;
   padding: 0;
-  border-radius: 0;
+  border-radius: 12%;
+  overflow: hidden;
 }
 
 .nav-square.has-icon:nth-child(3n + 1),
@@ -710,10 +720,8 @@ body {
 .nav-square-img {
   width: 100%;
   height: 100%;
-  object-fit: contain;
+  object-fit: cover;
   display: block;
-  /* 画像の四隅に残る白を切り落とす */
-  border-radius: 12%;
 }
 
 /* 英語（1行）：オレンジ、マス幅基準で最大化 */
@@ -1078,12 +1086,19 @@ video.photo-modal-img {
   display: none;
 }
 
+/* アルバム用：拡大写真のまわり。矢印と枚数カウンタの位置の基準になる
+   （2026-08-18 の並び替えで、一覧を上に出したため必要になった） */
+.photo-slider .ph-stage {
+  position: relative;
+}
+
 /* ---------- アルバム用：全部の写真を小さく1列に並べたもの ---------- */
+/* 2026-08-18 並び替え: 拡大写真の【下】→【上】へ移動 */
 .photo-slider .ph-thumbs {
   display: flex;
   justify-content: center;
   gap: 2px;
-  margin-top: 0.55rem;
+  margin: 0 0 0.55rem;
 }
 
 .photo-slider .ph-thumb {

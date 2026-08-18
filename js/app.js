@@ -587,16 +587,21 @@
       })
       .join("");
 
+    // 2026-08-18 並び替え: 【前】拡大写真→説明文→一覧　【後】一覧→拡大写真→説明文
+    // 矢印と「1 / 15」は拡大写真の上に重ねたいので、写真まわりを .ph-stage で囲って
+    // その中で位置を決める（囲わないと、一覧の上に矢印やカウンタが乗ってしまう）。
     return (
       '<div class="photo-slider" data-slider="album' + gi + '">' +
+      '<div class="ph-thumbs">' + thumbs + "</div>" +
+      '<div class="ph-stage">' +
       '<div class="ph-track">' + slides + "</div>" +
       '<button class="ph-arrow ph-prev" type="button" aria-label="前の写真">‹</button>' +
       '<button class="ph-arrow ph-next" type="button" aria-label="次の写真">›</button>' +
       '<div class="ph-count"><span class="ph-cur">1</span> / ' + list.length + "</div>" +
+      "</div>" +
       // 小さい写真の列がドットの代わりになるので、ドットは隠す（枚数の計算には使う）
       '<div class="ph-dots is-off">' + dots + "</div>" +
       (hasCaption ? '<p class="ph-caption timeline-text"></p>' : "") +
-      '<div class="ph-thumbs">' + thumbs + "</div>" +
       "</div>"
     );
   }
