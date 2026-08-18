@@ -1144,17 +1144,18 @@ video.photo-modal-img {
   visibility: hidden;
 }
 
+/* 2026-08-19: タイトルが一番上になったので、上の余白は不要・下に少し空ける */
 #album-list .timeline-stage {
-  margin-top: 0.55rem;
+  margin: 0 auto 0.7rem;
 }
 
 /* ---------- アルバム用：全部の写真を小さく1列に並べたもの ---------- */
-/* 2026-08-18 並び替え: 拡大写真の【下】→【上】へ移動 */
+/* 2026-08-19 並び替え: 一番下（説明文の下）に配置 */
 .photo-slider .ph-thumbs {
   display: flex;
   justify-content: center;
   gap: 2px;
-  margin: 0 0 0.55rem;
+  margin: 0.55rem 0 0;
 }
 
 .photo-slider .ph-thumb {
@@ -1351,7 +1352,7 @@ video.photo-modal-img {
 .full-chart {
   min-width: 620px;
   width: max-content;
-  border: 2px solid var(--dark);
+  border: 1px solid rgba(255, 255, 255, 0.55); /* 2026-08-19 トップのBACKボタンと同じ縁取りに変更 */
   border-radius: 12px;
   background: var(--white);
   padding: 1.2rem 1rem 1.4rem;
@@ -1413,21 +1414,23 @@ video.photo-modal-img {
   margin-bottom: 1.6rem;
 }
 
+/* 2026-08-19: 正方形のカード → 横長のピル型に変更（番号を左、店名を右） */
 .map-spot-btn {
   appearance: none;
-  aspect-ratio: 1;
+  min-height: 2.9rem;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
-  justify-content: center;
-  gap: 0.4rem;
+  justify-content: flex-start;
+  gap: 0.35rem;
   background: var(--white);
-  border: 2px solid var(--dark);
-  border-radius: 12px;
-  box-shadow: 3px 3px 0 rgba(51, 64, 74, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.55); /* 2026-08-19 トップのBACKボタンと同じ縁取りに変更 */
+  border-radius: 999px;
+  box-shadow: 2px 2px 0 rgba(51, 64, 74, 0.25);
   font: inherit;
-  padding: 0.4rem;
+  padding: 0.3rem 0.5rem 0.3rem 0.32rem;
   cursor: pointer;
+  text-align: left;
 }
 
 .map-spot-btn.is-active {
@@ -1469,14 +1472,18 @@ video.photo-modal-img {
   font-family: var(--font-sans);
   color: var(--dark);
   font-size: 0.62rem;
-  line-height: 1.35;
-  letter-spacing: 0.02em;
-  text-align: center;
+  line-height: 1.25;
+  letter-spacing: 0.01em;
+  /* 2026-08-19: ピル型に合わせて左寄せ。長い店名は2行で折り返す */
+  text-align: left;
+  flex: 1 1 auto;
+  min-width: 0;
 }
 
+/* 2026-08-19: 地図を横長に（340px → 220px）。並び順も 地図→ボタン→説明 に変更 */
 .toyama-map {
-  height: 340px;
-  border: 2px solid var(--dark);
+  height: 220px;
+  border: 1px solid rgba(255, 255, 255, 0.55); /* 2026-08-19 トップのBACKボタンと同じ縁取りに変更 */
   border-radius: 12px;
   margin-bottom: 0.5rem;
   z-index: 0;
@@ -1508,7 +1515,7 @@ video.photo-modal-img {
 
 .map-spot-desc {
   background: var(--cream);
-  border: 2px solid var(--dark);
+  border: 1px solid rgba(255, 255, 255, 0.55); /* 2026-08-19 トップのBACKボタンと同じ縁取りに変更 */
   border-radius: 12px;
   box-shadow: 3px 3px 0 rgba(51, 64, 74, 0.25);
   padding: 1.1rem 1.2rem 1.2rem;
@@ -1726,7 +1733,7 @@ video.photo-modal-img {
 
 .qa-card {
   background: var(--white);
-  border: 2px solid var(--dark);
+  border: 1px solid rgba(255, 255, 255, 0.55); /* 2026-08-19 トップのBACKボタンと同じ縁取りに変更 */
   border-radius: 12px;
   padding: 1.1rem 1.2rem 1.2rem;
   box-shadow: 3px 3px 0 rgba(51, 64, 74, 0.25);

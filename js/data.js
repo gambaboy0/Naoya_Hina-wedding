@@ -308,7 +308,7 @@ const TABLES = [
     guests: [
       { name: "竹澤 朋", yomi: "たけざわ とも", kana: "", side: "groom", category: "family", relation: "義兄", note: "" },
       { name: "細川 満弘", yomi: "ほそかわ みつひろ", kana: "", side: "groom", category: "family", relation: "伯父", note: "" },
-      { name: "竹澤 侑希", yomi: "たけざわ ゆうき", kana: "", side: "groom", category: "family", relation: "姪", note: "" },
+      { name: "竹澤 侑希", yomi: "たけざわ ゆうき", kana: "", side: "groom", category: "family", relation: "姪", note: "", honorific: "ちゃん" }, // 2026-08-19 敬称を「ちゃん」に
       { name: "細川 頼男", yomi: "ほそかわ よりお", kana: "", side: "groom", category: "family", relation: "伯父", note: "" },
       { name: "竹澤 眞美子", yomi: "たけざわ まみこ", kana: "", side: "groom", category: "family", relation: "姉", note: "" },
       { name: "細川 操", yomi: "ほそかわ みさお", kana: "", side: "groom", category: "family", relation: "伯母", note: "" },
@@ -485,8 +485,10 @@ const ALBUM_GROUPS = [
       "assets/img/album/g18/06.jpg",
       "assets/img/album/g18/07.jpg",
       "assets/img/album/g18/08.jpg",
-      { src: "assets/img/album/g18/09.mp4", type: "video" },
-      { src: "assets/img/album/g18/10.mp4", type: "video" },
+      // 2026-08-19: 動画2本（09.mp4 / 10.mp4）は掲載を取りやめ。
+      // 載せ直す場合は下の2行を戻すだけでよい（ファイルは assets/img/album/g18/ に残してある）。
+      // { src: "assets/img/album/g18/09.mp4", type: "video" },
+      // { src: "assets/img/album/g18/10.mp4", type: "video" },
     ],
   },
 ];
@@ -586,7 +588,7 @@ const MAP_SPOTS = [
     desc:
       "ふたりが初めて出会った場所☕️<br>" +
       "初対面でモーニングをしながら3時間おしゃべり！初めましてとは思えないくらい、時間が経つのもあっという間でした🌱",
-    photos: [{ src: "assets/img/map/spot-07.jpg", caption: "コメダ珈琲店 富山掛尾店" }],
+    photos: [{ src: "assets/img/map/spot-07.jpg?v=20260819a", caption: "コメダ珈琲店 富山掛尾店" }],
     gmap: "https://www.google.com/maps/search/?api=1&query=コメダ珈琲店+富山掛尾店",
   },
   {

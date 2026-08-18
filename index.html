@@ -9,7 +9,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Shrikhand&family=Zen+Maru+Gothic:wght@400;500;700&family=Yusei+Magic&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
 <!-- ?v= の数字は、更新したときにブラウザが古い表示を出さないための目印です（日付＋連番） -->
-<link rel="stylesheet" href="css/style.css?v=20260818h">
+<link rel="stylesheet" href="css/style.css?v=20260819g">
 </head>
 <body>
 
@@ -169,17 +169,19 @@
     <h2 class="section-title" data-title-for="map"></h2>
     <p class="map-intro" id="map-intro"></p>
 
-    <!-- 12の場所ボタン（3列×4段） -->
-    <div class="map-spot-grid" id="map-spot-grid"></div>
+    <!-- 2026-08-19 並び替え: 上から 地図 → 選択ボタン → 詳細説明 -->
 
     <!-- 富山県地図（Leaflet） -->
     <div id="toyama-map" class="toyama-map"></div>
     <p class="map-note">正確な位置はグーグルマップでご確認ください</p>
 
-    <!-- 選んだ場所の説明（ふたりの写真＋紹介文） -->
+    <!-- 9つの場所ボタン（3列×3段） -->
+    <div class="map-spot-grid" id="map-spot-grid"></div>
+
+    <!-- 選んだ場所の説明（お店の写真＋紹介文） -->
     <div id="map-spot-desc" class="map-spot-desc" hidden></div>
 
-    <button type="button" class="to-top-btn" data-scroll-top>&uarr; ページ上部へ</button>
+    <!-- 2026-08-19: 「↑ ページ上部へ」ボタンは削除 -->
     <nav class="profile-nav-grid" id="nav-grid-map"></nav>
   </section>
 
@@ -220,7 +222,7 @@
 </div>
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-<script src="js/data.js?v=20260818h"></script>
-<script src="js/app.js?v=20260818h"></script>
+<script src="js/data.js?v=20260819g"></script>
+<script src="js/app.js?v=20260819g"></script>
 </body>
 </html>

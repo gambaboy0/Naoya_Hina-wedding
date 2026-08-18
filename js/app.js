@@ -445,7 +445,8 @@
     return (
       '<button type="button" class="chart-seat" data-table="' + table.id + '" data-gi="' + gi + '">' +
       '<span class="chart-seat-rel">' + sideLabel(g.side) + g.relation + "</span>" +
-      '<span class="chart-seat-name">' + g.name + "様</span>" +
+      // 敬称は既定で「様」。data.js のゲストに honorific: "ちゃん" と書くと個別に変えられる
+      '<span class="chart-seat-name">' + g.name + (g.honorific || "様") + "</span>" +
       "</button>"
     );
   }
@@ -598,12 +599,11 @@
       })
       .join("");
 
-    // 2026-08-18 並び替え: 【前】拡大写真→説明文→一覧　【後】一覧→拡大写真→説明文
+    // 2026-08-19 並び替え: 拡大写真 → 説明文 → 写真列（タイトルは renderAlbum 側で先頭に置く）
     // 矢印と「1 / 15」は拡大写真の上に重ねたいので、写真まわりを .ph-stage で囲って
-    // その中で位置を決める（囲わないと、一覧の上に矢印やカウンタが乗ってしまう）。
+    // その中で位置を決める（囲わないと、他の要素の上に矢印やカウンタが乗ってしまう）。
     return (
       '<div class="photo-slider" data-slider="album' + gi + '">' +
-      '<div class="ph-thumbs">' + thumbs + "</div>" +
       '<div class="ph-stage">' +
       '<div class="ph-track">' + slides + "</div>" +
       '<button class="ph-arrow ph-prev" type="button" aria-label="前の写真">‹</button>' +
@@ -625,6 +625,8 @@
           '<span class="ph-cap-rule"></span>' +
           "</p>"
         : "") +
+      // 写真列（小さい写真の一覧）は 2026-08-19 から一番下
+      '<div class="ph-thumbs">' + thumbs + "</div>" +
       "</div>"
     );
   }
@@ -636,10 +638,11 @@
       el.innerHTML = '<p class="album-empty">お写真を準備中です</p>';
       return;
     }
+    // 2026-08-19 並び替え: 上から タイトル → 拡大写真 → 説明文 → 写真列
     el.innerHTML = ALBUM_GROUPS.map((g, gi) =>
       '<div class="timeline-entry">' +
-      buildAlbumSlider(g, gi) +
       '<p class="timeline-stage">' + g.title + "</p>" +
+      buildAlbumSlider(g, gi) +
       "</div>"
     ).join("");
     activateSliders(el);
