@@ -458,6 +458,15 @@ body {
   flex-shrink: 0;
 }
 
+/* お座席ページの案内（新郎新婦からいただいた画像・2026-08-18） */
+.seating-hint-img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+  margin: 0 0 2rem;
+}
+
 /* ---------- TOP (tall photo + greeting overlay + nav) ---------- */
 .section-top-compact {
   padding: 0;
@@ -680,6 +689,31 @@ body {
 .nav-square:nth-child(3n + 1),
 .nav-square:nth-child(3n) {
   background: var(--adopt-navy);
+}
+
+/* ---------- 画像のボタン（2026-08-18 新郎新婦からいただいたアイコンに差し替え） ----------
+   画像そのものが角丸・塗り・文字を含んでいるので、CSS側の背景・枠・影は消す。 */
+.nav-square.has-icon {
+  aspect-ratio: 400 / 476; /* いただいた画像の縦横比に合わせる（元は正方形） */
+  background: none;
+  border: none;
+  box-shadow: none;
+  padding: 0;
+  border-radius: 0;
+}
+
+.nav-square.has-icon:nth-child(3n + 1),
+.nav-square.has-icon:nth-child(3n) {
+  background: none;
+}
+
+.nav-square-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+  /* 画像の四隅に残る白を切り落とす */
+  border-radius: 12%;
 }
 
 /* 英語（1行）：オレンジ、マス幅基準で最大化 */
@@ -1373,8 +1407,16 @@ video.photo-modal-img {
   height: 340px;
   border: 2px solid var(--dark);
   border-radius: 12px;
-  margin-bottom: 1.2rem;
+  margin-bottom: 0.5rem;
   z-index: 0;
+}
+
+/* 地図の下の注記（ピンはおおよその位置のため） */
+.map-note {
+  color: var(--gray);
+  font-size: 0.72rem;
+  text-align: center;
+  margin: 0 0 1.1rem;
 }
 
 /* 地図上の番号マーカー */

@@ -173,19 +173,23 @@
   function buildNavGridHtml() {
     return NAV_ITEMS.map((item) => {
       const b = item.btn || { en1: item.en, en2: "", jp: item.jp };
-      const inner =
-        '<span class="nav-square-en">' + b.en1 + (b.en2 ? "<br>" + b.en2 : "") + "</span>" +
-        '<span class="nav-square-jp">' + b.jp + "</span>";
+      // 2026-08-18: 新郎新婦からいただいたボタン画像に差し替え。
+      // icon が無い項目は、これまでどおり文字のボタンになる。
+      const cls = "nav-square" + (item.icon ? " has-icon" : "");
+      const inner = item.icon
+        ? '<img class="nav-square-img" src="' + item.icon + '" alt="' + b.jp + '">'
+        : '<span class="nav-square-en">' + b.en1 + (b.en2 ? "<br>" + b.en2 : "") + "</span>" +
+          '<span class="nav-square-jp">' + b.jp + "</span>";
       if (item.disabled) {
-        return '<div class="nav-square is-disabled">' + inner + "</div>";
+        return '<div class="' + cls + ' is-disabled">' + inner + "</div>";
       }
       if (item.replay) {
-        return '<button type="button" class="nav-square" data-replay-splash>' + inner + "</button>";
+        return '<button type="button" class="' + cls + '" data-replay-splash>' + inner + "</button>";
       }
       if (item.topGreeting) {
-        return '<button type="button" class="nav-square" data-top-greeting>' + inner + "</button>";
+        return '<button type="button" class="' + cls + '" data-top-greeting>' + inner + "</button>";
       }
-      return '<a href="#' + item.id + '" class="nav-square">' + inner + "</a>";
+      return '<a href="#' + item.id + '" class="' + cls + '">' + inner + "</a>";
     }).join("");
   }
 

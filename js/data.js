@@ -392,15 +392,17 @@ const QA_RANKINGS = [
 // replay: true のボタンはページ遷移ではなく、オープニング画面を再生する特別な動作をします。
 // disabled: true のボタンは「準備中」のグレー表示になります（ラベルが決まったら差し替え）。
 // en/jp はセクション見出し用。btn はメニュー選択ボタン＆ハンバーガーINDEX用（英語1行＋日本語）。
+// icon … 2026-08-18 に新郎新婦からいただいたボタン画像（白フチを切り落として軽量化したもの）。
+//        icon を消すと、その項目だけ以前の文字のボタン（en1 + jp）に戻ります。
 const NAV_ITEMS = [
-  { id: "groom", en: "Groom", jp: "新郎プロフィール", btn: { en1: "Groom", jp: "新郎プロフィール" } },
-  { id: "bride", en: "Bride", jp: "新婦プロフィール", btn: { en1: "Bride", jp: "新婦プロフィール" } },
-  { id: "menu", en: "Menu", jp: "お食事", btn: { en1: "Menu", jp: "お食事" } },
-  { id: "seating", en: "Seating", jp: "お座席", btn: { en1: "Seating", jp: "席次表" } },
-  { id: "our-history", en: "Memory", jp: "ふたりの思い出", btn: { en1: "Memory", jp: "ふたりの思い出" } },
-  { id: "qa", en: "Q&amp;A", jp: "ふたりに質問", btn: { en1: "Q&amp;A", jp: "ふたりに質問" } },
-  { id: "map", en: "Map", jp: "おすすめマップ", btn: { en1: "Map", jp: "おすすめマップ" } },
-  { id: "album", en: "Photo", jp: "アルバム", btn: { en1: "Photo", jp: "アルバム" } },
+  { id: "groom", en: "Groom", jp: "新郎プロフィール", icon: "assets/img/nav/nav-groom.jpg", btn: { en1: "Groom", jp: "新郎プロフィール" } },
+  { id: "bride", en: "Bride", jp: "新婦プロフィール", icon: "assets/img/nav/nav-bride.jpg", btn: { en1: "Bride", jp: "新婦プロフィール" } },
+  { id: "menu", en: "Menu", jp: "お食事", icon: "assets/img/nav/nav-menu.jpg", btn: { en1: "Menu", jp: "お食事" } },
+  { id: "seating", en: "Seating", jp: "お座席", icon: "assets/img/nav/nav-seating.jpg", btn: { en1: "Seating", jp: "席次表" } },
+  { id: "our-history", en: "Memory", jp: "ふたりの思い出", icon: "assets/img/nav/nav-our-history.jpg", btn: { en1: "Memory", jp: "ふたりの思い出" } },
+  { id: "qa", en: "Q&amp;A", jp: "ふたりに質問", icon: "assets/img/nav/nav-qa.jpg", btn: { en1: "Q&amp;A", jp: "ふたりに質問" } },
+  { id: "map", en: "Map", jp: "おすすめマップ", icon: "assets/img/nav/nav-map.jpg", btn: { en1: "Map", jp: "おすすめマップ" } },
+  { id: "album", en: "Photo", jp: "アルバム", icon: "assets/img/nav/nav-album.jpg", btn: { en1: "Photo", jp: "アルバム" } },
 ];
 
 // ---------- アルバム（ジャンルごとに横へ送れる4つのまとまり） ----------
@@ -507,8 +509,8 @@ const MAP_SPOTS = [
   {
     no: 1,
     name: "だんらんや",
-    lat: 36.66915, lng: 137.23522, zoom: 16, // 郵便番号939-8048（太田北区）の中心。町名レベルの概算
-    address: "富山県富山市太田北区81-1（富山山室本店）",
+    lat: 36.668381, lng: 137.236572, zoom: 17, // 国土地理院「富山市太田81番地」。番地レベル
+    address: "富山県富山市太田81-1（富山山室本店）",
     desc:
       "直弥さんのお気に入りが、今ではふたりの定番に🍴<br>" +
       "ふたりが出会う前から、毎月給料日に通っていたほど直弥さんが大好きなお店！イチオシは網焼きハンバーグ。今ではふたりでいちばんよく行く洋食屋さんです。",
@@ -519,7 +521,7 @@ const MAP_SPOTS = [
   {
     no: 2,
     name: "ノマ",
-    lat: 36.65451, lng: 137.23095, zoom: 16, // 「堀」の中心。町名レベルの概算
+    lat: 36.653679, lng: 137.22995, zoom: 17, // 国土地理院「富山市堀60番地」。番地レベル
     address: "富山県富山市堀60-4",
     desc:
       "何を選んでも大満足のランチ🍚<br>" +
@@ -531,7 +533,7 @@ const MAP_SPOTS = [
   {
     no: 3,
     name: "中華そば つぼみ",
-    lat: 36.7164, lng: 137.26374, zoom: 16, // 「新庄北町」の中心。町名レベルの概算
+    lat: 36.715584, lng: 137.264175, zoom: 17, // 国土地理院「新庄北町18番24号」。番地レベル
     address: "富山県富山市新庄北町18-24 1F",
     desc:
       "行列のできる人気ラーメン店🍜<br>" +
@@ -543,7 +545,7 @@ const MAP_SPOTS = [
   {
     no: 4,
     name: "Cafe MicT",
-    lat: 36.69765, lng: 137.2488, zoom: 16, // 「荒川二丁目」の中心。町名レベルの概算
+    lat: 36.697231, lng: 137.251312, zoom: 17, // 国土地理院「荒川二丁目24番15号」。番地レベル
     address: "富山県富山市荒川2-24-15",
     desc:
       "こだわりの一杯を楽しめるカフェ☕️<br>" +
@@ -567,7 +569,7 @@ const MAP_SPOTS = [
   {
     no: 6,
     name: "すしだるま",
-    lat: 36.64751, lng: 137.21672, zoom: 16, // 「二俣」の中心。町名レベルの概算
+    lat: 36.649006, lng: 137.213623, zoom: 17, // 国土地理院「二俣448番地」。番地レベル
     address: "富山県富山市二俣448-1",
     desc:
       "3回目のデートで訪れたお寿司屋さん🍣<br>" +
@@ -590,7 +592,7 @@ const MAP_SPOTS = [
   {
     no: 8,
     name: "カーブ・ド・キキ",
-    lat: 36.69818, lng: 137.21284, zoom: 17, // 「桜町二丁目」の中心。番地レベルではほぼ一致
+    lat: 36.698845, lng: 137.213058, zoom: 17, // 国土地理院「桜町二丁目1番10号」。番地レベル
     address: "富山県富山市桜町2-1-10 山本ビル2F",
     desc:
       "ひなの“推しおじ”がいる、隠れ家的なワインバー🍷<br>" +
@@ -601,7 +603,7 @@ const MAP_SPOTS = [
   {
     no: 9,
     name: "吟魚系列",
-    lat: 36.69844, lng: 137.21131, zoom: 17, // 「新富町二丁目」の中心。番地レベルではほぼ一致
+    lat: 36.699127, lng: 137.210617, zoom: 17, // 国土地理院「新富町二丁目1番3号」。番地レベル
     address: "富山県富山市新富町2-1-3（吟魚 本店）ほか市内に5店舗",
     desc:
       "富山で居酒屋に迷ったら、まずおすすめしたいお店🍶<br>" +
