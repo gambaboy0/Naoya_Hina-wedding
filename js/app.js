@@ -514,12 +514,20 @@
     }).join("");
   }
 
-  // ふたりの写真サムネイル
-  // 2026-08-18: マップに写真を載せる案は取りやめになったため、写真が未登録のときは
-  // 「お写真1〜3」のグレー枠を出さず、何も表示しない（photos を設定すれば従来どおり出ます）。
+  // お店の写真
+  // 写真が未登録のときは何も表示しない（「お写真1〜3」のグレー枠は 2026-08-18 に撤去）。
+  // 1枚だけのときは地図のすぐ下に大きく1枚、2枚以上のときは従来どおり横に並べる。
   function buildSpotPhotosHtml(spot, spotIndex) {
     const photos = spot.photos || [];
     if (photos.length === 0) return "";
+    if (photos.length === 1) {
+      const p = photos[0];
+      return (
+        '<button type="button" class="map-photo-single" data-spot-photo="' + spotIndex + '::0">' +
+        '<img src="' + p.src + '" alt="' + (p.caption || spot.name) + '">' +
+        "</button>"
+      );
+    }
     return (
       '<div class="map-desc-photos">' +
       photos
@@ -732,11 +740,12 @@
     // 説明文を地図の下に表示
     const desc = $("#map-spot-desc");
     desc.hidden = false;
+    // 2026-08-18: 写真は地図のすぐ下（説明カードの一番上）に置く
     desc.innerHTML =
+      buildSpotPhotosHtml(s, index) +
       '<p class="map-desc-no">SPOT ' + s.no + "</p>" +
       '<h3 class="map-desc-name">' + s.name + "</h3>" +
       '<p class="map-desc-address">' + s.address + "</p>" +
-      buildSpotPhotosHtml(s, index) +
       '<p class="map-desc-text">' + s.desc + "</p>" +
       '<div class="map-desc-links">' +
       '<a class="map-desc-link" href="' +

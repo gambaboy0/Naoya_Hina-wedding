@@ -507,97 +507,106 @@ const MAP_SPOTS = [
   {
     no: 1,
     name: "だんらんや",
-    lat: 36.657, lng: 137.23, zoom: 16,
+    lat: 36.66915, lng: 137.23522, zoom: 16, // 郵便番号939-8048（太田北区）の中心。町名レベルの概算
     address: "富山県富山市太田北区81-1（富山山室本店）",
     desc:
       "直弥さんのお気に入りが、今ではふたりの定番に🍴<br>" +
       "ふたりが出会う前から、毎月給料日に通っていたほど直弥さんが大好きなお店！イチオシは網焼きハンバーグ。今ではふたりでいちばんよく行く洋食屋さんです。",
+    photos: [{ src: "assets/img/map/spot-01.jpg", caption: "だんらんや" }],
     gmap: "https://www.google.com/maps/search/?api=1&query=洋食だんらんや+富山山室本店",
     web: "https://www.danranya.co.jp/",
   },
   {
     no: 2,
     name: "ノマ",
-    lat: 36.665, lng: 137.209, zoom: 16,
+    lat: 36.65451, lng: 137.23095, zoom: 16, // 「堀」の中心。町名レベルの概算
     address: "富山県富山市堀60-4",
     desc:
       "何を選んでも大満足のランチ🍚<br>" +
       "メインから小鉢まで、どれもおいしくボリューム満点。おしゃれで居心地のいいお店です🌱 白ご飯を納豆そぼろ丼に変更するのがおすすめ！",
+    photos: [{ src: "assets/img/map/spot-02.jpg", caption: "ノマ" }],
     gmap: "https://www.google.com/maps/search/?api=1&query=ノマ+富山市堀60-4",
     instagram: "https://www.instagram.com/noma_toyama_cafe/",
   },
   {
     no: 3,
     name: "中華そば つぼみ",
-    lat: 36.7045, lng: 137.2405, zoom: 16,
+    lat: 36.7164, lng: 137.26374, zoom: 16, // 「新庄北町」の中心。町名レベルの概算
     address: "富山県富山市新庄北町18-24 1F",
     desc:
       "行列のできる人気ラーメン店🍜<br>" +
       "おすすめは濃厚な鶏白湯！店主さんの細やかな気遣いも魅力です。味も接客も大満足で、並んででも食べたい、リピート間違いなしのお店！",
+    photos: [{ src: "assets/img/map/spot-03.jpg", caption: "中華そば つぼみ" }],
     gmap: "https://www.google.com/maps/search/?api=1&query=中華そば+つぼみ+富山市新庄北町18-24",
     instagram: "https://www.instagram.com/tsubomi20180720/",
   },
   {
     no: 4,
     name: "Cafe MicT",
-    lat: 36.693, lng: 137.2325, zoom: 16,
+    lat: 36.69765, lng: 137.2488, zoom: 16, // 「荒川二丁目」の中心。町名レベルの概算
     address: "富山県富山市荒川2-24-15",
     desc:
       "こだわりの一杯を楽しめるカフェ☕️<br>" +
       "木の温もりを感じる落ち着いた店内で、実力派バリスタが淹れるこだわりのコーヒーと、相性ぴったりのスイーツが楽しめます🌿",
+    photos: [{ src: "assets/img/map/spot-04.jpg", caption: "Cafe MicT" }],
     gmap: "https://www.google.com/maps/search/?api=1&query=MicT+富山市荒川2-24-15",
     instagram: "https://www.instagram.com/mict_info/",
   },
   {
     no: 5,
     name: "ミチツムギ",
-    lat: 36.7565, lng: 137.063, zoom: 15,
+    lat: 36.7575, lng: 137.17951, zoom: 17, // OpenStreetMapに店舗の登録あり（正確）
     address: "富山県射水市本江1426",
     desc:
       "海を眺めながら食べる贅沢かき氷🍧<br>" +
       "自家製ソースと焼き菓子を組み合わせたかき氷が特徴！アサイーボウルや焼き菓子の販売もありますよ🍪 海沿いをお散歩するのもおすすめです🌱",
+    photos: [{ src: "assets/img/map/spot-05.jpg", caption: "ミチツムギ" }],
     gmap: "https://www.google.com/maps/search/?api=1&query=氷と焼き菓子+ミチツムギ+射水市本江1426",
     instagram: "https://www.instagram.com/michitsumugi/",
   },
   {
     no: 6,
     name: "すしだるま",
-    lat: 36.643, lng: 137.172, zoom: 16,
+    lat: 36.64751, lng: 137.21672, zoom: 16, // 「二俣」の中心。町名レベルの概算
     address: "富山県富山市二俣448-1",
     desc:
       "3回目のデートで訪れたお寿司屋さん🍣<br>" +
       "回転寿司ながら、ひと手間かけた本格的なお寿司が魅力。富山のおいしいお寿司を気軽に楽しみたい方におすすめです！",
+    photos: [{ src: "assets/img/map/spot-06.jpg", caption: "すしだるま" }],
     gmap: "https://www.google.com/maps/search/?api=1&query=すしだるま+富山市二俣448-1",
     web: "https://sushidaruma.biz/",
   },
   {
     no: 7,
     name: "コメダ珈琲店 富山掛尾店",
-    lat: 36.6636, lng: 137.2274, zoom: 16,
+    lat: 36.66164, lng: 137.21353, zoom: 17, // OpenStreetMapに店舗の登録あり（正確）
     address: "富山県富山市掛尾町26番1",
     desc:
       "ふたりが初めて出会った場所☕️<br>" +
       "初対面でモーニングをしながら3時間おしゃべり！初めましてとは思えないくらい、時間が経つのもあっという間でした🌱",
+    photos: [{ src: "assets/img/map/spot-07.jpg", caption: "コメダ珈琲店 富山掛尾店" }],
     gmap: "https://www.google.com/maps/search/?api=1&query=コメダ珈琲店+富山掛尾店",
   },
   {
     no: 8,
     name: "カーブ・ド・キキ",
-    lat: 36.6985, lng: 137.2128, zoom: 17,
+    lat: 36.69818, lng: 137.21284, zoom: 17, // 「桜町二丁目」の中心。番地レベルではほぼ一致
     address: "富山県富山市桜町2-1-10 山本ビル2F",
     desc:
       "ひなの“推しおじ”がいる、隠れ家的なワインバー🍷<br>" +
       "ちょっと珍しいワインや日本酒が楽しめます。マイペースで飾らないマスターの人柄も素敵！手作りのおいしいプレートも毎回のお楽しみです。",
+    photos: [{ src: "assets/img/map/spot-08.jpg", caption: "カーブ・ド・キキ" }],
     gmap: "https://www.google.com/maps/search/?api=1&query=カーブ・ド・キキ+富山市桜町2-1-10",
   },
   {
     no: 9,
     name: "吟魚系列",
-    lat: 36.6982, lng: 137.2108, zoom: 16,
+    lat: 36.69844, lng: 137.21131, zoom: 17, // 「新富町二丁目」の中心。番地レベルではほぼ一致
     address: "富山県富山市新富町2-1-3（吟魚 本店）ほか市内に5店舗",
     desc:
       "富山で居酒屋に迷ったら、まずおすすめしたいお店🍶<br>" +
       "富山らしい料理や地酒が豊富で、刺身盛りも絶品！何を頼んでもおいしく、系列店が5店舗あるので予定に合わせて選びやすいのも魅力です。",
+    photos: [{ src: "assets/img/map/spot-09.jpg", caption: "吟魚系列" }],
     gmap: "https://www.google.com/maps/search/?api=1&query=吟魚+富山市新富町2-1-3",
     instagram: "https://www.instagram.com/forza.gingyo/",
   },
