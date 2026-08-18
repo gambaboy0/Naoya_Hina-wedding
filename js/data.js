@@ -395,14 +395,14 @@ const QA_RANKINGS = [
 // icon … 2026-08-18 に新郎新婦からいただいたボタン画像（白フチを切り落として軽量化したもの）。
 //        icon を消すと、その項目だけ以前の文字のボタン（en1 + jp）に戻ります。
 const NAV_ITEMS = [
-  { id: "groom", en: "Groom", jp: "新郎プロフィール", icon: "assets/img/nav/nav-groom.jpg", btn: { en1: "Groom", jp: "新郎プロフィール" } },
-  { id: "bride", en: "Bride", jp: "新婦プロフィール", icon: "assets/img/nav/nav-bride.jpg", btn: { en1: "Bride", jp: "新婦プロフィール" } },
-  { id: "menu", en: "Menu", jp: "お食事", icon: "assets/img/nav/nav-menu.jpg", btn: { en1: "Menu", jp: "お食事" } },
-  { id: "seating", en: "Seating", jp: "お座席", icon: "assets/img/nav/nav-seating.jpg", btn: { en1: "Seating", jp: "席次表" } },
-  { id: "our-history", en: "Memory", jp: "ふたりの思い出", icon: "assets/img/nav/nav-our-history.jpg", btn: { en1: "Memory", jp: "ふたりの思い出" } },
-  { id: "qa", en: "Q&amp;A", jp: "ふたりに質問", icon: "assets/img/nav/nav-qa.jpg", btn: { en1: "Q&amp;A", jp: "ふたりに質問" } },
-  { id: "map", en: "Map", jp: "おすすめマップ", icon: "assets/img/nav/nav-map.jpg", btn: { en1: "Map", jp: "おすすめマップ" } },
-  { id: "album", en: "Photo", jp: "アルバム", icon: "assets/img/nav/nav-album.jpg", btn: { en1: "Photo", jp: "アルバム" } },
+  { id: "groom", en: "Groom", jp: "新郎プロフィール", icon: "assets/img/nav/nav-groom.jpg?v=20260818a", btn: { en1: "Groom", jp: "新郎プロフィール" } },
+  { id: "bride", en: "Bride", jp: "新婦プロフィール", icon: "assets/img/nav/nav-bride.jpg?v=20260818a", btn: { en1: "Bride", jp: "新婦プロフィール" } },
+  { id: "menu", en: "Menu", jp: "お食事", icon: "assets/img/nav/nav-menu.jpg?v=20260818a", btn: { en1: "Menu", jp: "お食事" } },
+  { id: "seating", en: "Seating", jp: "お座席", icon: "assets/img/nav/nav-seating.jpg?v=20260818a", btn: { en1: "Seating", jp: "席次表" } },
+  { id: "our-history", en: "Memory", jp: "ふたりの思い出", icon: "assets/img/nav/nav-our-history.jpg?v=20260818a", btn: { en1: "Memory", jp: "ふたりの思い出" } },
+  { id: "qa", en: "Q&amp;A", jp: "ふたりに質問", icon: "assets/img/nav/nav-qa.jpg?v=20260818a", btn: { en1: "Q&amp;A", jp: "ふたりに質問" } },
+  { id: "map", en: "Map", jp: "おすすめマップ", icon: "assets/img/nav/nav-map.jpg?v=20260818a", btn: { en1: "Map", jp: "おすすめマップ" } },
+  { id: "album", en: "Photo", jp: "アルバム", icon: "assets/img/nav/nav-album.jpg?v=20260818a", btn: { en1: "Photo", jp: "アルバム" } },
 ];
 
 // ---------- アルバム（ジャンルごとに横へ送れる4つのまとまり） ----------
