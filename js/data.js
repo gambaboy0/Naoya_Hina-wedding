@@ -528,7 +528,7 @@ const MAP_SPOTS = [
     desc:
       "何を選んでも大満足のランチ🍚<br>" +
       "メインから小鉢まで、どれもおいしくボリューム満点。おしゃれで居心地のいいお店です🌱 白ご飯を納豆そぼろ丼に変更するのがおすすめ！",
-    photos: [{ src: "assets/img/map/spot-02.jpg", caption: "ノマ" }],
+    photos: [{ src: "assets/img/map/spot-02.jpg?v=20260819h", caption: "ノマ" }], // 2026-08-19 お盆が枠いっぱいになるよう拡大
     gmap: "https://www.google.com/maps/search/?api=1&query=ノマ+富山市堀60-4",
     instagram: "https://www.instagram.com/noma_toyama_cafe/",
   },

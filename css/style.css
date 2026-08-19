@@ -1879,6 +1879,12 @@ body.modal-open {
   box-shadow: 0 -6px 24px rgba(51, 64, 74, 0.2);
 }
 
+/* ゲスト紹介のふきだしだけ、縁取りを紺色 → 薄い水色に（2026-08-19 クライアントご要望①）
+   ※写真の拡大表示（#photo-modal）は従来どおり紺色のまま */
+#guest-modal .modal-sheet {
+  border-color: var(--sky);
+}
+
 /* 閉じるとき: 下へ滑りながら消える */
 .modal-sheet.is-closing {
   animation: none;
